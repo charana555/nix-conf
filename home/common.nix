@@ -23,8 +23,13 @@
 
   programs.git = {
     enable = true;
-    userName = "Charana555";
-    userEmail = "charanchandrashekar555@gmail.com";
+    
+    settings = {
+	user = {
+	    name = "Charana555";
+	    email = "charanchandrashekar555@gmail.com";
+	};
+    };
   };
 
   programs.zsh = {
