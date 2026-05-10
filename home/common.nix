@@ -51,7 +51,9 @@
   tree-sitter
     
     nerd-fonts.jetbrains-mono
-    nodePackages.opencode-ai
+    (writeShellScriptBin "opencode" ''
+    exec ${nodejs_22}/bin/npx opencode-ai "$@"
+  '')
    ];
 
   programs.git = {
@@ -79,15 +81,18 @@
     syntaxHighlighting.enable = true;
 
     shellAliases = {
-      to = "tmux a -t"
-      oc = "opencode"  
-    }
+      to = "tmux a -t";
+      oc = "npx opencode-ai";
+    };
 
      initExtraFirst = ''
     # Source Nix daemon for non-login shells (tmux, etc.)
     if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
       . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
     fi
+    if [ -f ~/.config/secrets/opencode-env ]; then
+    source ~/.config/secrets/opencode-env
+  fi
   '';
   };
 
@@ -101,4 +106,5 @@
   xdg.configFile."tmux/tmux.conf".source = ../tmux/tmux.conf;
   xdg.configFile."kitty/kitty.conf".source = ../kitty/kitty.conf;
   xdg.configFile."starship.toml".source = ../starship/starship.toml;
+  xdg.configFile."opencode/opencode.json".source = ../opencode/opencode.json;
 }

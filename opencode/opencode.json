@@ -1,0 +1,31 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "bedrock-mantle": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Bedrock Mantle",
+      "options": {
+        "baseURL": "https://bedrock-mantle.us-east-1.api.aws/v1",
+        "apiKey": "{env:AWS_BEARER_TOKEN_BEDROCK}"
+      },
+      "models": {
+        "deepseek.v3.2": { "name": "DeepSeek V3.2" },
+        "qwen.qwen3-coder-480b-a35b-instruct": { "name": "Qwen3 Coder 480B" },
+        "openai.gpt-oss-120b": { "name": "GPT OSS 120B" },
+        "mistral.mistral-large-3-675b-instruct": { "name": "Mistral Large 3" },
+        "moonshotai.kimi-k2.5": { "name": "Kimi K2.5" }
+      }
+    }
+  },
+  "model": "bedrock-mantle/moonshotai.kimi-k2.5",
+  "agent": {
+    "build": {
+      "mode": "primary",
+      "model": "bedrock-mantle/moonshotai.kimi-k2.5"
+    },
+    "plan": {
+      "mode": "primary",
+      "model": "bedrock-mantle/moonshotai.kimi-k2.5"
+    }
+  }
+}
