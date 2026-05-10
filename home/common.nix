@@ -38,7 +38,10 @@
   # Nix tooling
   nixd
   nil
-  nixfmt-rfc-style
+  nixfmt
+
+  #Shell
+  starship
 
   # Formatters
   stylua
@@ -62,6 +65,10 @@
     };
   };
 
+  programs.starship = {
+  enable = true;
+};
+
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
@@ -78,4 +85,5 @@
   xdg.configFile."nvim".source = ../nvim;
   xdg.configFile."tmux/tmux.conf".source = ../tmux/tmux.conf;
   xdg.configFile."kitty/kitty.conf".source = ../kitty/kitty.conf;
+  xdg.configFile."starship.toml".source = ../starship/starship.toml;
 }
