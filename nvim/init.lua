@@ -1086,6 +1086,7 @@ require('lazy').setup({
       lazy = '💤 ',
     },
   },
+       lockfile = vim.fn.stdpath("state") .. "/lazy/lazy-lock.json",
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
