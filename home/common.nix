@@ -68,6 +68,7 @@
 
   home.sessionVariables = {
     EDITOR = "nvim";
+    TERM = "xterm-256color";
   };
   
   xdg.configFile."nvim".source = ../nvim;
