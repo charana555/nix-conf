@@ -9,19 +9,44 @@
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
-    git
-    vim
-    neovim
-    tmux
-    ripgrep
-    fd
-    fzf
-    lazygit
-    wget
-    curl
-    htop
-  ];
+  # Core
+  git
+  curl
+  wget
 
+  # CLI tooling
+  ripgrep
+  fd
+  fzf
+  bat
+  eza
+  lazygit
+  tmux
+  zoxide
+
+  # Neovim ecosystem
+  neovim
+  gcc
+  gnumake
+  unzip
+
+  # Languages
+  nodejs_22
+  python3
+  lua-language-server
+
+  # Nix tooling
+  nixd
+  nil
+  nixfmt-rfc-style
+
+  # Formatters
+  stylua
+  prettier
+
+  # LSP utilities
+  tree-sitter
+   ];
   programs.git = {
     enable = true;
     
@@ -44,4 +69,6 @@
   home.sessionVariables = {
     EDITOR = "nvim";
   };
+  
+  xdg.configFile."nvim".source = ../nvim;
 }
