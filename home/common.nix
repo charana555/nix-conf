@@ -71,4 +71,5 @@
   };
   
   xdg.configFile."nvim".source = ../nvim;
+  xdg.configFile."tmux/tmux.conf".source = ../tmux/tmux.conf;
 }
