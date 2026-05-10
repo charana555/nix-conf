@@ -21,7 +21,6 @@
   bat
   eza
   lazygit
-  tmux
   zoxide
 
   # Neovim ecosystem
@@ -42,6 +41,7 @@
 
   #Shell
   starship
+  kitty
 
   # Formatters
   stylua
@@ -51,7 +51,7 @@
   tree-sitter
     
     nerd-fonts.jetbrains-mono
-
+    nodePackages.opencode-ai
    ];
 
   programs.git = {
@@ -69,17 +69,32 @@
   enable = true;
 };
 
+  programs.kitty = {
+  enable = true;
+};
+
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+
+    shellAliases = {
+      to = "tmux a -t"
+      oc = "opencode"  
+    }
+
+     initExtraFirst = ''
+    # Source Nix daemon for non-login shells (tmux, etc.)
+    if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
+      . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+    fi
+  '';
   };
 
   programs.fzf.enable = true;
 
   home.sessionVariables = {
     EDITOR = "nvim";
-    TERM = "xterm-256color";
   };
   
   xdg.configFile."nvim".source = ../nvim;
