@@ -46,7 +46,11 @@
 
   # LSP utilities
   tree-sitter
+    
+    nerd-fonts.jetbrains-mono
+
    ];
+
   programs.git = {
     enable = true;
     
@@ -73,4 +77,5 @@
   
   xdg.configFile."nvim".source = ../nvim;
   xdg.configFile."tmux/tmux.conf".source = ../tmux/tmux.conf;
+  xdg.configFile."kitty/kitty.conf".source = ../kitty/kitty.conf;
 }
