@@ -1,8 +1,9 @@
 # =========================
 # STARSHIP CONFIG
 # =========================
-
 format = """
+$os\
+$username\
 $directory\
 $git_branch\
 $git_status\
@@ -191,3 +192,32 @@ disabled = true
 
 [terraform]
 disabled = true
+
+[os]
+disabled = false
+style = "bg:surface0 fg:blue bold"
+format = "[ $symbol ]($style)"
+
+[os.symbols]
+Alpine = " "
+Amazon = " "
+Android = " "
+Arch = "󰣇 "
+CentOS = " "
+Debian = " "
+Fedora = " "
+Gentoo = " "
+Linux = " "
+Macos = " "
+Manjaro = " "
+Mint = "󰣭 "
+NixOS = " "
+Pop = " "
+Ubuntu = " "
+Windows = "󰍲 "
+
+[username]
+show_always = true
+style_user = "bg:surface0 fg:lavender bold"
+style_root = "bg:red fg:base bold"
+format = "[ $user ]($style)"
