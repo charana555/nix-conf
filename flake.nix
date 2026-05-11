@@ -17,14 +17,16 @@
     pkgs = import nixpkgs {
       inherit system;
     };
-  in {
-    homeConfigurations.itachi =
+
+    mkHomeConfig = username: hostname: modules:
       home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-
-        modules = [
-          ./home/common.nix
-        ];
+        modules = modules ++ [{ home.stateVersion = "25.05"; }];
       };
+  in {
+    homeConfigurations = {
+      "itachi@popos" = mkHomeConfig "itachi" "popos" [ ./hosts/popos/home.nix ];
+      "charana.c@work" = mkHomeConfig "charana.c" "work" [ ./hosts/work/home.nix ];
+    };
   };
 }

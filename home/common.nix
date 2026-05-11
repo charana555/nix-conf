@@ -1,9 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  home.username = "itachi";
-  home.homeDirectory = "/home/itachi";
-
   home.stateVersion = "25.05";
 
   programs.home-manager.enable = true;
