@@ -9,7 +9,6 @@ $git_branch$git_status\
 $nodejs$python$golang$rust$nix_shell\
 $cmd_duration\
 $fill\
-$time\
 $line_break\
 $character
 """
@@ -161,22 +160,11 @@ detect_files = ["requirements.txt", "pyproject.toml", "setup.py", "Pipfile"]
 detect_folders = [".venv", "venv", "__pycache__"]
 
 # =========================
-# GO SECTION
-# =========================
-
-[golang]
-symbol = ""
-style = "bg:surface0 fg:sky bold"
-format = "[ $symbol($version )]($style)"
-detect_files = ["go.mod", "go.sum"]
-detect_folders = ["vendor"]
-
-# =========================
 # RUST SECTION
 # =========================
 
 [rust]
-symbol = ""
+symbol = " "
 style = "bg:surface0 fg:peach bold"
 format = "[ $symbol($version )]($style)"
 detect_files = ["Cargo.toml", "Cargo.lock"]
@@ -189,7 +177,7 @@ detect_folders = ["target"]
 [golang]
 symbol = " "
 style = "bg:surface0 fg:sky bold"
-format = "[ $symbol($version )]($style)"
+format = "[ $symbol ($version )]($style)"
 detect_files = ["go.mod", "go.sum"]
 detect_folders = ["vendor"]
 
