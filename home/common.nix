@@ -90,8 +90,8 @@
     if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
       . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
     fi
-    if [ -f ~/.config/secrets/opencode-env ]; then
-    source ~/.config/secrets/opencode-env
+    if [ -f ~/.config/secrets/env ]; then
+    source ~/.config/secrets/env
   fi
   '';
   };
