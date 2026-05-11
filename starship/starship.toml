@@ -1,18 +1,14 @@
 # =========================
-# STARSHIP CONFIG
+# STARSHIP CONFIG - PIL-STYLE SECTIONS
 # =========================
 format = """
 $os\
 $username\
 $directory\
-$git_branch\
-$git_status\
 $fill\
+$git_branch$git_status\
+$nodejs$python$golang$nix_shell\
 $cmd_duration\
-$nodejs\
-$python\
-$golang\
-$nix_shell\
 $time\
 $line_break\
 $character
@@ -61,31 +57,76 @@ mantle = "#181825"
 crust = "#11111b"
 
 # =========================
-# DIRECTORY
+# OS SECTION
+# =========================
+
+[os]
+disabled = false
+style = "bg:surface0 fg:blue bold"
+format = "[](surface0)[ $symbol ]($style)[](surface0)"
+
+[os.symbols]
+Alpine = " "
+Amazon = " "
+Android = " "
+Arch = "󰣇 "
+CentOS = " "
+Debian = " "
+Fedora = " "
+Gentoo = " "
+Linux = " "
+Macos = " "
+Manjaro = " "
+Mint = "󰣭 "
+NixOS = " "
+Pop = " "
+Ubuntu = " "
+Windows = "󰍲 "
+
+# =========================
+# USERNAME SECTION
+# =========================
+
+[username]
+show_always = true
+style_user = "bg:surface0 fg:lavender bold"
+style_root = "bg:red fg:base bold"
+format = "[ $user ]($style)[](surface0)"
+
+# =========================
+# DIRECTORY SECTION
 # =========================
 
 [directory]
-style = "bold blue"
 truncate_to_repo = true
 truncation_length = 3
 fish_style_pwd_dir_length = 1
 home_symbol = "~"
 read_only = " 󰌾"
-format = "[$path]($style)[$read_only]($read_only_style) "
+style = "bg:surface0 fg:blue bold"
+read_only_style = "bg:surface0 fg:red"
+format = "[ $path]($style)[$read_only]($read_only_style)[](surface0) "
 
 # =========================
-# GIT
+# FILL
+# =========================
+
+[fill]
+symbol = " "
+
+# =========================
+# GIT SECTION
 # =========================
 
 [git_branch]
 symbol = " "
-style = "bold mauve"
-format = "[$symbol$branch]($style) "
+style = "bg:mauve fg:base bold"
+format = "[](mauve)[$symbol$branch ]($style)"
 
 [git_status]
-style = "red"
-format = '([\[$all_status$ahead_behind\]]($style)) '
-conflicted = "="
+style = "bg:mauve fg:base"
+format = "[$all_status$ahead_behind]($style)[](mauve) "
+conflicted = "✗"
 ahead = "⇡${count}"
 behind = "⇣${count}"
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
@@ -97,11 +138,47 @@ renamed = "»"
 deleted = "✘"
 
 # =========================
-# FILL
+# NODE.JS SECTION
 # =========================
 
-[fill]
-symbol = " "
+[nodejs]
+symbol = " "
+style = "bg:green fg:base bold"
+format = "[](green)[$symbol($version )]($style)[](green) "
+detect_files = ["package.json", ".node-version"]
+detect_folders = ["node_modules"]
+
+# =========================
+# PYTHON SECTION
+# =========================
+
+[python]
+symbol = " "
+style = "bg:yellow fg:base bold"
+python_binary = "python3"
+format = "[](yellow)[$symbol($version )(\($virtualenv\) )]($style)[](yellow) "
+detect_files = ["requirements.txt", "pyproject.toml", "setup.py", "Pipfile"]
+detect_folders = [".venv", "venv", "__pycache__"]
+
+# =========================
+# GO SECTION
+# =========================
+
+[golang]
+symbol = " "
+style = "bg:sky fg:base bold"
+format = "[](sky)[$symbol($version )]($style)[](sky) "
+detect_files = ["go.mod", "go.sum"]
+detect_folders = ["vendor"]
+
+# =========================
+# NIX SHELL SECTION
+# =========================
+
+[nix_shell]
+symbol = " "
+style = "bg:lavender fg:base bold"
+format = "[](lavender)[$symbol($state )(\($name\) )]($style)[](lavender) "
 
 # =========================
 # COMMAND DURATION
@@ -109,55 +186,18 @@ symbol = " "
 
 [cmd_duration]
 min_time = 2000
-format = "[$duration](overlay1) "
+format = "[ $duration ](bg:surface1 fg:overlay1)[](surface1) "
 show_milliseconds = false
 
 # =========================
-# NODE
-# =========================
-
-[nodejs]
-symbol = " "
-style = "green"
-format = "[$symbol($version )]($style)"
-
-# =========================
-# PYTHON
-# =========================
-
-[python]
-symbol = " "
-style = "yellow"
-python_binary = "python3"
-format = "[$symbol$version( \\($virtualenv\\)) ]($style)"
-
-# =========================
-# GO
-# =========================
-
-[golang]
-symbol = " "
-style = "sky"
-format = "[$symbol($version )]($style)"
-
-# =========================
-# NIX SHELL
-# =========================
-
-[nix_shell]
-symbol = " "
-style = "lavender"
-format = "[$symbol$state( \\($name\\)) ]($style)"
-
-# =========================
-# TIME
+# TIME SECTION
 # =========================
 
 [time]
 disabled = false
 time_format = "%H:%M"
-style = "overlay1"
-format = "[$time]($style)"
+style = "bg:surface1 fg:text"
+format = "[](surface1)[ $time ]($style)[](surface1)"
 
 # =========================
 # CHARACTER
@@ -193,31 +233,20 @@ disabled = true
 [terraform]
 disabled = true
 
-[os]
-disabled = false
-style = "bg:surface0 fg:blue bold"
-format = "[ $symbol ]($style)"
+[helm]
+disabled = true
 
-[os.symbols]
-Alpine = " "
-Amazon = " "
-Android = " "
-Arch = "󰣇 "
-CentOS = " "
-Debian = " "
-Fedora = " "
-Gentoo = " "
-Linux = " "
-Macos = " "
-Manjaro = " "
-Mint = "󰣭 "
-NixOS = " "
-Pop = " "
-Ubuntu = " "
-Windows = "󰍲 "
+[dotnet]
+disabled = true
 
-[username]
-show_always = true
-style_user = "bg:surface0 fg:lavender bold"
-style_root = "bg:red fg:base bold"
-format = "[ $user ]($style)"
+[php]
+disabled = true
+
+[lua]
+disabled = true
+
+[perl]
+disabled = true
+
+[ruby]
+disabled = true
