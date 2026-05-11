@@ -156,7 +156,7 @@ detect_folders = ["node_modules"]
 symbol = " "
 style = "bg:yellow fg:base bold"
 python_binary = "python3"
-format = "[](yellow)[$symbol($version )(\($virtualenv\) )]($style)[](yellow) "
+format = "[](yellow)[$symbol($version )( $virtualenv )]($style)[](yellow) "
 detect_files = ["requirements.txt", "pyproject.toml", "setup.py", "Pipfile"]
 detect_folders = [".venv", "venv", "__pycache__"]
 
@@ -178,7 +178,7 @@ detect_folders = ["vendor"]
 [nix_shell]
 symbol = " "
 style = "bg:lavender fg:base bold"
-format = "[](lavender)[$symbol($state )(\($name\) )]($style)[](lavender) "
+format = "[](lavender)[$symbol$state( $name)]($style)[](lavender) "
 
 # =========================
 # COMMAND DURATION
