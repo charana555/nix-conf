@@ -143,8 +143,8 @@ deleted = "✘"
 
 [nodejs]
 symbol = " "
-style = "bg:green fg:base bold"
-format = "[$symbol($version )]($style)"
+style = "bg:surface0 fg:green bold"
+format = "[ $symbol($version )]($style)"
 detect_files = ["package.json", ".node-version"]
 detect_folders = ["node_modules"]
 
@@ -154,9 +154,9 @@ detect_folders = ["node_modules"]
 
 [python]
 symbol = " "
-style = "bg:yellow fg:base bold"
+style = "bg:surface0 fg:yellow bold"
 python_binary = "python3"
-format = "[$symbol($version )( $virtualenv )]($style)"
+format = "[ $symbol($version )( $virtualenv )]($style)"
 detect_files = ["requirements.txt", "pyproject.toml", "setup.py", "Pipfile"]
 detect_folders = [".venv", "venv", "__pycache__"]
 
@@ -166,8 +166,8 @@ detect_folders = [".venv", "venv", "__pycache__"]
 
 [golang]
 symbol = " "
-style = "bg:sky fg:base bold"
-format = "[$symbol($version )]($style)"
+style = "bg:surface0 fg:sky bold"
+format = "[ $symbol($version )]($style)"
 detect_files = ["go.mod", "go.sum"]
 detect_folders = ["vendor"]
 
@@ -177,8 +177,8 @@ detect_folders = ["vendor"]
 
 [nix_shell]
 symbol = " "
-style = "bg:lavender fg:base bold"
-format = "[$symbol$state( $name)]($style)"
+style = "bg:surface0 fg:lavender bold"
+format = "[ $symbol$state( $name)]($style)"
 
 # =========================
 # COMMAND DURATION
