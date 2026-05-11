@@ -120,11 +120,11 @@ symbol = " "
 
 [git_branch]
 symbol = " "
-style = "bg:mauve fg:base bold"
+style = "bg:sapphire fg:base bold"
 format = "[ $symbol$branch ]($style)"
 
 [git_status]
-style = "bg:mauve fg:base"
+style = "bg:sapphire fg:base"
 format = "[$all_status$ahead_behind ]($style)"
 conflicted = "✗"
 ahead = "⇡${count}"
