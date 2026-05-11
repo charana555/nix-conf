@@ -5,10 +5,10 @@ format = """
 $os\
 $username\
 $directory\
-$fill\
 $git_branch$git_status\
 $nodejs$python$golang$nix_shell\
 $cmd_duration\
+$fill\
 $time\
 $line_break\
 $character
@@ -63,7 +63,7 @@ crust = "#11111b"
 [os]
 disabled = false
 style = "bg:surface0 fg:blue bold"
-format = "[](surface0)[ $symbol ]($style)[](surface0)"
+format = "[](surface0)[ $symbol ]($style)"
 
 [os.symbols]
 Alpine = " "
@@ -91,7 +91,7 @@ Windows = "󰍲 "
 show_always = true
 style_user = "bg:surface0 fg:lavender bold"
 style_root = "bg:red fg:base bold"
-format = "[ $user ]($style)[](surface0)"
+format = "[ $user ]($style)"
 
 # =========================
 # DIRECTORY SECTION
@@ -105,7 +105,7 @@ home_symbol = "~"
 read_only = " 󰌾"
 style = "bg:surface0 fg:blue bold"
 read_only_style = "bg:surface0 fg:red"
-format = "[ $path]($style)[$read_only]($read_only_style)[](surface0) "
+format = "[ $path ]($style)[$read_only]($read_only_style)"
 
 # =========================
 # FILL
@@ -121,11 +121,11 @@ symbol = " "
 [git_branch]
 symbol = " "
 style = "bg:mauve fg:base bold"
-format = "[](mauve)[$symbol$branch ]($style)"
+format = "[ $symbol$branch ]($style)"
 
 [git_status]
 style = "bg:mauve fg:base"
-format = "[$all_status$ahead_behind]($style)[](mauve) "
+format = "[$all_status$ahead_behind ]($style)"
 conflicted = "✗"
 ahead = "⇡${count}"
 behind = "⇣${count}"
@@ -144,7 +144,7 @@ deleted = "✘"
 [nodejs]
 symbol = " "
 style = "bg:green fg:base bold"
-format = "[](green)[$symbol($version )]($style)[](green) "
+format = "[$symbol($version )]($style)"
 detect_files = ["package.json", ".node-version"]
 detect_folders = ["node_modules"]
 
@@ -156,7 +156,7 @@ detect_folders = ["node_modules"]
 symbol = " "
 style = "bg:yellow fg:base bold"
 python_binary = "python3"
-format = "[](yellow)[$symbol($version )( $virtualenv )]($style)[](yellow) "
+format = "[$symbol($version )( $virtualenv )]($style)"
 detect_files = ["requirements.txt", "pyproject.toml", "setup.py", "Pipfile"]
 detect_folders = [".venv", "venv", "__pycache__"]
 
@@ -167,7 +167,7 @@ detect_folders = [".venv", "venv", "__pycache__"]
 [golang]
 symbol = " "
 style = "bg:sky fg:base bold"
-format = "[](sky)[$symbol($version )]($style)[](sky) "
+format = "[$symbol($version )]($style)"
 detect_files = ["go.mod", "go.sum"]
 detect_folders = ["vendor"]
 
@@ -178,7 +178,7 @@ detect_folders = ["vendor"]
 [nix_shell]
 symbol = " "
 style = "bg:lavender fg:base bold"
-format = "[](lavender)[$symbol$state( $name)]($style)[](lavender) "
+format = "[$symbol$state( $name)]($style)"
 
 # =========================
 # COMMAND DURATION
@@ -186,7 +186,7 @@ format = "[](lavender)[$symbol$state( $name)]($style)[](lavender) "
 
 [cmd_duration]
 min_time = 2000
-format = "[ $duration ](bg:surface1 fg:overlay1)[](surface1) "
+format = "[ $duration ](bg:surface1 fg:overlay1)[](surface1)"
 show_milliseconds = false
 
 # =========================
