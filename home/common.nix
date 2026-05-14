@@ -19,7 +19,7 @@
   eza
   lazygit
   zoxide
-
+  sesh
   # Neovim ecosystem
   neovim
   gcc
@@ -78,7 +78,6 @@
     syntaxHighlighting.enable = true;
 
     shellAliases = {
-      to = "tmux a -t";
       oc = "npx opencode-ai";
     };
 
@@ -90,6 +89,16 @@
     if [ -f ~/.config/secrets/env ]; then
     source ~/.config/secrets/env
   fi
+  '';
+
+   initExtra = ''
+    to() {
+      if [ -n "$TMUX" ]; then
+        tmux switch-client -t "$1"
+      else
+        tmux attach -t "$1"
+      fi
+    }
   '';
   };
 

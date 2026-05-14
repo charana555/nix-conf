@@ -1,31 +1,86 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "model": "litellm/glm-latest",
+  "agent": {
+    "explore": { "mode": "subagent", "model": "litellm/open-fast" }
+  },
   "provider": {
-    "bedrock-mantle": {
+    "litellm": {
+      "name": "Juspay",
       "npm": "@ai-sdk/openai-compatible",
-      "name": "Bedrock Mantle",
       "options": {
-        "baseURL": "https://bedrock-mantle.us-east-1.api.aws/v1",
-        "apiKey": "{env:AWS_BEARER_TOKEN_BEDROCK}"
+        "apiKey": "{env:JUSPAY_API_KEY}",
+        "baseURL": "https://grid.ai.juspay.net",
+        "timeout": 600000
       },
       "models": {
-        "deepseek.v3.2": { "name": "DeepSeek V3.2" },
-        "qwen.qwen3-coder-480b-a35b-instruct": { "name": "Qwen3 Coder 480B" },
-        "openai.gpt-oss-120b": { "name": "GPT OSS 120B" },
-        "mistral.mistral-large-3-675b-instruct": { "name": "Mistral Large 3" },
-        "moonshotai.kimi-k2.5": { "name": "Kimi K2.5" }
+        "claude-opus-4-5": {
+          "name": "claude-opus-4-5",
+          "limit": { "context": 1000000, "output": 128000 },
+          "modalities": { "input": ["text", "image"], "output": ["text"] }
+        },
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6",
+          "limit": { "context": 1000000, "output": 128000 },
+          "modalities": { "input": ["text", "image"], "output": ["text"] }
+        },
+        "claude-sonnet-4-5": {
+          "name": "claude-sonnet-4-5",
+          "limit": { "context": 200000, "output": 32000 },
+          "modalities": { "input": ["text", "image"], "output": ["text"] }
+        },
+        "claude-sonnet-4-6": {
+          "name": "claude-sonnet-4-6",
+          "limit": { "context": 200000, "output": 64000 },
+          "modalities": { "input": ["text", "image"], "output": ["text"] }
+        },
+        "gemini-3-flash-preview": {
+          "name": "gemini-3-flash-preview",
+          "limit": { "context": 1048576, "output": 65535 },
+          "modalities": { "input": ["text", "image"], "output": ["text"] }
+        },
+        "gemini-3-pro-preview": {
+          "name": "gemini-3-pro-preview",
+          "limit": { "context": 1048576, "output": 65535 },
+          "modalities": { "input": ["text", "image"], "output": ["text"] }
+        },
+        "glm-flash-experimental": {
+          "name": "glm-flash-experimental",
+          "limit": { "context": 262144, "output": 32000 },
+          "modalities": { "input": ["text", "image"], "output": ["text"] }
+        },
+        "glm-latest": {
+          "name": "glm-latest",
+          "limit": { "context": 202752, "output": 32000 },
+          "modalities": { "input": ["text", "image"], "output": ["text"] }
+        },
+        "kimi-latest": {
+          "name": "kimi-latest",
+          "limit": { "context": 262000, "output": 32000 },
+          "modalities": { "input": ["text", "image"], "output": ["text"] }
+        },
+        "minimax-m2": {
+          "name": "minimax-m2",
+          "limit": { "context": 202752, "output": 32000 },
+          "modalities": { "input": ["text", "image"], "output": ["text"] }
+        },
+        "open-fast": {
+          "name": "open-fast",
+          "limit": { "context": 196000, "output": 32000 },
+          "modalities": { "input": ["text", "image"], "output": ["text"] }
+        },
+        "open-large": {
+          "name": "open-large",
+          "limit": { "context": 202752, "output": 32000 },
+          "modalities": { "input": ["text", "image"], "output": ["text"] }
+        },
+        "open-vision": {
+          "name": "open-vision",
+          "limit": { "context": 262144, "output": 32000 },
+          "modalities": { "input": ["text", "image"], "output": ["text"] }
+        }
       }
-    }
-  },
-  "model": "bedrock-mantle/moonshotai.kimi-k2.5",
-  "agent": {
-    "build": {
-      "mode": "primary",
-      "model": "bedrock-mantle/moonshotai.kimi-k2.5"
-    },
-    "plan": {
-      "mode": "primary",
-      "model": "bedrock-mantle/moonshotai.kimi-k2.5"
     }
   }
 }
+

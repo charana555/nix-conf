@@ -361,6 +361,7 @@ require('lazy').setup({
         { '<leader>t', group = '[T]oggle' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } }, -- Enable gitsigns recommended keymaps first
         { '<leader>g', group = '[G]it' },
+        { '<leader>r', group = '[R]est/HTTP' },
         { '<leader>e', group = '[E]xplorer' },
         { 'gr', group = 'LSP Actions', mode = { 'n' } },
       },
@@ -1061,6 +1062,16 @@ require('lazy').setup({
 
   -- Lazygit integration
   { 'kdheepak/lazygit.nvim', cmd = { 'LazyGit', 'LazyGitFilter', 'LazyGitFilterCurrentFile' } },
+
+  { -- REST client for .http files
+    'mistweaverco/kulala.nvim',
+    ft = { 'http', 'rest' },
+    opts = {
+       global_keymaps = true,
+       global_keymaps_prefix = "<leader>R",
+       kulala_keymaps_prefix = "",
+     },
+  },
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
