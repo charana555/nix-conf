@@ -20,6 +20,8 @@
   lazygit
   zoxide
   sesh
+  openssl.dev
+  pkg-config
   # Neovim ecosystem
   neovim
   gcc
@@ -99,6 +101,8 @@
         tmux attach -t "$1"
       fi
     }
+     # ... your existing initExtra ...
+  export PKG_CONFIG_PATH="${pkgs.openssl.dev}/lib/pkgconfig''${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}"
   '';
   };
 
