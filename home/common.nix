@@ -117,4 +117,5 @@
   xdg.configFile."kitty/kitty.conf".source = ../kitty/kitty.conf;
   xdg.configFile."starship.toml".source = ../starship/starship.toml;
   xdg.configFile."opencode/opencode.json".source = ../opencode/opencode.json;
+  xdg.configFile."opencode/skills".source = ../opencode/skills;
 }
