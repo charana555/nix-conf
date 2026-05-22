@@ -8,6 +8,20 @@
     ../../home/common.nix
   ];
 
+  programs.git = {
+    includes = [
+      {
+        condition = "gitdir:~/work/";
+        contents = {
+          user = {
+            name = "charana.c";
+            email = "charana.c@juspay.in";
+          };
+        };
+      }
+    ];
+  };
+
   home.packages = with pkgs; [
     # Rust toolchain (previously imperative)
     cargo
@@ -17,14 +31,10 @@
     docker-compose
     
     # Dev tools
-    gh
     mkpasswd
     
     # Editors/utils
     vim
     xclip
-    
-    # TMUX (plugins managed manually via tpm)
-    tmux
   ];
 }
