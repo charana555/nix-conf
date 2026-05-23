@@ -1,12 +1,11 @@
 let
   cfg = import ../../config.nix;
-  me = cfg.me // cfg.work;
 in
 { config, pkgs, ... }:
 
 {
-  home.username = me.username;
-  home.homeDirectory = "/home/${me.username}";
+  home.username = cfg.work.username;
+  home.homeDirectory = "/home/${cfg.work.username}";
 
   imports = [
     ../../home/common.nix
@@ -14,17 +13,17 @@ in
 
   programs.git = {
     settings.user = {
-      name = me.fullname;
-      email = me.email;
+      name = cfg.work.fullname;
+      email = cfg.work.email;
     };
 
     includes = [
       {
-        condition = "gitdir:~/work/";
+        condition = "gitdir:~/personal/";
         contents = {
           user = {
-            name = cfg.work.fullname;
-            email = cfg.work.email;
+            name = cfg.me.fullname;
+            email = cfg.me.email;
           };
         };
       }
