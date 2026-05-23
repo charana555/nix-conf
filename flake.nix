@@ -8,9 +8,14 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager }:
+  outputs = { self, nixpkgs, home-manager, nixvim }:
   let
     system = "x86_64-linux";
 
@@ -21,7 +26,10 @@
     mkHomeConfig = username: hostname: modules:
       home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = modules ++ [{ home.stateVersion = "25.05"; }];
+        modules = modules ++ [
+          nixvim.homeModules.default
+          { home.stateVersion = "25.05"; }
+        ];
       };
   in {
     homeConfigurations = {

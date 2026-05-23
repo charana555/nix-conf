@@ -15,10 +15,6 @@
     };
 
     settings = {
-      user = {
-        name = "Charana555";
-        email = "charanchandrashekar555@gmail.com";
-      };
       aliases.gl = "log --oneline --graph --decorate";
       init.defaultBranch = "main";
       core.editor = "nvim";
