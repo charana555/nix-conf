@@ -364,6 +364,9 @@
             require('osc52').copy(table.concat(lines, '\n'))
           end,
         },
+        paste = {
+          ['+'] = function() return nil end,
+        },
       }
 
       vim.o.clipboard = 'unnamedplus'
