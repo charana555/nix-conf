@@ -10,23 +10,12 @@
       mapleader = " ";
       maplocalleader = " ";
       have_nerd_font = true;
-      clipboard = {
-        name = "OSC52";
-        copy = {
-          "+" = [ "copy" ];
-          "*" = [ "copy" ];
-        };
-        paste = {
-          "+" = [ "xclip" "-selection" "clipboard" "-o" ];
-          "*" = [ "xclip" "-selection" "primary" "-o" ];
-        };
-      };
     };
 
     opts = {
       number = true;
       mouse = "a";
-      clipboard = "unnamedplus";
+
       showmode = false;
       breakindent = true;
       undofile = true;
@@ -357,9 +346,28 @@
 
     extraPlugins = with pkgs.vimPlugins; [
       kulala-nvim
+      nvim-osc52
     ];
 
     extraConfigLua = ''
+      require('osc52').setup {
+        max_length = 0,
+        silent = false,
+        trim = false,
+        tmux_passthrough = true,
+      }
+
+      vim.g.clipboard = {
+        name = 'osc52',
+        copy = {
+          ['+'] = function(lines, _)
+            require('osc52').copy(table.concat(lines, '\n'))
+          end,
+        },
+      }
+
+      vim.o.clipboard = 'unnamedplus'
+
       vim.diagnostic.config {
         update_in_insert = false,
         severity_sort = true,
