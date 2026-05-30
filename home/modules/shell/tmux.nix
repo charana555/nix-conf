@@ -100,6 +100,7 @@
       bind-key r movew -r\; display-message "Renumbered Windows"
 
       bind-key C send-keys -R \; clear-history
+      bind C-l send-keys 'C-l'
 
       bind -T copy-mode-vi v send -X begin-selection
       bind -T copy-mode-vi C-v send -X rectangle-toggle

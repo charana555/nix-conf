@@ -148,6 +148,42 @@
             topdelete = { text = "‾"; };
             changedelete = { text = "~"; };
           };
+          on_attach.__raw = ''
+            function(bufnr)
+              local gitsigns = require('gitsigns')
+
+              local function map(mode, l, r, desc)
+                vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
+              end
+
+              map('n', ']c', function()
+                if vim.wo.diff then
+                  vim.cmd.normal({ ']c', bang = true })
+                else
+                  gitsigns.nav_hunk('next')
+                end
+              end, 'Jump to next hunk')
+
+              map('n', '[c', function()
+                if vim.wo.diff then
+                  vim.cmd.normal({ '[c', bang = true })
+                else
+                  gitsigns.nav_hunk('prev')
+                end
+              end, 'Jump to previous hunk')
+
+              map('n', '<leader>hs', gitsigns.stage_hunk, 'Stage hunk')
+              map('n', '<leader>hr', gitsigns.reset_hunk, 'Reset hunk')
+              map('n', '<leader>hp', gitsigns.preview_hunk, 'Preview hunk')
+              map('n', '<leader>hb', gitsigns.blame_line, 'Blame line')
+              map('n', '<leader>hd', gitsigns.diffthis, 'Diff this')
+              map('n', '<leader>hR', gitsigns.reset_buffer, 'Reset buffer')
+              map('n', '<leader>hS', gitsigns.stage_buffer, 'Stage buffer')
+              map('n', '<leader>hu', gitsigns.undo_stage_hunk, 'Undo stage hunk')
+
+              map({ 'o', 'x' }, 'ih', gitsigns.select_hunk, 'Select hunk')
+            end
+          '';
         };
       };
 
@@ -231,24 +267,22 @@
         };
       };
 
-      mini = {
-        ai = {
-          enable = true;
-          settings = {
-            mappings = {
-              around_next = "aa";
-              inside_next = "ii";
-            };
-            n_lines = 500;
+      mini-ai = {
+        enable = true;
+        settings = {
+          mappings = {
+            around_next = "aa";
+            inside_next = "ii";
           };
+          n_lines = 500;
         };
-        surround = { enable = true; };
-        statusline = {
-          enable = true;
-          settings = {
-            use_icons = true;
-            section_location.__raw = "function() return '%2l:%-2v' end";
-          };
+      };
+      mini-surround = { enable = true; };
+      mini-statusline = {
+        enable = true;
+        settings = {
+          use_icons = true;
+          section_location.__raw = "function() return '%2l:%-2v' end";
         };
       };
 

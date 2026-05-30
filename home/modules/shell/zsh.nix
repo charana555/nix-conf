@@ -41,6 +41,7 @@ in
     sessionVariables = {
       ZVM_SYSTEM_CLIPBOARD_ENABLED = "true";
       ZVM_CLIPBOARD_COPY_CMD = "${copy}/bin/copy";
+      PSQL_PAGER = "cat";
     };
 
     localVariables = {
