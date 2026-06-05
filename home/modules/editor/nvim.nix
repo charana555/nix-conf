@@ -134,6 +134,20 @@
     };
 
     plugins = {
+      bufferline = {
+        enable = true;
+        settings = {
+          options = {
+            show_buffer_icons = true;
+            show_buffer_close_icons = true;
+            indicator = {
+              style = "icon";
+              icon = "▎";
+            };
+          };
+        };
+      };
+
       web-devicons = { enable = true; };
 
       guess-indent = { enable = true; };
