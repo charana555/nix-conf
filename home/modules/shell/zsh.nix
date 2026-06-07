@@ -36,9 +36,13 @@ in
 
     shellAliases = {
       oc = "npx opencode-ai";
+      to = "tmux a -t";
       to-dsd = "ssh -o MACs=hmac-sha2-512-etm@openssh.com charana.c@dsd.persian-vega.ts.net -i ~/.ssh/id_ed25519_server";
       to-cvps = "ssh -i ~/.ssh/id_ed25519 ubuntu@80.225.224.42";
       to-pvps = "ssh -i ~/.ssh/id_ed25519 ubuntu@140.245.225.52";
+      to-server = "ssh -o MACs=hmac-sha2-512-etm@openssh.com charana.c@100.112.214.101 -i ~/.ssh/id_ed25519_server";
+      to-lightx = "ssh -i ~/.ssh/id_ed25519_server itachi@pop-os.local";
+      to-oracle = "ssh -i ~/.ssh/ssh-key-2026-02-24.key ubuntu@80.225.224.42";
     };
 
     sessionVariables = {

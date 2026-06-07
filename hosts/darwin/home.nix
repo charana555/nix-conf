@@ -38,8 +38,21 @@ in
   home.packages = with pkgs; [
     cargo
     rustc
+    docker
     docker-compose
     colima
+    tailscale
+    gitleaks
+    haskell-language-server
+    pinentry_mac
   ];
+
+  programs.gpg = {
+    enable = true;
+  };
+  services.gpg-agent = {
+    enable = true;
+    pinentry.package = pkgs.pinentry_mac;
+  };
 }
 
