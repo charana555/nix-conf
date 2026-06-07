@@ -122,10 +122,10 @@ in
       tab_bar_style = "custom";
       tab_separator = "";
       tab_fade = "0 0 0 0";
-      tab_bar_edge = "bottom";
+      tab_bar_edge = "top";
       tab_bar_margin_width = "0.0";
       tab_bar_margin_height = "0.0";
-      tab_bar_align = "left";
+      tab_bar_align = "center";
       tab_bar_min_tabs = 2;
       tab_title_template = "{title}";
       active_tab_title_template = "{title}";
@@ -133,9 +133,9 @@ in
       active_tab_font_style = "bold";
       inactive_tab_font_style = "normal";
 
-      tab_bar_background = "#181825";
+      tab_bar_background = "none";
       active_tab_foreground = "#1e1e2e";
-      active_tab_background = "#cba6f7";
+      active_tab_background = "#fab387";
       inactive_tab_foreground = "#6c7086";
       inactive_tab_background = "#181825";
 
