@@ -1,13 +1,75 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
+let
+  fontFeatureString = name: # conf
+    ''
+      font_features Monaspace${name}Var-Bold +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-BoldItalic +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-ExtraBold +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-ExtraBoldItalic +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-ExtraLightItalic +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-Italic +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-Light +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-LightItalic +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-Medium +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-MediumItalic +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-SemiBold +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-SemiBoldItalic +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-SemiWideBold +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-SemiWideBoldItalic +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-SemiWideExtraBold +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-SemiWideExtraBoldItalic +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-SemiWideExtraLight +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-SemiWideExtraLightItalic +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-SemiWideItalic +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-SemiWideLight +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-SemiWideLightItalic +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-SemiWideMedium +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-SemiWideMediumItalic +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-SemiWideRegular +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-SemiWideSemiBold +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-SemiWideSemiBoldItalic +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-WideBold +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-WideBoldItalic +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-WideExtraBold +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-WideExtraBoldItalic +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-WideExtraLight +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-WideExtraLightItalic +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-WideItalic +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-WideLight +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-WideLightItalic +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-WideMedium +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-WideMediumItalic +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-WideRegular +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-WideSemiBold +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+      font_features Monaspace${name}Var-WideSemiBoldItalic +dlig +ss01 +ss02 +ss03 +ss04 +ss05 +ss06 +ss07 +ss08
+    '';
+in
 {
+  home.file."kitty-tab-bar" = {
+    source = ./tab_bar.py;
+    target = ".config/kitty/tab_bar.py";
+  };
+
   programs.kitty = {
     enable = true;
+
+    environment.FZF_PREVIEW_IMAGE_HANDLER = "kitty";
+
+    extraConfig = # conf
+      ''
+        # Enable ligatures in monaspace font
+        # picked from: <https://github.com/kovidgoyal/kitty/issues/7251#issuecomment-2016430720>
+        ${fontFeatureString "Radon"}
+        ${fontFeatureString "Krypton"}
+        ${fontFeatureString "Argon"}
+        ${fontFeatureString "Neon"}
+      '';
 
     settings = {
       shell_integration = "enabled no-cursor";
 
-      font_family = "JetBrainsMono Nerd Font";
+      font_family = "Monaspace Neon";
       bold_font = "auto";
       italic_font = "auto";
       bold_italic_font = "auto";
@@ -16,8 +78,6 @@
       adjust_line_height = "110%";
       adjust_column_width = "100%";
       adjust_baseline = 0;
-
-      symbol_map = "U+E0A0-U+E0D8,U+E700-U+E864 JetBrainsMono Nerd Font";
 
       cursor_shape = "block";
       cursor_beam_thickness = "7.5";
@@ -41,13 +101,15 @@
       window_padding_width = "0 0 0 0";
       window_margin_width = "0 0 0 0";
       placement_strategy = "center";
-      hide_window_decorations = "yes";
+      hide_window_decorations = "titlebar-only";
       confirm_os_window_close = 0;
       resize_in_steps = "no";
       os_window_state = "maximized";
       background_opacity = "0.90";
       background_blur = 64;
       dynamic_background_opacity = "yes";
+      macos_traditional_fullscreen = "yes";
+      macos_option_as_alt = "yes";
 
       enable_audio_bell = "no";
       visual_bell_duration = "0.0";
@@ -57,21 +119,25 @@
       cursor_text_color = "#1e1e2e";
       url_color = "#89b4fa";
 
-      tab_bar_style = "powerline";
-      tab_powerline_style = "slanted";
+      tab_bar_style = "custom";
+      tab_separator = "";
+      tab_fade = "0 0 0 0";
       tab_bar_edge = "bottom";
       tab_bar_margin_width = "0.0";
+      tab_bar_margin_height = "0.0";
+      tab_bar_align = "left";
       tab_bar_min_tabs = 2;
-      tab_title_template = "\"{index}: {title}\"";
-      active_tab_title_template = "none";
+      tab_title_template = "{title}";
+      active_tab_title_template = "{title}";
+      tab_activity_symbol = "none";
+      active_tab_font_style = "bold";
+      inactive_tab_font_style = "normal";
 
       tab_bar_background = "#181825";
       active_tab_foreground = "#1e1e2e";
       active_tab_background = "#cba6f7";
       inactive_tab_foreground = "#6c7086";
       inactive_tab_background = "#181825";
-      active_tab_font_style = "bold";
-      inactive_tab_font_style = "normal";
 
       enabled_layouts = "tall, stack, splits, grid";
 
@@ -106,9 +172,10 @@
       close_on_child_death = "no";
       allow_remote_control = "yes";
       listen_on = "unix:/tmp/kitty";
+      clipboard_control = "write-primary write-clipboard no-append";
     };
 
-    font.name = "JetBrainsMono Nerd Font";
+    font.name = "Monaspace Neon";
     font.size = 13;
 
     keybindings = {
