@@ -1,5 +1,16 @@
 { config, pkgs, ... }:
 
+let
+  edit-pane =
+    pkgs.writeShellScript "edit-pane" # sh
+      ''
+        buf=$(mktemp).sh
+        # -32768 is the length of the buffer
+        # Why -32768? Coz everyone using this
+        tmux capture-pane -pS -32768 > "$buf"
+        tmux new-window -n:edit-pane "$EDITOR $buf"
+      '';
+in
 {
   programs.tmux = {
     enable = true;
@@ -13,8 +24,29 @@
     terminal = "tmux-256color";
 
     plugins = with pkgs.tmuxPlugins; [
-      vim-tmux-navigator
+      {
+        plugin = minimal-tmux-status;
+        extraConfig = ''
+          set -g @minimal-tmux-bg "#2d241d"
+          set -g @minimal-tmux-fg "#e0a458"
+          set -g @minimal-tmux-justify "left"
+          set -g @minimal-tmux-use-arrow true
+          set -g @minimal-tmux-right-arrow ""
+          set -g @minimal-tmux-left-arrow ""
+          set -g @minimal-tmux-indicator-str ""
+        '';
+      }
+      {
+        plugin = vim-tmux-navigator;
+        extraConfig = ''
+          # vim-tmux-navigator: Only treat actual vim instances as vim
+          # Exclude lazygit and other TUIs by using a strict pattern
+          # Matches: vim, nvim, view, fzf (but NOT lazygit)
+          set -g @vim_navigator_pattern '(\S+/)?\.?(g?(view|n?vim?x?)(diff)?|fzf)(-wrapped)?$'
+        '';
+      }
       better-mouse-mode
+      open
       fzf-tmux-url
       tmux-which-key
       {
@@ -34,52 +66,47 @@
     ];
 
     extraConfig = ''
+      set -g allow-passthrough all
+      set -g default-command "''${SHELL}"
+
+      set -g default-terminal "tmux-256color"
       set -as terminal-overrides ",*:Tc"
+
+      # Undercurl
       set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
       set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
+
+      # Check if we are in WSL
+      if-shell 'test -n "$WSL_DISTRO_NAME"' {
+        set -as terminal-overrides ',*:Setulc=\E[58::2::::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
+      }
+
       set-environment -g COLORTERM "truecolor"
 
-      set -g allow-passthrough on
-      set -s set-clipboard on
+      set-option -ga update-environment "UPTERM_ADMIN_SOCKET"
+      set-option -ga update-environment "SSH_AUTH_SOCK"
+
+      set -g set-clipboard on
+      set-option -g automatic-rename on
+      set -g prefix C-a
 
       set -g renumber-windows on
       set -g set-titles on
       set -g set-titles-string "#T"
-      set-option -g automatic-rename on
       set -g detach-on-destroy off
 
-      set -g status-interval 2
-      set -g status-position bottom
-      set -g status-justify left
-      set -g status-style "bg=#181825 fg=#bac2de"
-      set -g window-status-format "#[fg=#6c7086 bg=#181825] #I #[fg=#6c7086]#W "
-      set -g window-status-current-format "#[fg=#1e1e2e bg=#b4befe bold] #I #[fg=#1e1e2e]#W #[fg=#b4befe bg=#181825]"
-      set -g window-status-separator ""
-      set -g status-left-length 40
-      set -g status-left "#[fg=#1e1e2e bg=#f5c2e7 bold]  #S #[fg=#f5c2e7 bg=#181825]"
-      set -g status-right-length 60
-      set -g status-right "#[fg=#181825 bg=#89dceb] #{pane_current_command} #[fg=#89dceb bg=#181825]#[fg=#1e1e2e bg=#cba6f7] %H:%M  #[fg=#cba6f7 bg=#181825]"
-
-      setw -g pane-border-style "fg=#313244"
-      setw -g pane-active-border-style "fg=#b4befe"
-      set -g pane-border-indicators both
-      set -g pane-border-lines single
-
-      set -g message-style "fg=#1e1e2e bg=#f5c2e7 bold"
-      set -g message-command-style "fg=#1e1e2e bg=#89dceb"
-      set -g copy-mode-match-style "fg=#1e1e2e bg=#f9e2af"
-      set -g copy-mode-current-match-style "fg=#1e1e2e bg=#f38ba8"
-      set -g mode-style "fg=#1e1e2e bg=#f5c2e7"
-      set -g clock-mode-colour "#cba6f7"
-      set -g clock-mode-style 24
-
       set -g focus-events on
+
+      bind N new-session
+      bind n new-window
 
       bind V copy-mode
       bind-key T display-popup -E -w 60% -h 60% "sesh connect \"$(sesh list | fzf --reverse --border-label ' sesh ' --prompt '🯋 ' --bind 'ctrl-s:reload(sesh list --sessions)' --preview 'sesh preview {}')\""
 
       bind v split-window -h -c "#{pane_current_path}"
       bind s split-window -v -c "#{pane_current_path}"
+      bind | split-window -h -c "#{pane_current_path}"
+      bind - split-window -v -c "#{pane_current_path}"
 
       bind -r < swap-window -t -1 \; select-window -t -1
       bind -r > swap-window -t +1 \; select-window -t +1
@@ -93,6 +120,9 @@
       bind H swap-pane -D
       bind L swap-pane -U
 
+      bind -r C-h previous-window
+      bind -r C-l next-window
+
       bind x kill-pane
       bind q kill-window
       bind Q kill-session
@@ -100,13 +130,17 @@
       bind-key r movew -r\; display-message "Renumbered Windows"
 
       bind-key C send-keys -R \; clear-history
-      bind C-l send-keys 'C-l'
+
+      bind C-e run-shell "${edit-pane}"
 
       bind -T copy-mode-vi v send -X begin-selection
       bind -T copy-mode-vi C-v send -X rectangle-toggle
       bind -T copy-mode-vi y send -X copy-selection-and-cancel
+      bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel
 
-      bind C-e run-shell "tmux capture-pane -pS -32768 > /tmp/tmux-pane-$$.sh && tmux new-window -n:edit-pane 'nvim /tmp/tmux-pane-$$.sh'"
+      bind b set-option status
+
+      bind S choose-session
     '';
   };
 }
