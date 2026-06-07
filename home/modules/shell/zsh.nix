@@ -36,6 +36,9 @@ in
 
     shellAliases = {
       oc = "npx opencode-ai";
+      to-dsd = "ssh -o MACs=hmac-sha2-512-etm@openssh.com charana.c@dsd.persian-vega.ts.net -i ~/.ssh/id_ed25519_server";
+      to-cvps = "ssh -i ~/.ssh/id_ed25519 ubuntu@80.225.224.42";
+      to-pvps = "ssh -i ~/.ssh/id_ed25519 ubuntu@140.245.225.52";
     };
 
     sessionVariables = {
