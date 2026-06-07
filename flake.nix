@@ -13,20 +13,26 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixvim }:
+  outputs = inputs:
   let
     mkHomeConfig = username: hostname: system: modules:
       let
-        pkgs = import nixpkgs {
+        pkgs = import inputs.nixpkgs {
           inherit system;
         };
       in
-      home-manager.lib.homeManagerConfiguration {
+      inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
+        extraSpecialArgs = { inherit inputs; };
         modules = modules ++ [
-          nixvim.homeModules.default
+          inputs.nixvim.homeModules.default
           { home.stateVersion = "25.05"; }
         ];
       };

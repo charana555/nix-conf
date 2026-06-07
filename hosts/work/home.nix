@@ -11,6 +11,11 @@ in
     ../../home/common.nix
   ];
 
+  sops.secrets."private-keys/ssh" = {
+    path = "${config.home.homeDirectory}/.ssh/id_ed25519";
+    mode = "0600";
+  };
+
   programs.git = {
     settings.user = {
       name = cfg.work.fullname;
