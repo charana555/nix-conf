@@ -17,13 +17,12 @@
 
   outputs = { self, nixpkgs, home-manager, nixvim }:
   let
-    system = "x86_64-linux";
-
-    pkgs = import nixpkgs {
-      inherit system;
-    };
-
-    mkHomeConfig = username: hostname: modules:
+    mkHomeConfig = username: hostname: system: modules:
+      let
+        pkgs = import nixpkgs {
+          inherit system;
+        };
+      in
       home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = modules ++ [
@@ -33,8 +32,10 @@
       };
   in {
     homeConfigurations = {
-      "itachi@popos" = mkHomeConfig "itachi" "popos" [ ./hosts/popos/home.nix ];
-      "charana.c@work" = mkHomeConfig "charana.c" "work" [ ./hosts/work/home.nix ];
+      "itachi@popos" = mkHomeConfig "itachi" "popos" "x86_64-linux" [ ./hosts/popos/home.nix ];
+      "charana.c@work" = mkHomeConfig "charana.c" "work" "x86_64-linux" [ ./hosts/work/home.nix ];
+      "charana.c@darwin" = mkHomeConfig "charana.c" "darwin" "aarch64-darwin" [ ./hosts/darwin/home.nix ];
     };
   };
 }
+

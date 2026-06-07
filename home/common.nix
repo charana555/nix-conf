@@ -5,6 +5,7 @@
 
   home.stateVersion = "25.05";
 
+  nix.package = pkgs.nix;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   programs.home-manager.enable = true;
