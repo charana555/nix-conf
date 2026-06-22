@@ -18,6 +18,11 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nvix = {
+      url = "github:niksingh710/nvix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs:
@@ -32,7 +37,6 @@
         inherit pkgs;
         extraSpecialArgs = { inherit inputs; };
         modules = modules ++ [
-          inputs.nixvim.homeModules.default
           { home.stateVersion = "25.05"; }
         ];
       };
