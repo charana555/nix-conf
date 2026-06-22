@@ -1,7 +1,7 @@
 # Nix-Conf Migration Tracker
 
-**Last updated**: 2026-05-23  
-**Build command**: `home-manager build --flake .#itachi@popos`  
+**Last updated**: 2026-05-23
+**Build command**: `home-manager build --flake .#itachi@popos`
 **Stage all before build**: `git add -A` (Nix flakes only see git-tracked files)
 
 ---
@@ -126,11 +126,17 @@ in
 
 ---
 
+## Files Removed (Cleanup Done)
+
+The following reference files have been deleted after successful verification:
+
+- ~~`starship/starship.toml`~~ — deleted after nix-native config verified
+- ~~`tmux/tmux.conf`~~ — deleted after nix-native config verified
+- ~~`kitty/kitty.conf`~~ — deleted after nix-native config verified
+- ~~`nvim/init.lua`~~ — deleted after nixvim config verified
+
 ## Files Kept as Reference (Not Deleted)
-- `starship/starship.toml` — original TOML config
-- `tmux/tmux.conf` — original tmux config
-- `kitty/kitty.conf` — original kitty config (now Nix-native)
-- `nvim/init.lua` — original neovim config (1104 lines, to be deleted after nixvim is verified)
+- `migration.md` — this tracker document
 
 ---
 
