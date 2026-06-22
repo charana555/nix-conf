@@ -87,25 +87,20 @@ in
 {
   home.packages = [
     (inputs.nvix.packages.${pkgs.system}.default.extend {
-      colorschemes.kanagawa.enable = lib.mkForce false;
+      colorschemes.catppuccin.enable = lib.mkForce false;
       colorschemes.tokyonight.enable = lib.mkForce false;
-      colorschemes.catppuccin = {
+      colorschemes.kanagawa = {
         enable = lib.mkForce true;
         settings = {
-          flavour = "macchiato";
-          transparent_background = true;
-          italic = true;
-          bold = true;
-          dimInactive = false;
-          integrations.native_lsp = {
-            enabled = true;
-            underlines = {
-              errors = [ "undercurl" ];
-              hints = [ "undercurl" ];
-              warnings = [ "undercurl" ];
-              information = [ "undercurl" ];
-            };
+          theme = lib.mkForce "wave";
+          transparent = true;
+          background = {
+            dark = lib.mkForce "wave";
+            light = "lotus";
           };
+          commentStyle.italic = true;
+          keywordStyle.italic = true;
+          statementStyle.bold = true;
         };
       };
 
