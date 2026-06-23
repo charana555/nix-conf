@@ -10,7 +10,6 @@
 
     ripgrep
     fd
-    sesh
     openssl.dev
     pkg-config
 
