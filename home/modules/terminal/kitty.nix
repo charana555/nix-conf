@@ -69,7 +69,7 @@ in
     settings = {
       shell_integration = "enabled no-cursor";
 
-      font_family = "Monaspace Neon";
+      font_family = "Monaspace Argon";
       bold_font = "auto";
       italic_font = "auto";
       bold_italic_font = "auto";
@@ -175,8 +175,8 @@ in
       clipboard_control = "write-primary write-clipboard no-append";
     };
 
-    font.name = "Monaspace Neon";
-    font.size = 13;
+    font.name = "Monaspace Argon";
+    font.size = 14;
 
     keybindings = {
       "cmd+space" = "no_op";
