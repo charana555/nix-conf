@@ -73,7 +73,7 @@ in
       bold_font = "auto";
       italic_font = "auto";
       bold_italic_font = "auto";
-      font_size = "13.0";
+      # font_size = "13.0";
 
       adjust_line_height = "110%";
       adjust_column_width = "100%";
