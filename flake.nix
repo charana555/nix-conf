@@ -23,6 +23,20 @@
       url = "github:niksingh710/nvix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    ponytail = {
+      url = "github:DietrichGebert/ponytail";
+      flake = false;
+    };
+
+    # zen till https://github.com/NixOS/nixpkgs/issues/327982 is resolved
+    # ponytail: git+https (not github:) to dodge unauthenticated GitHub API rate limits
+    zen-browser.url = "git+https://github.com/0xc000022070/zen-browser-flake";
+
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs:
