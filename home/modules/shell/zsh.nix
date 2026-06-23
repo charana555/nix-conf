@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{  pkgs, lib, ... }:
 
 let
   copyScript = pkgs.writeText "copy-script" ''
