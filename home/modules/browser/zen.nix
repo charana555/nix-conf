@@ -8,6 +8,9 @@ in
     inputs.zen-browser.homeModules.default
   ];
 
+  # Overwrite any pre-existing manual-install profiles.ini
+  home.file."${config.programs.zen-browser.configPath}/profiles.ini".force = true;
+
   programs.zen-browser = {
     enable = true;
 
