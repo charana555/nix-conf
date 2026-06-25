@@ -48,7 +48,13 @@ in
       better-mouse-mode
       open
       fzf-tmux-url
-      tmux-which-key
+      {
+        plugin = tmux-which-key;
+        extraConfig = ''
+          set -g @tmux-which-key-xdg-enable true
+          set -g @tmux-which-key-disable-autobuild true
+        '';
+      }
       {
         plugin = resurrect;
         extraConfig = ''
