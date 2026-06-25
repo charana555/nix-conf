@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{  ... }:
 
 let
   fontFeatureString = name: # conf
