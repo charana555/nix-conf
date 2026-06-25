@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{  pkgs, ... }:
 
 {
   home.packages = with pkgs; [
@@ -10,7 +10,6 @@
 
     ripgrep
     fd
-    sesh
     openssl.dev
     pkg-config
 
