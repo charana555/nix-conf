@@ -1,5 +1,6 @@
 # Nix-Conf Migration Tracker
-
+tty(0.46.2)
+    {
 **Last updated**: 2026-05-23
 **Build command**: `home-manager build --flake .#itachi@popos`
 **Stage all before build**: `git add -A` (Nix flakes only see git-tracked files)
