@@ -286,6 +286,23 @@
         "type": "github"
       }
     },
+    "openagents-control": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1774390579,
+        "narHash": "sha256-H5O08YjxzJMYva1sjMgCl5GTDrx9pR1ELBtO5bqGV/Y=",
+        "ref": "refs/heads/main",
+        "rev": "ef3836efd659e451b6dbb8eee7d3213ba39f5aec",
+        "revCount": 215,
+        "type": "git",
+        "url": "https://github.com/darrenhinde/OpenAgentsControl"
+      },
+      "original": {
+        "rev": "ef3836efd659e451b6dbb8eee7d3213ba39f5aec",
+        "type": "git",
+        "url": "https://github.com/darrenhinde/OpenAgentsControl"
+      }
+    },
     "ponytail": {
       "flake": false,
       "locked": {
@@ -309,6 +326,7 @@
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",
         "nvix": "nvix",
+        "openagents-control": "openagents-control",
         "ponytail": "ponytail",
         "sops-nix": "sops-nix",
         "zen-browser": "zen-browser"

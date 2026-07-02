@@ -1,7 +1,21 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "model": "litellm/glm-latest",
+  "default_agent": "OpenAgent",
   "agent": {
+    "OpenAgent": {
+      "skills": [
+        "frontend-design",
+        "git-wisdom",
+        "think-deeper",
+        "ponytail",
+        "ponytail-review",
+        "ponytail-audit",
+        "ponytail-debt",
+        "ponytail-gain",
+        "ponytail-help"
+      ]
+    },
     "explore": { "mode": "subagent", "model": "litellm/open-fast" }
   },
   "provider": {

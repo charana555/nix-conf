@@ -29,8 +29,13 @@
       flake = false;
     };
 
+    openagents-control = {
+      url = "git+https://github.com/darrenhinde/OpenAgentsControl?rev=ef3836efd659e451b6dbb8eee7d3213ba39f5aec";
+      flake = false;
+    };
+
     # zen till https://github.com/NixOS/nixpkgs/issues/327982 is resolved
-    # ponytail: git+https (not github:) to dodge unauthenticated GitHub API rate limits
+    # git+https inputs dodge unauthenticated GitHub API rate limits.
     zen-browser.url = "git+https://github.com/0xc000022070/zen-browser-flake";
 
     firefox-addons = {
@@ -39,27 +44,29 @@
     };
   };
 
-  outputs = inputs:
-  let
-    mkHomeConfig = username: hostname: system: modules:
-      let
-        pkgs = import inputs.nixpkgs {
-          inherit system;
+  outputs =
+    inputs:
+    let
+      mkHomeConfig =
+        username: hostname: system: modules:
+        let
+          pkgs = import inputs.nixpkgs {
+            inherit system;
+          };
+        in
+        inputs.home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = { inherit inputs; };
+          modules = modules ++ [
+            { home.stateVersion = "25.05"; }
+          ];
         };
-      in
-      inputs.home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = { inherit inputs; };
-        modules = modules ++ [
-          { home.stateVersion = "25.05"; }
-        ];
+    in
+    {
+      homeConfigurations = {
+        "itachi@popos" = mkHomeConfig "itachi" "popos" "x86_64-linux" [ ./hosts/popos/home.nix ];
+        "charana.c@work" = mkHomeConfig "charana.c" "work" "x86_64-linux" [ ./hosts/work/home.nix ];
+        "charana.c@darwin" = mkHomeConfig "charana.c" "darwin" "aarch64-darwin" [ ./hosts/darwin/home.nix ];
       };
-  in {
-    homeConfigurations = {
-      "itachi@popos" = mkHomeConfig "itachi" "popos" "x86_64-linux" [ ./hosts/popos/home.nix ];
-      "charana.c@work" = mkHomeConfig "charana.c" "work" "x86_64-linux" [ ./hosts/work/home.nix ];
-      "charana.c@darwin" = mkHomeConfig "charana.c" "darwin" "aarch64-darwin" [ ./hosts/darwin/home.nix ];
     };
-  };
 }
-
