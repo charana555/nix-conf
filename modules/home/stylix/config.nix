@@ -19,8 +19,5 @@ in
       package = pkgs.monaspace;
     };
     fonts.sizes.terminal = 14;
-
-    # starship palette is derived manually in starship.nix
-    targets.starship.enable = false;
   };
 }

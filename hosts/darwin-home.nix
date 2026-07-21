@@ -13,6 +13,7 @@ in
 
   imports = [
     flake.homeModules.default
+    flake.homeModules.stylix
   ];
 
   sops.secrets."private-keys/ssh" = {
