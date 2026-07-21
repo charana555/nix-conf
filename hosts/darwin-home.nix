@@ -9,7 +9,7 @@ let
 in
 {
   home.username = cfg.users.work.username;
-  home.homeDirectory = "/home/${cfg.users.work.username}";
+  home.homeDirectory = "/Users/${cfg.users.work.username}";
 
   imports = [
     flake.homeModules.default
@@ -42,8 +42,20 @@ in
   home.packages = with pkgs; [
     cargo
     rustc
+    docker
     docker-compose
-    mkpasswd
-    xclip
+    colima
+    tailscale
+    gitleaks
+    haskell-language-server
+    pinentry_mac
   ];
+
+  programs.gpg = {
+    enable = true;
+  };
+  services.gpg-agent = {
+    enable = true;
+    pinentry.package = pkgs.pinentry_mac;
+  };
 }

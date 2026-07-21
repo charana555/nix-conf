@@ -1,15 +1,18 @@
+{
+  flake,
+  config,
+  pkgs,
+  ...
+}:
 let
-  cfg = import ../../config.nix;
-  me = cfg.me // cfg.personal;
+  me = (import (flake + "/config.nix")).users.personal;
 in
-{ config, pkgs, ... }:
-
 {
   home.username = me.username;
   home.homeDirectory = "/home/${me.username}";
 
   imports = [
-    ../../home/common.nix
+    flake.homeModules.default
   ];
 
   sops.secrets."private-keys/ssh" = {

@@ -3,31 +3,57 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
+    # Auto-wiring
+    nix-wire.url = "github:semi710/nix-wire";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+
+    # Home-manager
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Darwin
+    nix-darwin.url = "github:LnL7/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Secrets
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Theming
+    stylix.url = "github:danth/stylix";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Disk management
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Kernel
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
+
+    # Wayland compositor
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-contrib = {
+      url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # nix-index database (`,` command)
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # Editor
+    nixvim.url = "github:nix-community/nixvim";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
-    nvix = {
-      url = "github:niksingh710/nvix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nvix.url = "github:niksingh710/nvix";
+    nvix.inputs.nixpkgs.follows = "nixpkgs";
 
-    ponytail = {
-      url = "github:DietrichGebert/ponytail";
-      flake = false;
-    };
+    # opencode ecosystem
+    ponytail.url = "github:DietrichGebert/ponytail";
+    ponytail.flake = false;
 
     # zen till https://github.com/NixOS/nixpkgs/issues/327982 is resolved
     # ponytail: git+https (not github:) to dodge unauthenticated GitHub API rate limits
@@ -39,27 +65,10 @@
     };
   };
 
-  outputs = inputs:
-  let
-    mkHomeConfig = username: hostname: system: modules:
-      let
-        pkgs = import inputs.nixpkgs {
-          inherit system;
-        };
-      in
-      inputs.home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = { inherit inputs; };
-        modules = modules ++ [
-          { home.stateVersion = "25.05"; }
-        ];
-      };
-  in {
-    homeConfigurations = {
-      "itachi@popos" = mkHomeConfig "itachi" "popos" "x86_64-linux" [ ./hosts/popos/home.nix ];
-      "charana.c@work" = mkHomeConfig "charana.c" "work" "x86_64-linux" [ ./hosts/work/home.nix ];
-      "charana.c@darwin" = mkHomeConfig "charana.c" "darwin" "aarch64-darwin" [ ./hosts/darwin/home.nix ];
+  outputs =
+    inputs:
+    inputs.nix-wire.mkFlake {
+      inherit inputs;
+      imports = [ ./parts ];
     };
-  };
 }
-
