@@ -11,6 +11,7 @@ in
     flake.homeModules.terminal
     flake.homeModules.browser
     flake.homeModules.editor
+    # hyprland is added via nixosModules.hyprland home-imports (sharedModules)
   ];
 
   programs.git = {
