@@ -18,7 +18,8 @@
       (
         { lib, ... }:
         {
-          # stylix hyprland target checks this attribute which doesn't exist in current home-manager
+          # stylix hyprland target checks this attribute which doesn't exist
+          # in current home-manager. Defined in home stylix module too.
           options.wayland.windowManager.hyprland.configType = lib.mkOption {
             type = lib.types.str;
             default = "hyprlang";

@@ -13,7 +13,10 @@ in
 
   imports = [
     flake.homeModules.default
+    flake.homeModules.stylix
   ];
+
+  stylix.cliOnly = true;
 
   sops.secrets."private-keys/ssh" = {
     path = "${config.home.homeDirectory}/.ssh/id_ed25519";
