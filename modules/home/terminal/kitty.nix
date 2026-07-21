@@ -70,12 +70,6 @@ in
     settings = {
       shell_integration = "enabled no-cursor";
 
-      font_family = "Monaspace Argon";
-      bold_font = "auto";
-      italic_font = "auto";
-      bold_italic_font = "auto";
-      # font_size = "13.0";
-
       adjust_line_height = "110%";
       adjust_column_width = "100%";
       adjust_baseline = 0;
@@ -106,7 +100,6 @@ in
       confirm_os_window_close = 0;
       resize_in_steps = "no";
       os_window_state = "maximized";
-      background_opacity = "0.90";
       background_blur = 64;
       dynamic_background_opacity = "yes";
       macos_traditional_fullscreen = "yes";
@@ -115,10 +108,6 @@ in
       enable_audio_bell = "no";
       visual_bell_duration = "0.0";
       window_alert_on_bell = "yes";
-
-      cursor = "#f5e0dc";
-      cursor_text_color = "#1e1e2e";
-      url_color = "#89b4fa";
 
       tab_bar_style = "custom";
       tab_separator = "";
@@ -135,34 +124,8 @@ in
       inactive_tab_font_style = "normal";
 
       tab_bar_background = "none";
-      active_tab_foreground = "#1e1e2e";
-      active_tab_background = "#fab387";
-      inactive_tab_foreground = "#6c7086";
-      inactive_tab_background = "#181825";
 
       enabled_layouts = "tall, stack, splits, grid";
-
-      background = "#1e1e2e";
-      foreground = "#cdd6f4";
-      selection_background = "#f5e0dc";
-      selection_foreground = "#1e1e2e";
-
-      color0 = "#45475a";
-      color8 = "#585b70";
-      color1 = "#f38ba8";
-      color9 = "#f38ba8";
-      color2 = "#a6e3a1";
-      color10 = "#a6e3a1";
-      color3 = "#f9e2af";
-      color11 = "#f9e2af";
-      color4 = "#89b4fa";
-      color12 = "#89b4fa";
-      color5 = "#cba6f7";
-      color13 = "#cba6f7";
-      color6 = "#89dceb";
-      color14 = "#89dceb";
-      color7 = "#bac2de";
-      color15 = "#a6adc8";
 
       repaint_delay = 10;
       input_delay = 3;
@@ -175,9 +138,6 @@ in
       listen_on = "unix:/tmp/kitty";
       clipboard_control = "write-primary write-clipboard no-append";
     };
-
-    font.name = "Monaspace Argon";
-    font.size = 14;
 
     keybindings = {
       "cmd+space" = "no_op";

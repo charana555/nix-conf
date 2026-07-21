@@ -8,12 +8,10 @@
 
 {
   imports =
-    with builtins;
-    map (dir: ./${dir}) (
-      filter (name: name != "default.nix" && (readDir ./.).${name} == "directory") (
-        attrNames (readDir ./.)
-      )
-    )
+    inputs.nix-wire.lib.autoImportExcept ./. [
+      "stylix"
+      "hyprland"
+    ]
     ++ [ inputs.sops-nix.homeManagerModules.sops ];
 
   home.stateVersion = "25.05";

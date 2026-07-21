@@ -21,57 +21,26 @@
 
       add_newline = true;
 
-      palette = "catppuccin";
-
-      palettes.catppuccin = {
-        rosewater = "#f5e0dc";
-        flamingo = "#f2cdcd";
-        pink = "#f5c2e7";
-        mauve = "#cba6f7";
-        red = "#f38ba8";
-        maroon = "#eba0ac";
-        peach = "#fab387";
-        yellow = "#f9e2af";
-        green = "#a6e3a1";
-        teal = "#94e2d5";
-        sky = "#89dceb";
-        sapphire = "#74c7ec";
-        blue = "#89b4fa";
-        lavender = "#b4befe";
-        text = "#cdd6f4";
-        subtext1 = "#bac2de";
-        subtext0 = "#a6adc8";
-        overlay2 = "#9399b2";
-        overlay1 = "#7f849c";
-        overlay0 = "#6c7086";
-        surface2 = "#585b70";
-        surface1 = "#45475a";
-        surface0 = "#313244";
-        base = "#1e1e2e";
-        mantle = "#181825";
-        crust = "#11111b";
-      };
-
       os = {
         disabled = false;
         style = "bg:surface0 fg:blue bold";
-        format = "[](surface0)[ $symbol ]($style)";
+        format = "[](surface0)[ $symbol ]($style)";
         symbols = {
-          Alpine = " ";
-          Amazon = " ";
-          Android = " ";
+          Alpine = " ";
+          Amazon = " ";
+          Android = " ";
           Arch = "󰣇 ";
-          CentOS = " ";
-          Debian = " ";
-          Fedora = " ";
-          Gentoo = " ";
-          Linux = " ";
-          Macos = " ";
-          Manjaro = " ";
+          CentOS = " ";
+          Debian = " ";
+          Fedora = " ";
+          Gentoo = " ";
+          Linux = " ";
+          Macos = " ";
+          Manjaro = " ";
           Mint = "󰣭 ";
-          NixOS = " ";
-          Pop = " ";
-          Ubuntu = " ";
+          NixOS = " ";
+          Pop = " ";
+          Ubuntu = " ";
           Windows = "󰍲 ";
         };
       };
@@ -118,7 +87,7 @@
       };
 
       nodejs = {
-        symbol = " ";
+        symbol = " ";
         style = "bg:surface0 fg:green bold";
         format = "[ $symbol($version )]($style)";
         detect_files = [
@@ -129,7 +98,7 @@
       };
 
       python = {
-        symbol = " ";
+        symbol = " ";
         style = "bg:surface0 fg:yellow bold";
         python_binary = "python3";
         format = "[ $symbol($version )( $virtualenv )]($style)";
@@ -147,7 +116,7 @@
       };
 
       rust = {
-        symbol = " ";
+        symbol = " ";
         style = "bg:surface0 fg:peach bold";
         format = "[ $symbol($version )]($style)";
         detect_files = [
@@ -158,7 +127,7 @@
       };
 
       golang = {
-        symbol = " ";
+        symbol = " ";
         style = "bg:surface0 fg:sky bold";
         format = "[ $symbol ($version )]($style)";
         detect_files = [
@@ -169,14 +138,14 @@
       };
 
       nix_shell = {
-        symbol = " ";
+        symbol = " ";
         style = "bg:surface0 fg:lavender bold";
         format = "[ $symbol$state( $name)]($style)";
       };
 
       cmd_duration = {
         min_time = 0;
-        format = "[ $duration ](bg:surface0 fg:lavender)[](surface0)";
+        format = "[ $duration ](bg:surface0 fg:lavender)[](surface0)";
         show_milliseconds = false;
       };
 
@@ -184,7 +153,7 @@
         disabled = false;
         time_format = "%H:%M";
         style = "bg:surface1 fg:text";
-        format = "[](surface1)[ $time ]($style)[](surface1)";
+        format = "[](surface1)[ $time ]($style)[](surface1)";
       };
 
       character = {

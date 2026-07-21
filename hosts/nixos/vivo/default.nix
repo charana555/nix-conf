@@ -15,6 +15,7 @@ in
     flake.nixosModules.hardware
     flake.nixosModules.intel
     flake.nixosModules.hyprland
+    flake.nixosModules.stylix
     flake.inputs.sops-nix.nixosModules.sops
     flake.inputs.disko.nixosModules.disko
     ./disk.nix

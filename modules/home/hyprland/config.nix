@@ -1,11 +1,12 @@
-{ lib, ... }:
-# ponytail: hardcoded colors, stylix replaces these in Phase 6
+{
+  config,
+  lib,
+  ...
+}:
 let
-  base00 = "24273a";
-  base06 = "cad3f5";
-  base0F = "5b6078";
-  border_active = "0xff${base06}";
-  border_inactive = "0x00${base06}";
+  inherit (config.lib.stylix) colors;
+  border_active = "0xff${colors.base06}";
+  border_inactive = "0x00${colors.base06}";
 in
 {
   wayland.windowManager.hyprland = {
@@ -57,6 +58,7 @@ in
           height = 5;
           "col.active" = lib.mkForce border_active;
           "col.inactive" = lib.mkForce border_inactive;
+          text_color = lib.mkForce "0xff${colors.base0F}";
         };
       };
 
