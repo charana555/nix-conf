@@ -1,5 +1,12 @@
-{ lib, ... }:
+{
+  lib,
+  config,
+  ...
+}:
 
+let
+  c = config.lib.stylix.colors;
+in
 {
   programs.starship = {
     enable = true;
@@ -20,6 +27,28 @@
       right_format = "";
 
       add_newline = true;
+
+      # Map stylix base16 colors to the names this config uses
+      palettes.kanagawa = {
+        base = "#${c.base00}";
+        mantle = "#${c.base01}";
+        surface0 = "#${c.base02}";
+        surface1 = "#${c.base03}";
+        surface2 = "#${c.base04}";
+        text = "#${c.base05}";
+        subtext1 = "#${c.base06}";
+        subtext0 = "#${c.base07}";
+        red = "#${c.base08}";
+        peach = "#${c.base09}";
+        yellow = "#${c.base0A}";
+        green = "#${c.base0B}";
+        teal = "#${c.base0C}";
+        blue = "#${c.base0D}";
+        lavender = "#${c.base0E}";
+        pink = "#${c.base0F}";
+      };
+
+      palette = "kanagawa";
 
       os = {
         disabled = false;
@@ -128,7 +157,7 @@
 
       golang = {
         symbol = " ";
-        style = "bg:surface0 fg:sky bold";
+        style = "bg:surface0 fg:blue bold";
         format = "[ $symbol ($version )]($style)";
         detect_files = [
           "go.mod"
