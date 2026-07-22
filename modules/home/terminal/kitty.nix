@@ -65,9 +65,6 @@ in
         ${fontFeatureString "Krypton"}
         ${fontFeatureString "Argon"}
         ${fontFeatureString "Neon"}
-
-        # Fallback to JetBrainsMono Nerd Font for icons/powerline glyphs
-        symbol_map U+E000-U+E00A,U+E0A0-U+E0A3,U+E0B0-U+E0D4,U+E200-U+E2A9,U+E300-U+E30C,U+E600-U+E60C,U+E700-U+E7C5,U+F000-U+F02E,U+F030-U+F093,U+F0A0-U+F0FE,U+F100-U+F1E0,U+F1E3,U+F1E5-U+F1FF,U+F200-U+F20A,U+F300-U+F31C,U+F400-U+F4FC,U+F500-U+F8FF JetBrainsMono Nerd Font
       '';
 
     settings = {
