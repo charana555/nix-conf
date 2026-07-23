@@ -63,8 +63,19 @@ in
       }
       {
         name = "zsh-fzf-tab";
-        src = pkgs.zsh-fzf-tab;
-        file = "share/fzf-tab/fzf-tab.plugin.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "Aloxaf";
+          repo = "fzf-tab";
+          rev = "v1.3.0";
+          sha256 = "sha256-8atbysoOyCBW2OYKmdc91x9V/Mk3eyg3hvzvhJpQ32w=";
+          # ponytail: skip modules/ dir, avoids glibc mismatch on non-NixOS
+          sparseCheckout = [
+            "fzf-tab.plugin.zsh"
+            "fzf-tab.zsh"
+            "lib"
+          ];
+        };
+        file = "fzf-tab.plugin.zsh";
       }
     ];
 
@@ -76,8 +87,6 @@ in
         if [ -f ~/.config/secrets/env ]; then
           source ~/.config/secrets/env
         fi
-        # ponytail: skip compiled fzftab module on non-NixOS (glibc mismatch)
-        zstyle ':fzf-tab:*' no-load-fzftab yes
       '')
       (lib.mkOrder 1000 ''
         to() {
