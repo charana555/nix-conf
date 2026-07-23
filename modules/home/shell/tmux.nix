@@ -74,6 +74,7 @@ in
     extraConfig = ''
       set -g allow-passthrough all
       set -g default-command "''${SHELL}"
+      bind-key -n S-Enter send-keys -l "\e[13;2u"
 
       set -g default-terminal "tmux-256color"
       set -as terminal-overrides ",*:Tc"
