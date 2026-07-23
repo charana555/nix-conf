@@ -1,5 +1,48 @@
-{ ... }:
+{ lib, ... }:
 
+let
+  baseBindings = {
+    "space" = "no_op";
+    "f" = "send_text all \\x01";
+    "s" = "send_text all \\x01/";
+    "t" = "new_tab_with_cwd";
+    "w" = "close_tab";
+    "n" = "next_tab";
+    "m" = "previous_tab";
+    "." = "move_tab_forward";
+    "," = "move_tab_backward";
+    "enter" = "new_window_with_cwd";
+    "d" = "close_window";
+    "]" = "next_window";
+    "[" = "previous_window";
+    "r" = "start_resizing_window";
+    "l" = "next_layout";
+    "equal" = "change_font_size all +1.0";
+    "minus" = "change_font_size all -1.0";
+    "backspace" = "change_font_size all 0";
+    "a" = "set_background_opacity -0.05";
+    "b" = "set_background_opacity +0.05";
+    "h" = "show_scrollback";
+    "g" = "show_last_command_output";
+    "c" = "copy_to_clipboard";
+    "v" = "paste_from_clipboard";
+  };
+
+  shiftBindings = {
+    "t" = "set_tab_title";
+    "f" = "move_window_forward";
+  };
+
+  mkBindings = prefix: lib.mapAttrs' (k: v: {
+    name = "${prefix}+${k}";
+    value = v;
+  }) baseBindings;
+
+  mkShiftBindings = prefix: lib.mapAttrs' (k: v: {
+    name = "${prefix}+shift+${k}";
+    value = v;
+  }) shiftBindings;
+in
 {
   home.file."kitty-tab-bar" = {
     source = ./tab_bar.py;
@@ -84,40 +127,10 @@
       clipboard_control = "write-primary write-clipboard no-append";
     };
 
-    keybindings = {
-      "cmd+space" = "no_op";
-
-      "cmd+f" = "send_text all \\x01";
-      "cmd+s" = "send_text all \\x01/";
-      "cmd+t" = "new_tab_with_cwd";
-      "cmd+w" = "close_tab";
-      "cmd+n" = "next_tab";
-      "cmd+m" = "previous_tab";
-      "cmd+." = "move_tab_forward";
-      "cmd+," = "move_tab_backward";
-      "cmd+shift+t" = "set_tab_title";
-
-      "cmd+enter" = "new_window_with_cwd";
-      "cmd+d" = "close_window";
-      "cmd+]" = "next_window";
-      "cmd+[" = "previous_window";
-      "cmd+shift+f" = "move_window_forward";
-      "cmd+r" = "start_resizing_window";
-
-      "cmd+l" = "next_layout";
-
-      "cmd+equal" = "change_font_size all +1.0";
-      "cmd+minus" = "change_font_size all -1.0";
-      "cmd+backspace" = "change_font_size all 0";
-
-      "cmd+a" = "set_background_opacity -0.05";
-      "cmd+b" = "set_background_opacity +0.05";
-
-      "cmd+h" = "show_scrollback";
-      "cmd+g" = "show_last_command_output";
-
-      "cmd+c" = "copy_to_clipboard";
-      "cmd+v" = "paste_from_clipboard";
-    };
+    keybindings =
+      mkBindings "cmd"
+      // mkBindings "alt"
+      // mkShiftBindings "cmd"
+      // mkShiftBindings "alt";
   };
 }
