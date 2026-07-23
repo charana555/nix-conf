@@ -14,9 +14,9 @@ in
     opacity.terminal = 0.90;
     polarity = "dark";
     fonts.monospace = {
-      name = "Monaspace Neon";
-      package = pkgs.monaspace;
+      name = "JetBrainsMono Nerd Font";
+      package = pkgs.nerd-fonts.jetbrains-mono;
     };
-    fonts.sizes.terminal = 13;
+    fonts.sizes.terminal = 15;
   };
 }
