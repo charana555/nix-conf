@@ -53,25 +53,26 @@ in
       os = {
         disabled = false;
         style = "bg:surface0 fg:blue bold";
-        format = "[](surface0)[ $symbol ]($style)";
+        format = "[](surface0)[ $symbol ]($style)";
         symbols = {
-          Alpine = " ";
-          Amazon = " ";
-          Android = " ";
+          Alpine = " ";
+          Amazon = " ";
+          Android = " ";
           Arch = "󰣇 ";
-          CentOS = " ";
-          Debian = " ";
-          Fedora = " ";
-          Gentoo = " ";
-          Linux = " ";
-          Macos = " ";
-          Manjaro = " ";
+          CentOS = " ";
+          Debian = " ";
+          Fedora = " ";
+          Gentoo = " ";
+          Linux = " ";
+          Macos = " ";
+          Manjaro = " ";
           Mint = "󰣭 ";
-          NixOS = " ";
-          Pop = " ";
-          Ubuntu = " ";
+          NixOS = " ";
+          Pop = " ";
+          Ubuntu = " ";
           Windows = "󰍲 ";
         };
+      };
       };
 
       username = {
