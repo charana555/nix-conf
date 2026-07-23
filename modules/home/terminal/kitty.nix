@@ -40,6 +40,7 @@
       url_style = "curly";
       open_url_with = "default";
       copy_on_select = "no";
+      scroll_to_bottom_on_input = "no";
       focus_follows_mouse = "no";
 
       window_padding_width = "0 0 0 0";
@@ -86,12 +87,13 @@
       allow_remote_control = "yes";
       listen_on = "unix:/tmp/kitty";
       clipboard_control = "write-primary write-clipboard no-append";
+      scrollback_filter_environ = [ ];
     };
 
     keybindings = {
       "cmd+space" = "no_op";
 
-      "cmd+f" = "send_text all \\x01";
+      "cmd+f" = "start_search";
       "cmd+t" = "new_tab_with_cwd";
       "cmd+w" = "close_tab";
       "cmd+n" = "next_tab";
