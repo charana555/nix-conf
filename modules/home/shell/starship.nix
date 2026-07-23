@@ -73,7 +73,6 @@ in
           Windows = "󰍲 ";
         };
       };
-      };
 
       username = {
         show_always = true;
