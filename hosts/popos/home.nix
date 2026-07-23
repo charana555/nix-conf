@@ -21,13 +21,16 @@ in
   stylix.cliOnly = true;
 
   programs.kitty = {
-    package = pkgs.symlinkJoin {
+    package = pkgs.buildEnv {
       name = "kitty-nixgl";
-      paths = [ pkgs.kitty ];
-      nativeBuildInputs = [ pkgs.makeWrapper ];
-      postBuild = ''
-        wrapProgram $out/bin/kitty --prefix PATH : ${nixgl.nixGLIntel}/bin
-      '';
+      paths = [
+        (pkgs.writeShellScriptBin "kitty" ''
+          exec ${nixgl.nixGLIntel}/bin/nixGLIntel ${pkgs.kitty}/bin/kitty "$@"
+        '')
+        (pkgs.writeShellScriptBin "kitten" ''
+          exec ${nixgl.nixGLIntel}/bin/nixGLIntel ${pkgs.kitty}/bin/kitten "$@"
+        '')
+      ];
     };
     settings.linux_display_server = "x11";
   };
