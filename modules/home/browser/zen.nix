@@ -14,6 +14,8 @@ in
     inputs.zen-browser.homeModules.default
   ];
 
+  stylix.targets.zen-browser.profileNames = [ "default" ];
+
   # Overwrite any pre-existing manual-install profiles.ini
   home.file."${config.programs.zen-browser.configPath}/profiles.ini".force = true;
 
