@@ -60,8 +60,6 @@
       tab_bar_style = "custom";
       tab_fade = "0 0 0 0";
       tab_bar_edge = "top";
-      tab_bar_margin_width = 0;
-      tab_bar_margin_height = 0;
       tab_bar_align = "center";
       tab_bar_min_tabs = 2;
       tab_title_template = "{title}";
