@@ -19,7 +19,7 @@
     settings = {
       shell_integration = "enabled no-cursor";
 
-      adjust_line_height = "140%";
+      adjust_line_height = "120%";
       adjust_column_width = "100%";
       adjust_baseline = 0;
 
