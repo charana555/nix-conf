@@ -53,23 +53,23 @@ in
       os = {
         disabled = false;
         style = "bg:surface0 fg:blue bold";
-        format = "[](surface0)[  $symbol ]($style)";
+        format = "[](surface0)[ $symbol ]($style)";
         symbols = {
-          Alpine = " ";
-          Amazon = " ";
-          Android = " ";
+          Alpine = " ";
+          Amazon = " ";
+          Android = " ";
           Arch = "󰣇 ";
-          CentOS = " ";
-          Debian = " ";
-          Fedora = " ";
-          Gentoo = " ";
-          Linux = " ";
-          Macos = " ";
-          Manjaro = " ";
+          CentOS = " ";
+          Debian = " ";
+          Fedora = " ";
+          Gentoo = " ";
+          Linux = " ";
+          Macos = " ";
+          Manjaro = " ";
           Mint = "󰣭 ";
-          NixOS = " ";
-          Pop = " ";
-          Ubuntu = " ";
+          NixOS = " ";
+          Pop = " ";
+          Ubuntu = " ";
           Windows = "󰍲 ";
         };
       };
@@ -78,7 +78,7 @@ in
         show_always = true;
         style_user = "bg:surface0 fg:lavender bold";
         style_root = "bg:red fg:base bold";
-        format = "[  $user ]($style)";
+        format = "[ $user ]($style)";
       };
 
       directory = {
@@ -89,7 +89,7 @@ in
         read_only = " 󰌾";
         style = "bg:surface0 fg:blue bold";
         read_only_style = "bg:surface0 fg:red";
-        format = "[  $path ]($style)[$read_only]($read_only_style)";
+        format = "[ $path ]($style)[$read_only]($read_only_style)";
       };
 
       fill.symbol = " ";
@@ -97,7 +97,7 @@ in
       git_branch = {
         symbol = " ";
         style = "bg:surface0 fg:teal bold";
-        format = "[  $symbol$branch ]($style)";
+        format = "[ $symbol$branch ]($style)";
       };
 
       git_status = {
@@ -116,65 +116,47 @@ in
       };
 
       nodejs = {
-        symbol = " ";
+        symbol = " ";
         style = "bg:surface0 fg:green bold";
-        format = "[  $symbol($version )]($style)";
-        detect_files = [
-          "package.json"
-          ".node-version"
-        ];
+        format = "[ $symbol($version )]($style)";
+        detect_files = [ "package.json" ".node-version" ];
         detect_folders = [ "node_modules" ];
       };
 
       python = {
-        symbol = " ";
+        symbol = " ";
         style = "bg:surface0 fg:yellow bold";
         python_binary = "python3";
-        format = "[  $symbol($version )( $virtualenv )]($style)";
-        detect_files = [
-          "requirements.txt"
-          "pyproject.toml"
-          "setup.py"
-          "Pipfile"
-        ];
-        detect_folders = [
-          ".venv"
-          "venv"
-          "__pycache__"
-        ];
+        format = "[ $symbol($version )( $virtualenv )]($style)";
+        detect_files = [ "requirements.txt" "pyproject.toml" "setup.py" "Pipfile" ];
+        detect_folders = [ ".venv" "venv" "__pycache__" ];
       };
 
       rust = {
-        symbol = " ";
+        symbol =  " ";
         style = "bg:surface0 fg:peach bold";
-        format = "[  $symbol($version )]($style)";
-        detect_files = [
-          "Cargo.toml"
-          "Cargo.lock"
-        ];
+        format = "[ $symbol($version )]($style)";
+        detect_files = [ "Cargo.toml" "Cargo.lock" ];
         detect_folders = [ "target" ];
       };
 
       golang = {
-        symbol = " ";
+        symbol = " ";
         style = "bg:surface0 fg:blue bold";
-        format = "[  $symbol ($version )]($style)";
-        detect_files = [
-          "go.mod"
-          "go.sum"
-        ];
+        format = "[ $symbol ($version )]($style)";
+        detect_files = [ "go.mod" "go.sum" ];
         detect_folders = [ "vendor" ];
       };
 
       nix_shell = {
-        symbol = " ";
+        symbol = " ";
         style = "bg:surface0 fg:lavender bold";
-        format = "[  $symbol$state( $name)]($style)";
+        format = "[ $symbol$state( $name)]($style)";
       };
 
       cmd_duration = {
         min_time = 0;
-        format = "[  $duration ](bg:surface0 fg:lavender)[](surface0)";
+        format = "[ $duration ](bg:surface0 fg:lavender)[](surface0)";
         show_milliseconds = false;
       };
 
@@ -182,7 +164,7 @@ in
         disabled = false;
         time_format = "%H:%M";
         style = "bg:surface1 fg:text";
-        format = "[](surface1)[  $time  ]($style)[](surface1)";
+        format = "[](surface1)[ $time ]($style)[](surface1)";
       };
 
       character = {
