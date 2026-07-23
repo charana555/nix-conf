@@ -143,7 +143,7 @@ in
       bind -T copy-mode-vi v send -X begin-selection
       bind -T copy-mode-vi C-v send -X rectangle-toggle
       bind -T copy-mode-vi y send -X copy-selection-and-cancel
-      bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel
+      bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe
 
       bind b set-option status
 
