@@ -55,6 +55,9 @@
     ponytail.url = "github:DietrichGebert/ponytail";
     ponytail.flake = false;
 
+    # OpenGL wrapper for Nix binaries on non-NixOS Linux
+    nixgl.url = "github:nix-community/nixGL";
+
     openagents-control = {
       url = "git+https://github.com/darrenhinde/OpenAgentsControl?rev=ef3836efd659e451b6dbb8eee7d3213ba39f5aec";
       flake = false;
