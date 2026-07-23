@@ -48,7 +48,7 @@ in
         pink = "#${c.base0F}";
       };
 
-      palette = lib.mkForce "catppuccin-mocha";
+      palette = "catppuccin-mocha";
 
       os = {
         disabled = false;
