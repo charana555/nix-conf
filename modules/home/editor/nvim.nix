@@ -99,6 +99,20 @@ in
         settings = {
           flavour = "macchiato";
           transparent_background = true;
+          custom_highlights = # lua
+            ''
+              function(colors)
+                return {
+                  NormalFloat = { bg = "none" },
+                  FloatBorder = { bg = "none" },
+                  FloatTitle = { bg = "none" },
+                  SnacksNormal = { bg = "none" },
+                  SnacksNormalNC = { bg = "none" },
+                  SnacksBorder = { bg = "none" },
+                  SnacksTitle = { bg = "none" },
+                }
+              end
+            '';
           integrations = {
             cmp = true;
             gitsigns = true;
