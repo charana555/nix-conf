@@ -93,7 +93,7 @@
       "cmd+space" = "no_op";
 
       "cmd+f" = "send_text all \\x01";
-      "cmd+s" = "start_search";
+      "cmd+s" = "send_text all \\x01/";
       "cmd+t" = "new_tab_with_cwd";
       "cmd+w" = "close_tab";
       "cmd+n" = "next_tab";

@@ -107,6 +107,7 @@ in
       bind n new-window
 
       bind V copy-mode
+      bind-key / copy-mode \; send-keys "/"
       bind-key T display-popup -E -w 60% -h 60% "sesh connect \"$(sesh list | fzf --reverse --border-label ' sesh ' --prompt '🯋 ' --bind 'ctrl-s:reload(sesh list --sessions)' --preview 'sesh preview {}')\""
 
       bind v split-window -h -c "#{pane_current_path}"
