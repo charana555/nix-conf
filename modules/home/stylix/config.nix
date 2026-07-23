@@ -1,7 +1,6 @@
 { pkgs, ... }:
 let
-  # Matches nvim kanagawa-wave theme
-  scheme = "kanagawa";
+  scheme = "catppuccin-mocha";
 in
 {
   stylix = {
@@ -15,9 +14,9 @@ in
     opacity.terminal = 0.90;
     polarity = "dark";
     fonts.monospace = {
-      name = "Monaspace Argon";
+      name = "Monaspace Neon";
       package = pkgs.monaspace;
     };
-    fonts.sizes.terminal = 14;
+    fonts.sizes.terminal = 13;
   };
 }

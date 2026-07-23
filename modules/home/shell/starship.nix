@@ -29,7 +29,7 @@ in
       add_newline = true;
 
       # Map stylix base16 colors to the names this config uses
-      palettes.kanagawa = {
+      palettes.catppuccin-mocha = {
         base = "#${c.base00}";
         mantle = "#${c.base01}";
         surface0 = "#${c.base02}";
@@ -48,7 +48,7 @@ in
         pink = "#${c.base0F}";
       };
 
-      palette = lib.mkForce "kanagawa";
+      palette = lib.mkForce "catppuccin-mocha";
 
       os = {
         disabled = false;
