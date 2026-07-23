@@ -40,7 +40,6 @@
       url_style = "curly";
       open_url_with = "default";
       copy_on_select = "no";
-      scroll_to_bottom_on_input = "no";
       focus_follows_mouse = "no";
 
       window_padding_width = "0 0 0 0";
@@ -49,7 +48,6 @@
       hide_window_decorations = "titlebar-only";
       confirm_os_window_close = 0;
       resize_in_steps = "no";
-      os_window_state = "maximized";
       background_blur = 64;
       dynamic_background_opacity = "yes";
       macos_traditional_fullscreen = "yes";
@@ -60,11 +58,10 @@
       window_alert_on_bell = "yes";
 
       tab_bar_style = "custom";
-      tab_separator = "";
       tab_fade = "0 0 0 0";
       tab_bar_edge = "top";
-      tab_bar_margin_width = "0.0";
-      tab_bar_margin_height = "0.0";
+      tab_bar_margin_width = 0;
+      tab_bar_margin_height = 0;
       tab_bar_align = "center";
       tab_bar_min_tabs = 2;
       tab_title_template = "{title}";

@@ -18,6 +18,8 @@ in
 
   stylix.cliOnly = true;
 
+  programs.kitty.settings.linux_display_server = "x11";
+
   sops.secrets."private-keys/ssh" = {
     path = "${config.home.homeDirectory}/.ssh/id_ed25519";
     mode = "0600";

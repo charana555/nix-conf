@@ -55,6 +55,11 @@
     ponytail.url = "github:DietrichGebert/ponytail";
     ponytail.flake = false;
 
+    openagents-control = {
+      url = "git+https://github.com/darrenhinde/OpenAgentsControl?rev=ef3836efd659e451b6dbb8eee7d3213ba39f5aec";
+      flake = false;
+    };
+
     # zen till https://github.com/NixOS/nixpkgs/issues/327982 is resolved
     # ponytail: git+https (not github:) to dodge unauthenticated GitHub API rate limits
     zen-browser.url = "git+https://github.com/0xc000022070/zen-browser-flake";
