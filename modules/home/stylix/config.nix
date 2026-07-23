@@ -17,6 +17,6 @@ in
       name = "JetBrainsMono Nerd Font";
       package = pkgs.nerd-fonts.jetbrains-mono;
     };
-    fonts.sizes.terminal = 15;
+    fonts.sizes.terminal = 14;
   };
 }

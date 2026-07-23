@@ -92,20 +92,24 @@ in
 {
   home.packages = [
     (inputs.nvix.packages.${pkgs.system}.default.extend {
-      colorschemes.catppuccin.enable = lib.mkForce false;
+      colorschemes.kanagawa.enable = lib.mkForce false;
       colorschemes.tokyonight.enable = lib.mkForce false;
-      colorschemes.kanagawa = {
+      colorschemes.catppuccin = {
         enable = lib.mkForce true;
         settings = {
-          theme = lib.mkForce "wave";
-          transparent = true;
-          background = {
-            dark = lib.mkForce "wave";
-            light = "lotus";
+          flavour = "mocha";
+          transparent_background = true;
+          integrations = {
+            cmp = true;
+            gitsigns = true;
+            nvimtree = true;
+            treesitter = true;
+            notify = false;
+            mini = {
+              enabled = true;
+              indentscope_color = "";
+            };
           };
-          commentStyle.italic = true;
-          keywordStyle.italic = true;
-          statementStyle.bold = true;
         };
       };
 
