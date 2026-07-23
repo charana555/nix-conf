@@ -52,31 +52,35 @@ in
 
       os = {
         disabled = false;
-        style = "bg:surface0 fg:blue bold";
-        format = "[](surface0)[ $symbol ]($style)";
+        style = "bg:surface1 fg:blue bold";
+        format = "[](surface1)[ $symbol ]($style)";
         symbols = {
-          Alpine = " ";
-          Amazon = " ";
-          Android = " ";
-          Arch = "󰣇 ";
-          CentOS = " ";
-          Debian = " ";
-          Fedora = " ";
-          Gentoo = " ";
-          Linux = " ";
-          Macos = " ";
-          Manjaro = " ";
-          Mint = "󰣭 ";
-          NixOS = " ";
-          Pop = " ";
-          Ubuntu = " ";
-          Windows = "󰍲 ";
+          Windows = "";
+          Ubuntu = "󰕈";
+          SUSE = "";
+          Raspbian = "󰐿";
+          Mint = "󰣭";
+          Macos = "󰀵";
+          Manjaro = "";
+          Linux = "󰌽";
+          Gentoo = "󰣨";
+          Fedora = "󰣛";
+          Alpine = "";
+          Amazon = "";
+          Android = "";
+          AOSC = "";
+          Arch = "󰣇";
+          Artix = "󰣇";
+          CentOS = "";
+          Debian = "󰣚";
+          Redhat = "󱄛";
+          RedHatEnterprise = "󱄛";
         };
       };
 
       username = {
         show_always = true;
-        style_user = "bg:surface0 fg:lavender bold";
+        style_user = "bg:surface1 fg:lavender bold";
         style_root = "bg:red fg:base bold";
         format = "[ $user ]($style)";
       };
@@ -87,8 +91,8 @@ in
         fish_style_pwd_dir_length = 1;
         home_symbol = "~";
         read_only = " 󰌾";
-        style = "bg:surface0 fg:blue bold";
-        read_only_style = "bg:surface0 fg:red";
+        style = "bg:surface1 fg:blue bold";
+        read_only_style = "bg:surface1 fg:red";
         format = "[ $path ]($style)[$read_only]($read_only_style)";
       };
 
@@ -96,12 +100,12 @@ in
 
       git_branch = {
         symbol = " ";
-        style = "bg:surface0 fg:teal bold";
+        style = "bg:surface1 fg:teal bold";
         format = "[ $symbol$branch ]($style)";
       };
 
       git_status = {
-        style = "bg:surface0 fg:teal";
+        style = "bg:surface1 fg:teal";
         format = "[$all_status$ahead_behind ]($style)";
         conflicted = "✗";
         ahead = "⇡\${count}";
@@ -117,46 +121,64 @@ in
 
       nodejs = {
         symbol = " ";
-        style = "bg:surface0 fg:green bold";
+        style = "bg:surface1 fg:green bold";
         format = "[ $symbol($version )]($style)";
-        detect_files = [ "package.json" ".node-version" ];
+        detect_files = [
+          "package.json"
+          ".node-version"
+        ];
         detect_folders = [ "node_modules" ];
       };
 
       python = {
         symbol = " ";
-        style = "bg:surface0 fg:yellow bold";
+        style = "bg:surface1 fg:yellow bold";
         python_binary = "python3";
         format = "[ $symbol($version )( $virtualenv )]($style)";
-        detect_files = [ "requirements.txt" "pyproject.toml" "setup.py" "Pipfile" ];
-        detect_folders = [ ".venv" "venv" "__pycache__" ];
+        detect_files = [
+          "requirements.txt"
+          "pyproject.toml"
+          "setup.py"
+          "Pipfile"
+        ];
+        detect_folders = [
+          ".venv"
+          "venv"
+          "__pycache__"
+        ];
       };
 
       rust = {
-        symbol =  " ";
-        style = "bg:surface0 fg:peach bold";
+        symbol = " ";
+        style = "bg:surface1 fg:peach bold";
         format = "[ $symbol($version )]($style)";
-        detect_files = [ "Cargo.toml" "Cargo.lock" ];
+        detect_files = [
+          "Cargo.toml"
+          "Cargo.lock"
+        ];
         detect_folders = [ "target" ];
       };
 
       golang = {
         symbol = " ";
-        style = "bg:surface0 fg:blue bold";
+        style = "bg:surface1 fg:blue bold";
         format = "[ $symbol ($version )]($style)";
-        detect_files = [ "go.mod" "go.sum" ];
+        detect_files = [
+          "go.mod"
+          "go.sum"
+        ];
         detect_folders = [ "vendor" ];
       };
 
       nix_shell = {
         symbol = " ";
-        style = "bg:surface0 fg:lavender bold";
+        style = "bg:surface1 fg:lavender bold";
         format = "[ $symbol$state( $name)]($style)";
       };
 
       cmd_duration = {
         min_time = 0;
-        format = "[ $duration ](bg:surface0 fg:lavender)[](surface0)";
+        format = "[ $duration ](bg:surface1 fg:lavender)[](surface1)";
         show_milliseconds = false;
       };
 
