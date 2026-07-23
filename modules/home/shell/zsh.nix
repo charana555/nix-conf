@@ -76,6 +76,8 @@ in
         if [ -f ~/.config/secrets/env ]; then
           source ~/.config/secrets/env
         fi
+        # ponytail: skip compiled fzftab module on non-NixOS (glibc mismatch)
+        zstyle ':fzf-tab:*' no-load-fzftab yes
       '')
       (lib.mkOrder 1000 ''
         to() {
