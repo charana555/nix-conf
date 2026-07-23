@@ -87,13 +87,13 @@
       allow_remote_control = "yes";
       listen_on = "unix:/tmp/kitty";
       clipboard_control = "write-primary write-clipboard no-append";
-      scrollback_filter_environ = [ ];
     };
 
     keybindings = {
       "cmd+space" = "no_op";
 
-      "cmd+f" = "start_search";
+      "cmd+f" = "send_text all \\x01";
+      "cmd+s" = "start_search";
       "cmd+t" = "new_tab_with_cwd";
       "cmd+w" = "close_tab";
       "cmd+n" = "next_tab";
@@ -123,7 +123,6 @@
 
       "cmd+c" = "copy_to_clipboard";
       "cmd+v" = "paste_from_clipboard";
-      "cmd+s" = "paste_from_selection";
     };
   };
 }
