@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  scheme = "catppuccin-mocha";
+  scheme = "catppuccin-macchiato";
 in
 {
   stylix = {

@@ -97,7 +97,7 @@ in
       colorschemes.catppuccin = {
         enable = lib.mkForce true;
         settings = {
-          flavour = "mocha";
+          flavour = "macchiato";
           transparent_background = true;
           integrations = {
             cmp = true;

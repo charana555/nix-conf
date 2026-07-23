@@ -55,21 +55,21 @@ in
         style = "bg:surface0 fg:blue bold";
         format = "[](surface0)[$symbol]($style)";
         symbols = {
-          Alpine = " ";
-          Amazon = " ";
-          Android = " ";
+          Alpine = " ";
+          Amazon = " ";
+          Android = " ";
           Arch = "󰣇 ";
-          CentOS = " ";
-          Debian = " ";
-          Fedora = " ";
-          Gentoo = " ";
-          Linux = " ";
-          Macos = " ";
-          Manjaro = " ";
+          CentOS = " ";
+          Debian = " ";
+          Fedora = " ";
+          Gentoo = " ";
+          Linux = " ";
+          Macos = " ";
+          Manjaro = " ";
           Mint = "󰣭 ";
-          NixOS = " ";
-          Pop = " ";
-          Ubuntu = " ";
+          NixOS = " ";
+          Pop = " ";
+          Ubuntu = " ";
           Windows = "󰍲 ";
         };
       };
@@ -115,8 +115,8 @@ in
         deleted = "✘";
       };
 
-      nodejs = {
-        symbol = " ";
+ nodejs = {
+        symbol = " ";
         style = "bg:surface0 fg:green bold";
         format = "[ $symbol($version )]($style)";
         detect_files = [ "package.json" ".node-version" ];
@@ -124,7 +124,7 @@ in
       };
 
       python = {
-        symbol = " ";
+        symbol = " ";
         style = "bg:surface0 fg:yellow bold";
         python_binary = "python3";
         format = "[ $symbol($version )( $virtualenv )]($style)";
@@ -133,7 +133,7 @@ in
       };
 
       rust = {
-        symbol = " ";
+        symbol =  " ";
         style = "bg:surface0 fg:peach bold";
         format = "[ $symbol($version )]($style)";
         detect_files = [ "Cargo.toml" "Cargo.lock" ];
@@ -141,15 +141,15 @@ in
       };
 
       golang = {
-        symbol = " ";
-        style = "bg:surface0 fg:blue bold";
+        symbol = " ";
+        style = "bg:surface0 fg:sky bold";
         format = "[ $symbol ($version )]($style)";
         detect_files = [ "go.mod" "go.sum" ];
         detect_folders = [ "vendor" ];
       };
 
       nix_shell = {
-        symbol = " ";
+        symbol = " ";
         style = "bg:surface0 fg:lavender bold";
         format = "[ $symbol$state( $name)]($style)";
       };
@@ -164,7 +164,7 @@ in
         disabled = false;
         time_format = "%H:%M";
         style = "bg:surface1 fg:text";
-        format = "(surface0)[  $time ](bg:surface0 fg:lavender)[](surface0)";
+       format = "(surface0)[  $time ](bg:surface0 fg:lavender)[](surface0)";
       };
 
       character = {
