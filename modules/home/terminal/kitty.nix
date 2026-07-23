@@ -65,6 +65,10 @@ in
         ${fontFeatureString "Krypton"}
         ${fontFeatureString "Argon"}
         ${fontFeatureString "Neon"}
+
+        # Nerd Font glyphs live in the Private Use Area; Core Text won't
+        # auto-fallback to them from Monaspace, so map them explicitly.
+        symbol_map U+E000-U+F8FF JetBrainsMono Nerd Font Mono
       '';
 
     settings = {
