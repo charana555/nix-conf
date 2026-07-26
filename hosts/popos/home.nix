@@ -46,4 +46,6 @@ in
       email = me.email;
     };
   };
+
+  apps.discord.enable = true;
 }
