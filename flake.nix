@@ -58,6 +58,9 @@
     # OpenGL wrapper for Nix binaries on non-NixOS Linux
     nixgl.url = "github:nix-community/nixGL";
 
+    # Custom packages (sklauncher, etc.)
+    ndots.url = "github:semi710/ndots";
+
     openagents-control = {
       url = "git+https://github.com/darrenhinde/OpenAgentsControl?rev=ef3836efd659e451b6dbb8eee7d3213ba39f5aec";
       flake = false;
