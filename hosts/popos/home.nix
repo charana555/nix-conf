@@ -50,4 +50,6 @@ in
   apps.discord.enable = true;
   apps.skLauncher.enable = true;
   apps.steam.enable = true;
+  apps.keepassxc.enable = true;
+  apps.nextcloud.enable = true;
 }

@@ -11,8 +11,12 @@ in
     flake.homeModules.terminal
     flake.homeModules.browser
     flake.homeModules.editor
+    flake.homeModules.apps
     # hyprland is added via nixosModules.hyprland home-imports (sharedModules)
   ];
+
+  apps.keepassxc.enable = true;
+  apps.nextcloud.enable = true;
 
   programs.git = {
     settings.user = {

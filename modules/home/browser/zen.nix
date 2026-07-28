@@ -89,6 +89,7 @@ in
         vimium
         zen-internet
         refined-github
+        keepassxc-browser
       ];
 
       extensions.settings = {
