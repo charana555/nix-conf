@@ -1,5 +1,4 @@
 {
-  pkgs,
   lib,
   config,
   ...
@@ -12,13 +11,6 @@
     programs.keepassxc = {
       enable = true;
       autostart = true;
-      settings = {
-        GUI.MinimizeOnClose = true;
-        Browser = {
-          Enabled = true;
-          ShowNotification = true;
-        };
-      };
     };
   };
 }
