@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }:
 
@@ -12,5 +13,11 @@
       enable = true;
       autostart = true;
     };
+
+    # xdotool + xsel required for KeePassXC-Browser auto-fill on X11
+    home.packages = with pkgs; [
+      xdotool
+      xsel
+    ];
   };
 }
