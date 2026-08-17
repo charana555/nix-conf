@@ -55,6 +55,10 @@
     ponytail.url = "github:DietrichGebert/ponytail";
     ponytail.flake = false;
 
+    # oh-my-openagent (sisyphus agent harness) and vim-enabled opencode
+    llm-agents.url = "github:numtide/llm-agents.nix";
+    opencode-vim.url = "github:leohenon/opencode-vim/ocv";
+
     # OpenGL wrapper for Nix binaries on non-NixOS Linux
     nixgl.url = "github:nix-community/nixGL";
 

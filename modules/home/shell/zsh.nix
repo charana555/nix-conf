@@ -35,7 +35,7 @@ in
     };
 
     shellAliases = {
-      oc = "npx opencode-ai";
+      oc = "opencode";
       to = "tmux a -t";
       to-dsd = "ssh -o MACs=hmac-sha2-512-etm@openssh.com charana.c@100.77.128.13  -i ~/.ssh/id_ed25519";
       to-cvps = "ssh -i ~/.ssh/id_ed25519 ubuntu@80.225.224.42";

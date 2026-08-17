@@ -34,11 +34,9 @@
     tree-sitter
 
     tmate
+    kubectl
 
     nerd-fonts.jetbrains-mono
-    (writeShellScriptBin "opencode" ''
-      exec ${nodejs_22}/bin/npx opencode-ai "$@"
-    '')
   ];
 
   programs.btop = {
