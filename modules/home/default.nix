@@ -100,8 +100,6 @@ in
   home.packages = [
     opencodeVim
     ohMyOpencode
-    pkgs.nodejs
-    pkgs.bun
   ];
 
   xdg.configFile =
