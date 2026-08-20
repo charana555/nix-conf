@@ -40,6 +40,8 @@ in
     ];
   };
 
+  apps.maccy.enable = true;
+
   home.packages = with pkgs; [
     cargo
     rustc
