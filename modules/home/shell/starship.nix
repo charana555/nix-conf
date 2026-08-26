@@ -48,7 +48,7 @@ in
         pink = "#${c.base0F}";
       };
 
-      palette = "stylix";
+      palette = lib.mkForce "stylix";
 
       os = {
         disabled = false;
