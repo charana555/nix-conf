@@ -20,11 +20,18 @@
       wl-clipboard
       brightnessctl
       libnotify
-      fuzzel
     ];
     shellAliases = {
       copy = "wl-copy";
       paste = "wl-paste";
     };
+  };
+
+  # Cursor theme (matches catppuccin-macchiato stylix scheme)
+  home.pointerCursor = {
+    name = "catppuccin-macchiato-dark-cursors";
+    package = pkgs.catppuccin-cursors.macchiatoDark;
+    size = 24;
+    gtk.enable = true;
   };
 }

@@ -16,7 +16,9 @@ in
 
       env = [
         "XCURSOR_SIZE,24"
+        "XCURSOR_THEME,catppuccin-macchiato-dark-cursors"
         "HYPRCURSOR_SIZE,24"
+        "HYPRCURSOR_THEME,catppuccin-macchiato-dark-cursors"
       ];
 
       binds = {
