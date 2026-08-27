@@ -30,14 +30,20 @@ in
   nixpkgs.overlays = [ flake.inputs.nix-cachyos-kernel.overlays.pinned ];
   boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-lts;
 
-  # Binary cache for cachyos kernel (avoids building from source)
-  nix.settings.substituters = [ "https://attic.xuyh0120.win/lantian" ];
-  nix.settings.trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
+  # Binary cache for cachyos kernel (extra- appends to cache.nixos.org, doesn't replace it)
+  nix.settings.extra-substituters = [ "https://attic.xuyh0120.win/lantian" ];
+  nix.settings.extra-trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
 
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
     efi.efiSysMountPoint = "/boot";
+  };
+
+  # Graphical login screen (stylix auto-themes SDDM)
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
   };
 
   networking.networkmanager.enable = true;
