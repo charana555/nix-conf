@@ -26,6 +26,13 @@ in
 
   networking.hostName = "dell";
 
+  # Use default NixOS kernel (6.6 LTS) instead of cachyos 6.18.26 which
+  # fails initrd shrink (missing aes_x86_64 module) and hangs on boot
+  boot.kernelPackages = pkgs.linuxPackages;
+
+  # Debug: bypass GPU mode-setting hang during early boot
+  boot.kernelParams = [ "systemd.debug-shell" "nomodeset" ];
+
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;

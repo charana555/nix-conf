@@ -10,13 +10,13 @@
   boot = {
     initrd.availableKernelModules = [
       "nvme"
+      "vmd"
       "xhci_pci"
       "usbhid"
       "usb_storage"
       "sd_mod"
-      "aes_x86_64"
-      "cryptd"
     ];
+    initrd.kernelModules = [ "nvme" "vmd" ];
     kernelModules = [ "kvm-intel" ];
   };
 
