@@ -14,6 +14,15 @@
   programs.nix-ld.enable = true;
   services.envfs.enable = true;
 
+  # Enable SSH server
+  services.openssh = {
+    enable = true;
+    settings = {
+      PermitRootLogin = "no";
+      PasswordAuthentication = true;
+    };
+  };
+
   environment.systemPackages = with pkgs; [
     bash
     coreutils
