@@ -26,16 +26,13 @@ in
 
   networking.hostName = "dell";
 
-  # CachyOS kernel with pinned overlay (guarantees binary cache availability)
+  # CachyOS LTS kernel with pinned overlay (binary cache availability)
   nixpkgs.overlays = [ flake.inputs.nix-cachyos-kernel.overlays.pinned ];
-  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
+  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-lts;
 
   # Binary cache for cachyos kernel (avoids building from source)
   nix.settings.substituters = [ "https://attic.xuyh0120.win/lantian" ];
   nix.settings.trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
-
-  # Debug: bypass GPU mode-setting hang during early boot
-  boot.kernelParams = [ "systemd.debug-shell" "nomodeset" ];
 
   boot.loader = {
     systemd-boot.enable = true;
