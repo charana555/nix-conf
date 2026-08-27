@@ -58,9 +58,6 @@ in
   programs.zsh.enable = true;
   security.sudo.wheelNeedsPassword = false;
 
-  # Auto-login on tty1 (Hyprland launches via uwsm)
-  services.getty.autologinUser = me.username;
-
   sops = {
     defaultSopsFile = "${flake}/secrets/keys.yaml";
     age.keyFile = "${config.users.users.${me.username}.home}/.config/sops/age/keys.txt";
