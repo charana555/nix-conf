@@ -40,10 +40,13 @@ in
     efi.efiSysMountPoint = "/boot";
   };
 
-  # Graphical login screen (stylix auto-themes SDDM)
+  # Graphical login screen with catppuccin theme
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
+    theme = "catppuccin-macchiato";
+    package = pkgs.kdePackages.sddm;
+    extraPackages = with pkgs; [ catppuccin-sddm-corners ];
   };
 
   networking.networkmanager.enable = true;
