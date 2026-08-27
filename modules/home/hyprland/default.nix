@@ -20,6 +20,7 @@
       wl-clipboard
       brightnessctl
       libnotify
+      fuzzel
     ];
     shellAliases = {
       copy = "wl-copy";
