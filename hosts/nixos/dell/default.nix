@@ -26,9 +26,13 @@ in
 
   networking.hostName = "dell";
 
-  # Use default NixOS kernel (6.6 LTS) instead of cachyos 6.18.26 which
-  # fails initrd shrink (missing aes_x86_64 module) and hangs on boot
-  boot.kernelPackages = pkgs.linuxPackages;
+  # CachyOS kernel with pinned overlay (guarantees binary cache availability)
+  nixpkgs.overlays = [ flake.inputs.nix-cachyos-kernel.overlays.pinned ];
+  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
+
+  # Binary cache for cachyos kernel (avoids building from source)
+  nix.settings.substituters = [ "https://attic.xuyh0120.win/lantian" ];
+  nix.settings.trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
 
   # Debug: bypass GPU mode-setting hang during early boot
   boot.kernelParams = [ "systemd.debug-shell" "nomodeset" ];
