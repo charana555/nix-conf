@@ -7,7 +7,7 @@ let
   # Power menu script using rofi dmenu mode
   power-menu = pkgs.writeShellScriptBin "power-menu" ''
     options="Shutdown\nReboot\nSuspend\nLogout"
-    choice=$(echo -e "$options" | ${lib.getExe pkgs.rofi-wayland} -dmenu -p "Power" -theme-str 'window {width: 15em;} listview {lines: 4;}')
+    choice=$(echo -e "$options" | ${lib.getExe pkgs.rofi} -dmenu -p "Power" -theme-str 'window {width: 15em;} listview {lines: 4;}')
     case "$choice" in
       Shutdown) systemctl poweroff ;;
       Reboot) systemctl reboot ;;
@@ -21,7 +21,7 @@ in
 
   programs.rofi = {
     enable = true;
-    package = pkgs.rofi-wayland;
+    package = pkgs.rofi;
     # Stylix auto-themes rofi, just set minimal layout
     extraConfig = {
       modi = "drun,window,run";
