@@ -67,7 +67,6 @@ in
         "$modSHIFT,k,movewindow,u"
         "$mod,return,exec,pgrep -f kitty >/dev/null && hyprctl dispatch focuswindow class:kitty || kitty"
         "$mod,f,togglefloating,"
-        "$modSHIFT,f,pseudo,"
         "$modCTRL,f,fullscreenstate,0 2"
         "$mod,m,fullscreen,0"
         "$modSHIFT,x,exec,hyprctl kill"
