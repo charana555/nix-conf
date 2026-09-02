@@ -8,7 +8,7 @@
     (flake.disko.partition {
       inherit lib;
       device = "/dev/nvme0n1";
-      encrypted = true;
+      encrypted = false;
       ssd = true;
       impermanence = true;
       ssdOptions = [

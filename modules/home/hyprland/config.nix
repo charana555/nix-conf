@@ -16,7 +16,9 @@ in
 
       env = [
         "XCURSOR_SIZE,24"
+        "XCURSOR_THEME,catppuccin-macchiato-dark-cursors"
         "HYPRCURSOR_SIZE,24"
+        "HYPRCURSOR_THEME,catppuccin-macchiato-dark-cursors"
       ];
 
       binds = {
@@ -28,7 +30,6 @@ in
       ecosystem.no_update_news = true;
 
       dwindle = {
-        pseudotile = true;
         preserve_split = true;
         use_active_for_splits = true;
       };
@@ -91,7 +92,6 @@ in
           render_power = 1;
           scale = 6;
           offset = "2 6";
-          ignore_window = true;
         };
       };
 

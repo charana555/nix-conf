@@ -26,10 +26,27 @@ in
 
   networking.hostName = "dell";
 
+  # CachyOS LTS kernel with pinned overlay (binary cache availability)
+  nixpkgs.overlays = [ flake.inputs.nix-cachyos-kernel.overlays.pinned ];
+  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-lts;
+
+  # Binary cache for cachyos kernel (extra- appends to cache.nixos.org, doesn't replace it)
+  nix.settings.extra-substituters = [ "https://attic.xuyh0120.win/lantian" ];
+  nix.settings.extra-trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
+
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
     efi.efiSysMountPoint = "/boot";
+  };
+
+  # Graphical login screen with catppuccin theme
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+    theme = "catppuccin-macchiato";
+    package = pkgs.kdePackages.sddm;
+    extraPackages = with pkgs; [ catppuccin-sddm-corners ];
   };
 
   networking.networkmanager.enable = true;

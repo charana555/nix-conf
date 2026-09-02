@@ -23,20 +23,40 @@ let
       tmux_visualization = true;
     };
     agents = {
-      sisyphus = { model = defaultModel; };
-      metis = { model = defaultModel; };
-      prometheus = { model = defaultModel; };
-      atlas = { model = defaultModel; };
+      sisyphus = {
+        model = defaultModel;
+      };
+      metis = {
+        model = defaultModel;
+      };
+      prometheus = {
+        model = defaultModel;
+      };
+      atlas = {
+        model = defaultModel;
+      };
       hephaestus = {
         model = defaultModel;
         allow_non_gpt_model = true;
       };
-      oracle = { model = defaultModel; };
-      momus = { model = defaultModel; };
-      explore = { model = defaultModel; };
-      librarian = { model = defaultModel; };
-      multimodal-looker = { model = defaultModel; };
-      sisyphus-junior = { model = defaultModel; };
+      oracle = {
+        model = defaultModel;
+      };
+      momus = {
+        model = defaultModel;
+      };
+      explore = {
+        model = defaultModel;
+      };
+      librarian = {
+        model = defaultModel;
+      };
+      multimodal-looker = {
+        model = defaultModel;
+      };
+      sisyphus-junior = {
+        model = defaultModel;
+      };
     };
   };
 
@@ -125,11 +145,8 @@ in
       "opencode/node_modules/oh-my-openagent".source = "${ohMyOpencode}/lib/oh-my-opencode";
 
       "opencode/AGENTS.md".source = ../../opencode/AGENTS.md;
-      "opencode/skills/frontend-design/SKILL.md".source =
-        ../../opencode/skills/frontend-design/SKILL.md;
-      "opencode/skills/git-wisdom/SKILL.md".source =
-        ../../opencode/skills/git-wisdom/SKILL.md;
-      "opencode/skills/think-deeper/SKILL.md".source =
-        ../../opencode/skills/think-deeper/SKILL.md;
+      "opencode/skills/frontend-design/SKILL.md".source = ../../opencode/skills/frontend-design/SKILL.md;
+      "opencode/skills/git-wisdom/SKILL.md".source = ../../opencode/skills/git-wisdom/SKILL.md;
+      "opencode/skills/think-deeper/SKILL.md".source = ../../opencode/skills/think-deeper/SKILL.md;
     };
 }
