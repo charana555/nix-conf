@@ -16,7 +16,10 @@
       "usb_storage"
       "sd_mod"
     ];
-    initrd.kernelModules = [ "nvme" "vmd" ];
+    initrd.kernelModules = [
+      "nvme"
+      "vmd"
+    ];
     kernelModules = [ "kvm-intel" ];
   };
 

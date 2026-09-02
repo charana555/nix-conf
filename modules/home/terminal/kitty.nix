@@ -33,15 +33,19 @@ let
     "f" = "move_window_forward";
   };
 
-  mkBindings = prefix: lib.mapAttrs' (k: v: {
-    name = "${prefix}+${k}";
-    value = v;
-  }) baseBindings;
+  mkBindings =
+    prefix:
+    lib.mapAttrs' (k: v: {
+      name = "${prefix}+${k}";
+      value = v;
+    }) baseBindings;
 
-  mkShiftBindings = prefix: lib.mapAttrs' (k: v: {
-    name = "${prefix}+shift+${k}";
-    value = v;
-  }) shiftBindings;
+  mkShiftBindings =
+    prefix:
+    lib.mapAttrs' (k: v: {
+      name = "${prefix}+shift+${k}";
+      value = v;
+    }) shiftBindings;
 in
 {
   home.file."kitty-tab-bar" = {
@@ -128,9 +132,6 @@ in
     };
 
     keybindings =
-      mkBindings "cmd"
-      // mkBindings "alt"
-      // mkShiftBindings "cmd"
-      // mkShiftBindings "alt";
+      mkBindings "cmd" // mkBindings "alt" // mkShiftBindings "cmd" // mkShiftBindings "alt";
   };
 }
