@@ -23,6 +23,9 @@
     };
   };
 
+  # Kannada script rendering
+  fonts.packages = [ pkgs.noto-fonts ];
+
   environment.systemPackages = with pkgs; [
     bash
     coreutils
