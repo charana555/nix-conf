@@ -77,6 +77,10 @@ in
         ",Print,exec,${lib.getExe contrib.grimblast} --notify --cursor copysave output $sspath"
         "$modSHIFT,Print,exec,${lib.getExe contrib.grimblast} --notify --cursor copysave area $sspath"
         "$mod,Print,exec,${lib.getExe contrib.grimblast} --notify --cursor copysave active $sspath"
+        # no Print key on the Aula F75, mirror the binds on Super+s
+        "$mod,s,exec,${lib.getExe contrib.grimblast} --notify --cursor copysave output $sspath"
+        "$modSHIFT,s,exec,${lib.getExe contrib.grimblast} --notify --cursor copysave area $sspath"
+        "$modCTRL,s,exec,${lib.getExe contrib.grimblast} --notify --cursor copysave active $sspath"
         ",F9,exec,loginctl lock-session"
         ",Scroll_Lock,exec,loginctl lock-session"
       ];
