@@ -21,7 +21,7 @@ in
     enable = true;
     enableReleaseChecks = false;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/${scheme}.yaml";
-    image = ../../../wallpapers/gruvbox_image55.png;
+    image = ../../../wallpapers/your_name_wall.jpg;
     opacity.terminal = 0.90;
     polarity = "dark";
     fonts.monospace = {
