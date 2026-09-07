@@ -15,6 +15,7 @@ in
     # hyprland is added via nixosModules.hyprland home-imports (sharedModules)
   ];
 
+  apps.launcher.enable = true;
   apps.keepassxc.enable = true;
   apps.nextcloud.enable = true;
   apps.localsend.enable = true;

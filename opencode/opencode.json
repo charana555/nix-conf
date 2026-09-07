@@ -13,7 +13,13 @@
         "ponytail-audit",
         "ponytail-debt",
         "ponytail-gain",
-        "ponytail-help"
+        "ponytail-help",
+        "workmux",
+        "worktree",
+        "merge",
+        "coordinator",
+        "rebase",
+        "open-pr"
       ]
     },
     "explore": { "mode": "subagent", "model": "litellm/open-fast" }

@@ -1,6 +1,12 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  inputs,
+  ...
+}:
 
 let
+  workmux = inputs.workmux.packages.${pkgs.stdenv.hostPlatform.system}.default;
+
   edit-pane =
     pkgs.writeShellScript "edit-pane" # sh
       ''
@@ -10,8 +16,58 @@ let
         tmux capture-pane -pS -32768 > "$buf"
         tmux new-window -n:edit-pane "$EDITOR $buf"
       '';
+
+  workmux-sidebar =
+    pkgs.writeShellScript "workmux-sidebar" # sh
+      ''
+        set +e
+        sidebar=$(tmux list-panes -F '#{pane_id} #{pane_current_command}' 2>/dev/null | grep ' workmux$' | awk '{print $1}' | head -1)
+        active=$(tmux display -p '#{pane_id}' 2>/dev/null)
+        if [ -z "$sidebar" ]; then
+          # Not open → open and focus
+          workmux sidebar --session 2>/dev/null
+          for i in 1 2 3 4 5 6 7 8 9 10; do
+            sidebar=$(tmux list-panes -F '#{pane_id} #{pane_current_command}' 2>/dev/null | grep ' workmux$' | awk '{print $1}' | head -1)
+            [ -n "$sidebar" ] && break
+            sleep 0.1
+          done
+          [ -n "$sidebar" ] && tmux select-pane -t "$sidebar" 2>/dev/null
+        elif [ "$sidebar" = "$active" ]; then
+          # Focused → close
+          tmux kill-pane -t "$sidebar" 2>/dev/null
+        else
+          # Open but not focused → focus
+          tmux select-pane -t "$sidebar" 2>/dev/null
+        fi
+        exit 0
+      '';
+
+  workmux-dashboard =
+    pkgs.writeShellScript "workmux-dashboard" # sh
+      ''
+        tab="''${1:-}"
+        h=$(tmux display -p '#{window_height}')
+        w=$(tmux display -p '#{window_width}')
+        h=$((h * 9 / 10))
+        w=$((w * 9 / 10))
+        if [ -n "$tab" ]; then
+          tmux display-popup -h "$h" -w "$w" -E "workmux dashboard --tab $tab"
+        else
+          tmux display-popup -h "$h" -w "$w" -E "workmux dashboard"
+        fi
+      '';
 in
 {
+  home.packages = [ workmux ];
+
+  # Session per worktree matches the sesh-style workflow; opencode is the agent
+  xdg.configFile."workmux/config.yaml".text = # yaml
+    ''
+      mode: session
+      agent: opencode
+      nerdfont: true
+    '';
+
   programs.tmux = {
     enable = true;
     shortcut = "a";
@@ -109,7 +165,6 @@ in
 
       bind V copy-mode
       bind-key / copy-mode \; send-keys "/"
-      bind-key T display-popup -E -w 60% -h 60% "sesh connect \"$(sesh list | fzf --reverse --border-label ' sesh ' --prompt '🯋 ' --bind 'ctrl-s:reload(sesh list --sessions)' --preview 'sesh preview {}')\""
 
       bind v split-window -h -c "#{pane_current_path}"
       bind s split-window -v -c "#{pane_current_path}"
@@ -149,6 +204,13 @@ in
       bind b set-option status
 
       bind S choose-session
+
+      # workmux: toggle agent sidebar, focus on open (replaces send-prefix)
+      bind C-a run-shell "${workmux-sidebar}"
+      # workmux: dashboard popup (C-s is taken by resurrect save)
+      bind C-d run-shell "${workmux-dashboard}"
+      # workmux: dashboard on worktrees tab
+      bind C-w run-shell "${workmux-dashboard} worktrees"
     '';
   };
 }

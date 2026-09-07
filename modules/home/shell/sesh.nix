@@ -4,7 +4,7 @@
 
   programs.sesh = {
     enable = true;
-    tmuxKey = "c-o";
+    tmuxKey = "T";
     settings = {
       blacklist = [
         "^scratch$"
