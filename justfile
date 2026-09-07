@@ -20,9 +20,9 @@ home user="itachi@popos":
 build host:
     nh os build .#{{host}} --dry
 
-# Format nix files
+# Format nix files (config lives in the flake, so go through nix fmt)
 fmt:
-    treefmt
+    nix fmt
 
 # Update flake lock
 update:
