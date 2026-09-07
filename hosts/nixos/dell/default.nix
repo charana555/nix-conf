@@ -77,6 +77,7 @@ in
   };
 
   # Per-user home-manager config (hm = home-manager.users.<username>)
+  hm.apps.launcher.enable = true;
   hm.apps.keepassxc.enable = true;
   hm.apps.nextcloud.enable = true;
   hm.apps.discord.enable = true;

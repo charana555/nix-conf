@@ -47,6 +47,7 @@ in
     };
   };
 
+  apps.launcher.enable = true;
   apps.discord.enable = true;
   apps.skLauncher.enable = true;
   apps.steam.enable = true;
