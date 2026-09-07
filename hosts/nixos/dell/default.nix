@@ -82,6 +82,11 @@ in
   hm.apps.discord.enable = true;
   hm.apps.steam.enable = true;
   hm.apps.skLauncher.enable = true;
+  hm.apps.localsend.enable = true;
+
+  # LocalSend receives on 53317 (blocked by default firewall otherwise)
+  networking.firewall.allowedTCPPorts = [ 53317 ];
+  networking.firewall.allowedUDPPorts = [ 53317 ];
   hm.programs.git.settings.user = {
     name = me.fullname;
     email = me.email;
