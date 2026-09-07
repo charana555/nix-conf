@@ -33,6 +33,10 @@ in
 
   networking.networkmanager.enable = true;
 
+  # LocalSend receives on 53317 (blocked by default firewall otherwise)
+  networking.firewall.allowedTCPPorts = [ 53317 ];
+  networking.firewall.allowedUDPPorts = [ 53317 ];
+
   # Primary user
   users = {
     defaultUserShell = pkgs.zsh;
