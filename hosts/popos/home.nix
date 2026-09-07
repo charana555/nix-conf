@@ -1,3 +1,6 @@
+# Historical config, kept for reference only.
+# This machine (the one that ran Pop!_OS) was migrated to NixOS on 2026-08-23
+# and is now the `dell` host - see memory/nixos-migration-dell.md.
 {
   flake,
   config,

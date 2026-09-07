@@ -6,6 +6,10 @@
 **Disk**: 1TB NVMe SK hynix BC901, UEFI boot, currently LUKS + LVM + ext4
 **Date**: 2026-08-23
 
+**Status (2026-09-08)**: Migration complete. This machine is now the `dell` NixOS host.
+The Pop!_OS machine no longer exists - `hosts/popos/` in the flake is kept for
+future reference only (e.g. if another standalone home-manager machine is needed).
+
 ---
 
 ## Decisions
