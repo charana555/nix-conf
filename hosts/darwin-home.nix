@@ -42,6 +42,9 @@ in
 
   apps.maccy.enable = true;
 
+  # LocalSend has no darwin build in nixpkgs - install via `brew install --cask localsend`
+  # ponytail: revisit if nixpkgs gains a darwin package, then use apps.localsend.enable
+
   home.packages = with pkgs; [
     cargo
     rustc

@@ -70,8 +70,9 @@ in
       adjust_column_width = "100%";
       adjust_baseline = 0;
 
-      cursor_shape = "block";
-      cursor_beam_thickness = "7.5";
+      cursor_shape = "beam";
+      cursor_beam_thickness = "1.8";
+      cursor_underline_thickness = "1.5";
       cursor_blink_interval = "0.5";
       cursor_stop_blinking_after = "15.0";
       cursor_trail = 3;

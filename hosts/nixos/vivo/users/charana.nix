@@ -17,6 +17,7 @@ in
 
   apps.keepassxc.enable = true;
   apps.nextcloud.enable = true;
+  apps.localsend.enable = true;
 
   programs.git = {
     settings.user = {
