@@ -27,6 +27,8 @@
     cachix
     nix-info
     nixpkgs-fmt
+    nh
+    just
 
     stylua
     prettier
