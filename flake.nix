@@ -59,6 +59,9 @@
     llm-agents.url = "github:numtide/llm-agents.nix";
     opencode-vim.url = "github:leohenon/opencode-vim/ocv";
 
+    # Parallel dev: git worktrees + tmux windows
+    workmux.url = "github:raine/workmux";
+
     # OpenGL wrapper for Nix binaries on non-NixOS Linux
     nixgl.url = "github:nix-community/nixGL";
 

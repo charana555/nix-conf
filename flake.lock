@@ -3027,6 +3027,22 @@
     },
     "nixpkgs_32": {
       "locked": {
+        "lastModified": 1787900134,
+        "narHash": "sha256-VYXO0XZlgj06dxJZRhrD3WoSsvq/c7+/Akyoa22pefw=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "83199d0d373dd3ac2b9a1996b1d0263f76ab7a4c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_33": {
+      "locked": {
         "lastModified": 1781074563,
         "narHash": "sha256-md8WlXOlfnIeHeOScMTTHFyf2d6iaTwPl2apR5EQ3P4=",
         "owner": "nixos",
@@ -3475,6 +3491,7 @@
         "sops-nix": "sops-nix_2",
         "stylix": "stylix_2",
         "treefmt-nix": "treefmt-nix_8",
+        "workmux": "workmux",
         "zen-browser": "zen-browser_2"
       }
     },
@@ -4116,6 +4133,24 @@
         "type": "github"
       }
     },
+    "workmux": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_32"
+      },
+      "locked": {
+        "lastModified": 1788725915,
+        "narHash": "sha256-QRjx4uXWYhH2yLGsOxj9NRwfIbRMC6zMKp+L72wwT90=",
+        "owner": "raine",
+        "repo": "workmux",
+        "rev": "ac4289fceed31c77d81b6b674699ea4e12f4ceac",
+        "type": "github"
+      },
+      "original": {
+        "owner": "raine",
+        "repo": "workmux",
+        "type": "github"
+      }
+    },
     "xdph": {
       "inputs": {
         "hyprland-protocols": [
@@ -4226,7 +4261,7 @@
     "zen-browser_2": {
       "inputs": {
         "home-manager": "home-manager_4",
-        "nixpkgs": "nixpkgs_32"
+        "nixpkgs": "nixpkgs_33"
       },
       "locked": {
         "lastModified": 1782144240,

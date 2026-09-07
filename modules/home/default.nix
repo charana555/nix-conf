@@ -90,6 +90,22 @@ let
       value.source = "${inputs.ponytail}/.opencode/command/${name}.md";
     }) ponytailSkillNames
   );
+
+  workmuxSkillNames = [
+    "coordinator"
+    "merge"
+    "open-pr"
+    "rebase"
+    "workmux"
+    "worktree"
+  ];
+
+  workmuxSkillFiles = builtins.listToAttrs (
+    map (name: {
+      name = "opencode/skills/${name}/SKILL.md";
+      value.source = "${inputs.workmux}/skills/${name}/SKILL.md";
+    }) workmuxSkillNames
+  );
 in
 {
   imports =
@@ -126,6 +142,7 @@ in
     opencodeRegistryFiles
     // ponytailSkillFiles
     // ponytailCommandFiles
+    // workmuxSkillFiles
     // {
       "opencode/opencode.json".text = builtins.toJSON (
         opencodeConfig
