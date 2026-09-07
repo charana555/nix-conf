@@ -60,6 +60,14 @@ in
 {
   home.packages = [ workmux ];
 
+  # Session per worktree matches the sesh-style workflow; opencode is the agent
+  xdg.configFile."workmux/config.yaml".text = # yaml
+    ''
+      mode: session
+      agent: opencode
+      nerdfont: true
+    '';
+
   programs.tmux = {
     enable = true;
     shortcut = "a";
@@ -157,7 +165,6 @@ in
 
       bind V copy-mode
       bind-key / copy-mode \; send-keys "/"
-      bind-key T display-popup -E -w 60% -h 60% "sesh connect \"$(sesh list | fzf --reverse --border-label ' sesh ' --prompt '🯋 ' --bind 'ctrl-s:reload(sesh list --sessions)' --preview 'sesh preview {}')\""
 
       bind v split-window -h -c "#{pane_current_path}"
       bind s split-window -v -c "#{pane_current_path}"
