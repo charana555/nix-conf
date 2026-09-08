@@ -21,6 +21,13 @@ in
         "HYPRCURSOR_THEME,catppuccin-macchiato-dark-cursors"
       ];
 
+      # HDMI on the dell is wired to the NVIDIA dGPU; hardware cursor planes
+      # flicker on the proprietary driver in that multi-GPU setup, so render
+      # the cursor in software (harmless on Intel-only hosts like vivo)
+      cursor = {
+        no_hardware_cursors = true;
+      };
+
       binds = {
         allow_workspace_cycles = true;
         focus_preferred_method = 1;
