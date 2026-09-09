@@ -60,14 +60,6 @@ let
     };
   };
 
-  tuiConfig = builtins.toJSON {
-    vim_system_clipboard_register = true;
-    vim_escape_sequence = "jk";
-    vim_enter_submit = true;
-    vim_insert_after_submit = true;
-    scroll_acceleration.enabled = true;
-  };
-
   ponytailSkillNames = [
     "ponytail"
     "ponytail-review"
@@ -155,7 +147,14 @@ in
         }
       );
 
-      "opencode/tui.json".text = tuiConfig;
+      # opencode/tui.json is deliberately NOT managed here: opencode
+      # rewrites it at runtime (plugin registration, TUI setting
+      # changes), and a nix-managed symlink plus a stale .backup made
+      # every switch fail with "would be clobbered". The live file
+      # already carries the settings below - re-apply them manually on
+      # a fresh machine via the TUI settings screen.
+      #   vim_system_clipboard_register, vim_escape_sequence "jk",
+      #   vim_enter_submit, vim_insert_after_submit, scroll_acceleration
 
       "opencode/oh-my-openagent.jsonc".text = omoConfig;
 
