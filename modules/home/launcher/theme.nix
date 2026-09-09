@@ -13,6 +13,7 @@
   ...
 }:
 let
+  palette = import ./palette.nix;
   card-theme = pkgs.writeText "card.rasi" ''
     /**
      * "card" - a small rounded card centered on screen,
@@ -21,14 +22,14 @@ let
      */
 
     * {
-        bg:        #1e1e2e;
-        bg-input:  #292c3c;
-        fg:        #cdd6f4;
-        fg-dim:    #7f849c;
-        accent:    #f5c2e7;
-        border-c:  #313244;
+        bg:        ${palette.bg};
+        bg-input:  ${palette.bg-input};
+        fg:        ${palette.fg};
+        fg-dim:    ${palette.fg-dim};
+        accent:    ${palette.accent};
+        border-c:  ${palette.border-c};
 
-        font: "JetBrainsMono Nerd Font 11";
+        font: "${palette.font.family} ${palette.font.weight} ${toString palette.font.size}";
     }
 
     window {
