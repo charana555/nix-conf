@@ -19,6 +19,8 @@ in
   apps.keepassxc.enable = true;
   apps.nextcloud.enable = true;
   apps.localsend.enable = true;
+  apps.discord.enable = true;
+  apps.whatsapp.enable = true;
 
   programs.git = {
     settings.user = {
