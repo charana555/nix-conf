@@ -24,6 +24,13 @@ in
     image = ../../../wallpapers/your_name_wall.jpg;
     opacity.terminal = 0.90;
     polarity = "dark";
+    icons = {
+      enable = true;
+      # stylix has no default icon theme - name + package are required
+      dark = "Papirus-Dark";
+      light = "Papirus-Light";
+      package = pkgs.papirus-icon-theme;
+    };
     fonts.monospace = {
       inherit (selectedFont) name package;
     };

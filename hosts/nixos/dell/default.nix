@@ -44,10 +44,13 @@ in
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
-    theme = "catppuccin-macchiato";
+    theme = "catppuccin-sddm-corners";
     package = pkgs.kdePackages.sddm;
-    extraPackages = with pkgs; [ catppuccin-sddm-corners ];
   };
+
+  # Theme must land in SDDM's ThemeDir (/run/current-system/sw/share/sddm/themes);
+  # sddm.extraPackages only adds Qt bits to the greeter env, not theme files.
+  environment.systemPackages = [ pkgs.catppuccin-sddm-corners ];
 
   networking.networkmanager.enable = true;
 

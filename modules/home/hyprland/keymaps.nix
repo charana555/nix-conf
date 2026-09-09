@@ -68,6 +68,7 @@ in
         "$mod,return,exec,kitty"
         "$mod,space,exec,rofi -show drun"
         "$modSHIFT,space,exec,rofi -show window"
+        "$modSHIFT,return,exec,rofi -show run"
         "$modSHIFT,backspace,exec,power-menu"
         "$mod,f,togglefloating,"
         "$modCTRL,f,fullscreenstate,0 2"

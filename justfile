@@ -6,7 +6,7 @@ deploy host="":
         if [ "$(uname -s)" = "Darwin" ]; then \
             nh darwin switch . -H darwin; \
         else \
-            nh os switch .; \
+            nh os switch . && { hyprctl reload 2>/dev/null || true; }; \
         fi; \
     else \
         nh os switch .#{{host}} --target-host charana.c@{{host}} --elevation-strategy passwordless; \
