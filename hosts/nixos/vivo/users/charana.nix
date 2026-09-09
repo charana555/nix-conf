@@ -21,6 +21,7 @@ in
   apps.localsend.enable = true;
   apps.discord.enable = true;
   apps.whatsapp.enable = true;
+  waybar.battery.enable = true;
 
   programs.git = {
     settings.user = {
