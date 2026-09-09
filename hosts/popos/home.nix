@@ -52,6 +52,7 @@ in
 
   apps.launcher.enable = true;
   apps.discord.enable = true;
+  apps.whatsapp.enable = true;
   apps.skLauncher.enable = true;
   apps.steam.enable = true;
   apps.keepassxc.enable = true;

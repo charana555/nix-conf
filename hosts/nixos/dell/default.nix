@@ -84,6 +84,7 @@ in
   hm.apps.keepassxc.enable = true;
   hm.apps.nextcloud.enable = true;
   hm.apps.discord.enable = true;
+  hm.apps.whatsapp.enable = true;
   hm.apps.steam.enable = true;
   hm.apps.skLauncher.enable = true;
   hm.apps.localsend.enable = true;
