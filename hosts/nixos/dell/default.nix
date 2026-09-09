@@ -88,6 +88,7 @@ in
   hm.apps.steam.enable = true;
   hm.apps.skLauncher.enable = true;
   hm.apps.localsend.enable = true;
+  hm.waybar.battery.enable = true;
 
   # LocalSend receives on 53317 (blocked by default firewall otherwise)
   networking.firewall.allowedTCPPorts = [ 53317 ];
