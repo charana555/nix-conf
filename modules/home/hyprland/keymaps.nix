@@ -11,6 +11,13 @@ let
   brightnessctl = lib.getExe pkgs.brightnessctl;
   avizo-client = lib.getExe' pkgs.avizo "avizo-client";
 
+  # Caelestia hosts swap rofi/avizo/power-menu for shell IPC:
+  #   drawers toggle <launcher|session|dashboard|osd>
+  #   picker open (screenshot area), brightness set "+5%"/"5%-"
+  # Volume stays on wpctl like upstream's own dots - the shell's OSD
+  # reacts to the pipewire changes.
+  cael = config.apps.caelestia.enable;
+
   # Volume/brightness change + OSD popup, one command per keybind.
   # Keeps the wpctl backend (incl. the -l 1.5 boost cap) instead of
   # avizo's volumectl, which would switch to pamixer and cap at 100%.
@@ -89,7 +96,7 @@ let
   ];
 in
 {
-  home.packages = with contrib; [ grimblast ];
+  home.packages = with contrib; lib.optionals (!cael) [ grimblast ];
 
   xdg = {
     userDirs = {
@@ -104,36 +111,58 @@ in
       "$notify" = "notify-send -a 'Hyprland'";
       "$sspath" = ''~/Pictures/Screenshots/"$(date +%d-%b-%H-%M-%S)".png'';
 
-      bind = workspace ++ [
-        "$mod,q,killactive"
-        "$mod,h,movefocus,l"
-        "$mod,l,movefocus,r"
-        "$mod,k,movefocus,u"
-        "$mod,j,movefocus,d"
-        "$modSHIFT,h,movewindow,l"
-        "$modSHIFT,l,movewindow,r"
-        "$modSHIFT,j,movewindow,d"
-        "$modSHIFT,k,movewindow,u"
-        "$mod,return,exec,kitty"
-        "$mod,space,exec,rofi -show drun"
-        "$modSHIFT,space,exec,rofi -show window"
-        "$modSHIFT,return,exec,rofi -show run"
-        "$modSHIFT,backspace,exec,power-menu"
-        "$mod,f,togglefloating,"
-        "$modCTRL,f,fullscreenstate,0 2"
-        "$mod,m,fullscreen,0"
-        "$modSHIFT,x,exec,hyprctl kill"
-        "$mod,r,exec,hyprctl reload"
-        ",Print,exec,${lib.getExe contrib.grimblast} --notify --cursor copysave output $sspath"
-        "$modSHIFT,Print,exec,${lib.getExe contrib.grimblast} --notify --cursor copysave area $sspath"
-        "$mod,Print,exec,${lib.getExe contrib.grimblast} --notify --cursor copysave active $sspath"
-        # no Print key on the Aula F75, mirror the binds on Super+s
-        "$mod,s,exec,${lib.getExe contrib.grimblast} --notify --cursor copysave output $sspath"
-        "$modSHIFT,s,exec,${lib.getExe contrib.grimblast} --notify --cursor copysave area $sspath"
-        "$modCTRL,s,exec,${lib.getExe contrib.grimblast} --notify --cursor copysave active $sspath"
-        ",F9,exec,loginctl lock-session"
-        ",Scroll_Lock,exec,loginctl lock-session"
-      ];
+      bind =
+        workspace
+        ++ [
+          "$mod,q,killactive"
+          "$mod,h,movefocus,l"
+          "$mod,l,movefocus,r"
+          "$mod,k,movefocus,u"
+          "$mod,j,movefocus,d"
+          "$modSHIFT,h,movewindow,l"
+          "$modSHIFT,l,movewindow,r"
+          "$modSHIFT,j,movewindow,d"
+          "$modSHIFT,k,movewindow,u"
+          "$mod,return,exec,kitty"
+          "$mod,f,togglefloating,"
+          "$modCTRL,f,fullscreenstate,0 2"
+          "$mod,m,fullscreen,0"
+          "$modSHIFT,x,exec,hyprctl kill"
+          "$mod,r,exec,hyprctl reload"
+          # hypridle routes lock-session to hyprlock or the shell lock
+          ",F9,exec,loginctl lock-session"
+          ",Scroll_Lock,exec,loginctl lock-session"
+        ]
+        ++ lib.optionals cael [
+          "$mod,space,exec,caelestia-shell ipc call drawers toggle launcher"
+          # the launcher has no window-switch mode; cycle focus instead
+          "$modSHIFT,space,cyclenext,"
+          # rofi run mode is covered by the launcher's ">" action prefix
+          "$modSHIFT,return,exec,caelestia-shell ipc call drawers toggle launcher"
+          "$modSHIFT,backspace,exec,caelestia-shell ipc call drawers toggle session"
+          # full: focused monitor to clipboard + swappy prompt;
+          # area: the shell's freeze picker
+          ",Print,exec,caelestia screenshot"
+          "$mod,Print,exec,caelestia screenshot"
+          "$modSHIFT,Print,exec,caelestia-shell ipc call picker open"
+          # no Print key on the Aula F75, mirror the binds on Super+s
+          "$mod,s,exec,caelestia screenshot"
+          "$modSHIFT,s,exec,caelestia-shell ipc call picker open"
+          "$modCTRL,s,exec,caelestia screenshot"
+        ]
+        ++ lib.optionals (!cael) [
+          "$mod,space,exec,rofi -show drun"
+          "$modSHIFT,space,exec,rofi -show window"
+          "$modSHIFT,return,exec,rofi -show run"
+          "$modSHIFT,backspace,exec,power-menu"
+          ",Print,exec,${lib.getExe contrib.grimblast} --notify --cursor copysave output $sspath"
+          "$modSHIFT,Print,exec,${lib.getExe contrib.grimblast} --notify --cursor copysave area $sspath"
+          "$mod,Print,exec,${lib.getExe contrib.grimblast} --notify --cursor copysave active $sspath"
+          # no Print key on the Aula F75, mirror the binds on Super+s
+          "$mod,s,exec,${lib.getExe contrib.grimblast} --notify --cursor copysave output $sspath"
+          "$modSHIFT,s,exec,${lib.getExe contrib.grimblast} --notify --cursor copysave area $sspath"
+          "$modCTRL,s,exec,${lib.getExe contrib.grimblast} --notify --cursor copysave active $sspath"
+        ];
       bindm = [
         "$mod,mouse:272,movewindow"
         "$mod,mouse:273,resizewindow 2"
@@ -143,6 +172,18 @@ in
         "$modCTRL,l,resizeactive,50 0"
         "$modCTRL,j,resizeactive,0 50"
         "$modCTRL,k,resizeactive,0 -50"
+      ]
+      ++ lib.optionals cael [
+        # wpctl keeps the -l 1.5 boost cap, shell OSD reacts via pipewire
+        ",XF86AudioRaiseVolume,exec,${wpctl} set-mute @DEFAULT_AUDIO_SINK@ 0; ${wpctl} set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
+        ",XF86AudioLowerVolume,exec,${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+        ",XF86MonBrightnessUp,exec,caelestia-shell ipc call brightness set +5%"
+        ",XF86MonBrightnessDown,exec,caelestia-shell ipc call brightness set 5%-"
+        # Super + volume knob on the Aula F75 = brightness
+        "$mod,XF86AudioRaiseVolume,exec,caelestia-shell ipc call brightness set +5%"
+        "$mod,XF86AudioLowerVolume,exec,caelestia-shell ipc call brightness set 5%-"
+      ]
+      ++ lib.optionals (!cael) [
         ",XF86AudioRaiseVolume,exec,${lib.getExe osd} vol-up"
         ",XF86AudioLowerVolume,exec,${lib.getExe osd} vol-down"
         ",XF86MonBrightnessUp,exec,${lib.getExe osd} bright-up"
@@ -152,9 +193,15 @@ in
         "$mod,XF86AudioLowerVolume,exec,${lib.getExe osd} bright-down"
       ];
       bindl = [
+        ",switch:on:Lid Switch,exec,loginctl lock-session"
+      ]
+      ++ lib.optionals cael [
+        ",XF86AudioMute,exec,${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ",XF86AudioMicMute,exec,${wpctl} set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+      ]
+      ++ lib.optionals (!cael) [
         ",XF86AudioMute,exec,${lib.getExe osd} mute"
         ",XF86AudioMicMute,exec,${lib.getExe osd} mic-mute"
-        ",switch:on:Lid Switch,exec,loginctl lock-session"
       ];
     };
   };

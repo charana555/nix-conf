@@ -8,22 +8,27 @@
 {
   imports = [ inputs.caelestia.homeManagerModules.default ];
 
-  # Trial: the shell is not autostarted (systemd unit off) and
-  # waybar/rofi/mako/avizo stay enabled. Preview with `caelestia shell -d`.
   options.apps.caelestia.enable = lib.mkEnableOption "Caelestia desktop shell";
 
   config = lib.mkIf config.apps.caelestia.enable {
     programs.caelestia = {
       enable = true;
       cli.enable = true;
-      systemd.enable = false;
+      # systemd user unit on graphical-session.target; uwsm starts it on
+      # login. Stop with `systemctl --user stop caelestia` - pkill restarts it.
+      systemd.enable = true;
       settings = {
-        # awww + stylix own the wallpaper; without this the shell stacks
-        # its own background layer (bundled fallback) over it on startup
-        background.wallpaperEnabled = false;
         # left-edge vertical taskbar is structural (BarConfig has no
         # position option) - exclude it on all screens, waybar stays top
         bar.excludedScreens = [ ".*" ];
+        # stock wallpapers are symlinked here by wallpaper.nix
+        paths.wallpaperDir = "~/.local/share/wallpapers";
+        # match the old wpctl/osd behavior: 5% steps, 150% volume cap
+        services = {
+          maxVolume = 1.5;
+          audioIncrement = 0.05;
+          brightnessIncrement = 0.05;
+        };
       };
       cli.settings = {
         # stylix owns terminal/GTK/Qt theming; `caelestia scheme set`

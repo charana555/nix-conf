@@ -8,7 +8,9 @@ let
   awww = lib.getExe pkgs.awww;
   awww-daemon = lib.getExe' pkgs.awww "awww-daemon";
 
-  # Repo stock wallpapers - symlinked to ~/.local/share/wallpapers on every machine
+  # Repo stock wallpapers - symlinked to ~/.local/share/wallpapers on every
+  # machine. Kept unconditional: caelestia's picker reads this dir too
+  # (paths.wallpaperDir in apps/caelestia.nix).
   wallpapersDir = ../../../wallpapers;
   stockWallpapers = builtins.attrNames (builtins.readDir wallpapersDir);
 
@@ -51,23 +53,35 @@ let
   '';
 in
 {
-  home.packages = [
-    pkgs.awww
-    wallinit
-    wallset
-  ];
+  # awww stack; disable on hosts where the shell (caelestia) owns the
+  # wallpaper - its picker + background layer replace wallinit/wallset
+  options.wallpaper.enable = lib.mkOption {
+    type = lib.types.bool;
+    default = true;
+    description = "awww wallpaper daemon with rofi picker";
+  };
 
-  xdg.dataFile = builtins.listToAttrs (
-    map (name: {
-      name = "wallpapers/${name}";
-      value.source = wallpapersDir + "/${name}";
-    }) stockWallpapers
-  );
+  config = {
+    # stock wallpapers stay symlinked everywhere; caelestia's picker
+    # reads this dir (paths.wallpaperDir in apps/caelestia.nix)
+    xdg.dataFile = builtins.listToAttrs (
+      map (name: {
+        name = "wallpapers/${name}";
+        value.source = wallpapersDir + "/${name}";
+      }) stockWallpapers
+    );
 
-  xdg.userDirs.extraConfig.WF = userWallpaperDir;
+    home.packages = lib.mkIf config.wallpaper.enable [
+      pkgs.awww
+      wallinit
+      wallset
+    ];
 
-  wayland.windowManager.hyprland.settings = {
-    exec-once = [ (lib.getExe wallinit) ];
-    bind = [ "$modSHIFT,w,exec,${lib.getExe wallset}" ];
+    xdg.userDirs.extraConfig.WF = lib.mkIf config.wallpaper.enable userWallpaperDir;
+
+    wayland.windowManager.hyprland.settings = lib.mkIf config.wallpaper.enable {
+      exec-once = [ (lib.getExe wallinit) ];
+      bind = [ "$modSHIFT,w,exec,${lib.getExe wallset}" ];
+    };
   };
 }

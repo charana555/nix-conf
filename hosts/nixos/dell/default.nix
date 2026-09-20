@@ -80,7 +80,16 @@ in
   };
 
   # Per-user home-manager config (hm = home-manager.users.<username>)
+  # caelestia replaces the rofi launcher/power menu, mako, avizo OSD,
+  # hyprlock and the awww wallpaper stack (binds switch in
+  # modules/home/hyprland/keymaps.nix). rofi itself stays: it is the
+  # backend for networkmanager-dmenu (Super+W) and rofi-bluetooth (Super+B).
   hm.apps.launcher.enable = true;
+  hm.apps.caelestia.enable = true;
+  hm.mako.enable = false;
+  hm.avizo.enable = false;
+  hm.hyprlock.enable = false;
+  hm.wallpaper.enable = false;
   hm.apps.keepassxc.enable = true;
   hm.apps.nextcloud.enable = true;
   hm.apps.discord.enable = true;
@@ -88,7 +97,6 @@ in
   hm.apps.steam.enable = true;
   hm.apps.skLauncher.enable = true;
   hm.apps.localsend.enable = true;
-  hm.apps.caelestia.enable = true;
   hm.waybar.battery.enable = true;
 
   # LocalSend receives on 53317 (blocked by default firewall otherwise)
