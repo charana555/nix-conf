@@ -40,6 +40,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Desktop shell for Hyprland (trial on dell). Follows root nixpkgs so
+    # adding it cannot bump the system-wide pin; quickshell git is expected
+    # to build against the July qt6 - revisit if it ever breaks.
+    caelestia = {
+      url = "github:caelestia-dots/shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # nix-index database (`,` command)
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
