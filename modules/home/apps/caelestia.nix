@@ -17,6 +17,11 @@
       enable = true;
       cli.enable = true;
       systemd.enable = false;
+      settings = {
+        # awww + stylix own the wallpaper; without this the shell stacks
+        # its own background layer (bundled fallback) over it on startup
+        background.wallpaperEnabled = false;
+      };
     };
   };
 }
