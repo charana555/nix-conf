@@ -18,9 +18,6 @@
       # login. Stop with `systemctl --user stop caelestia` - pkill restarts it.
       systemd.enable = true;
       settings = {
-        # left-edge vertical taskbar is structural (BarConfig has no
-        # position option) - exclude it on all screens, waybar stays top
-        bar.excludedScreens = [ ".*" ];
         # stock wallpapers are symlinked here by wallpaper.nix
         paths.wallpaperDir = "~/.local/share/wallpapers";
         # match the old wpctl/osd behavior: 5% steps, 150% volume cap

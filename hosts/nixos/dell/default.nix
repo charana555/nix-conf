@@ -53,6 +53,8 @@ in
   environment.systemPackages = [ pkgs.catppuccin-sddm-corners ];
 
   networking.networkmanager.enable = true;
+  # wifi/bluetooth picking happens in the caelestia bar popouts instead
+  hyprland.networkPickers.enable = false;
 
   users = {
     defaultUserShell = pkgs.zsh;
@@ -80,12 +82,12 @@ in
   };
 
   # Per-user home-manager config (hm = home-manager.users.<username>)
-  # caelestia replaces the rofi launcher/power menu, mako, avizo OSD,
-  # hyprlock and the awww wallpaper stack (binds switch in
-  # modules/home/hyprland/keymaps.nix). rofi itself stays: it is the
-  # backend for networkmanager-dmenu (Super+W) and rofi-bluetooth (Super+B).
-  hm.apps.launcher.enable = true;
+  # caelestia is the full shell on dell: its left bar, launcher, lock,
+  # notifications, OSD, screenshots, wallpaper picker and network/bluetooth
+  # popouts replace waybar, rofi, mako, avizo, hyprlock and the awww stack
+  # (binds switch in modules/home/hyprland/keymaps.nix).
   hm.apps.caelestia.enable = true;
+  hm.waybar.enable = false;
   hm.mako.enable = false;
   hm.avizo.enable = false;
   hm.hyprlock.enable = false;
@@ -97,7 +99,6 @@ in
   hm.apps.steam.enable = true;
   hm.apps.skLauncher.enable = true;
   hm.apps.localsend.enable = true;
-  hm.waybar.battery.enable = true;
 
   # LocalSend receives on 53317 (blocked by default firewall otherwise)
   networking.firewall.allowedTCPPorts = [ 53317 ];
