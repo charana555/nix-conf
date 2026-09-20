@@ -40,17 +40,29 @@ in
     efi.efiSysMountPoint = "/boot";
   };
 
-  # Graphical login screen with catppuccin theme
+  # Graphical login screen: pixie (Pixel/MD3). autoColor extracts a Material
+  # You accent from the background, matching the caelestia dynamic scheme.
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
-    theme = "catppuccin-sddm-corners";
+    theme = "pixie";
     package = pkgs.kdePackages.sddm;
+    # Qt6 QML bits the greeter env needs to render the theme
+    extraPackages = with pkgs.kdePackages; [
+      qt5compat
+      qtdeclarative
+      qtsvg
+    ];
   };
 
   # Theme must land in SDDM's ThemeDir (/run/current-system/sw/share/sddm/themes);
   # sddm.extraPackages only adds Qt bits to the greeter env, not theme files.
-  environment.systemPackages = [ pkgs.catppuccin-sddm-corners ];
+  # Background mirrors stylix.image (modules/home/stylix/config.nix).
+  environment.systemPackages = [
+    (flake.inputs.pixie-sddm.packages.${pkgs.stdenv.hostPlatform.system}.pixie-sddm.override {
+      background = ../../../wallpapers/your_name_wall.jpg;
+    })
+  ];
 
   networking.networkmanager.enable = true;
   # wifi/bluetooth picking happens in the caelestia bar popouts instead
