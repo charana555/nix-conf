@@ -55,6 +55,6 @@ in
   apps.whatsapp.enable = true;
   apps.skLauncher.enable = true;
   apps.steam.enable = true;
-  apps.keepassxc.enable = true;
+  apps.bitwarden.enable = true;
   apps.nextcloud.enable = true;
 }
