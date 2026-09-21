@@ -89,7 +89,7 @@ in
         vimium
         zen-internet
         refined-github
-        keepassxc-browser
+        bitwarden
       ];
 
       extensions.settings = {

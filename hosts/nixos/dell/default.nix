@@ -140,7 +140,7 @@ in
   hm.avizo.enable = false;
   hm.hyprlock.enable = false;
   hm.wallpaper.enable = false;
-  hm.apps.keepassxc.enable = true;
+  hm.apps.bitwarden.enable = true;
   hm.apps.nextcloud.enable = true;
   hm.apps.discord.enable = true;
   hm.apps.whatsapp.enable = true;
