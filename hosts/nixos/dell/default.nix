@@ -57,11 +57,40 @@ in
 
   # Theme must land in SDDM's ThemeDir (/run/current-system/sw/share/sddm/themes);
   # sddm.extraPackages only adds Qt bits to the greeter env, not theme files.
-  # Background mirrors stylix.image (modules/home/stylix/config.nix).
+  # Tweaks (input locked at 1e1a863, so the splice anchors are stable):
+  # - background: assets/background.jpg is replaced with the same wallpaper
+  #   stylix uses (modules/home/stylix/config.nix), so pixie's autoColor
+  #   extracts a matching Material You accent. Replacing the asset instead of
+  #   the theme.conf path keeps the wallpaper a real derivation input (GC-safe).
+  # - password field: swapped for a caelestia-lock-style one (no box, animated
+  #   dots) - see pixie/ShapeField.qml.
   environment.systemPackages = [
-    (flake.inputs.pixie-sddm.packages.${pkgs.stdenv.hostPlatform.system}.pixie-sddm.override {
-      background = ../../../wallpapers/your_name_wall.jpg;
-    })
+    (flake.inputs.pixie-sddm.packages.${pkgs.stdenv.hostPlatform.system}.pixie-sddm.overrideAttrs
+      (old: {
+        postPatch = old.postPatch + ''
+          cp ${./pixie/ShapeField.qml} components/ShapeField.qml
+          cp ${./pixie/avatar.jpg} assets/avatar.jpg
+          cp ${../../../wallpapers/your_name_wall.jpg} assets/background.jpg
+          awk -v repl=${./pixie/password-field.qml} '
+            /^ *TextField \{$/ {
+              while ((getline line < repl) > 0) print line
+              skipping = 1
+              next
+            }
+            skipping == 1 {
+              if (/onAccepted: container\.doLogin\(\)/)
+                skipping = 2
+              next
+            }
+            skipping == 2 {
+              skipping = 0
+              next
+            }
+            { print }
+          ' Main.qml > Main.qml.tmp && mv Main.qml.tmp Main.qml
+        '';
+      })
+    )
   ];
 
   networking.networkmanager.enable = true;
@@ -98,6 +127,9 @@ in
   # notifications, OSD, screenshots, wallpaper picker and network/bluetooth
   # popouts replace waybar, rofi, mako, avizo, hyprlock and the awww stack
   # (binds switch in modules/home/hyprland/keymaps.nix).
+  # ~/.face is the avatar caelestia's dashboard shows (same image as the
+  # login screen).
+  hm.home.file.".face".source = ./pixie/avatar.jpg;
   hm.apps.caelestia.enable = true;
   hm.waybar.enable = false;
   hm.mako.enable = false;
