@@ -51,9 +51,16 @@ let
   };
 in
 {
+  # Disable on hosts where the shell (caelestia) provides the bar
+  options.waybar.enable = lib.mkOption {
+    type = lib.types.bool;
+    default = true;
+    description = "waybar top bar";
+  };
+
   options.waybar.battery.enable = lib.mkEnableOption "battery module (hosts with a battery)";
 
-  config = {
+  config = lib.mkIf config.waybar.enable {
     home.packages = [
       tailscale-waybar
       # nm-connection-editor, opened by the network module's right-click
