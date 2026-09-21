@@ -42,9 +42,13 @@ in
 
   # Graphical login screen: pixie (Pixel/MD3). autoColor extracts a Material
   # You accent from the background, matching the caelestia dynamic scheme.
+  # X11 greeter: the wayland (weston) greeter coredumps when SDDM respawns it
+  # after a Hyprland session ends, leaving a dead VT with a blinking cursor.
+  # Only the login screen uses X11; the user session stays on Wayland.
+  services.xserver.enable = true;
   services.displayManager.sddm = {
     enable = true;
-    wayland.enable = true;
+    wayland.enable = false;
     theme = "pixie";
     package = pkgs.kdePackages.sddm;
     # Qt6 QML bits the greeter env needs to render the theme
