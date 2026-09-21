@@ -26,6 +26,11 @@
           audioIncrement = 0.05;
           brightnessIncrement = 0.05;
         };
+        # default logout is a loginctl Terminate alias: a hard SIGTERM of the
+        # session that leaves the GPU/VT wedged, so SDDM's greeter never
+        # respawns (dead VT, blinking cursor). uwsm stop exits Hyprland
+        # cleanly and the greeter comes back.
+        session.commands.logout = [ "uwsm" "stop" ];
       };
       cli.settings = {
         # stylix owns terminal/GTK/Qt theming; `caelestia scheme set`
