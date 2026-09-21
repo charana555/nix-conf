@@ -7,6 +7,7 @@
     sd
     tree
     less
+    rclone
 
     ripgrep
     fd
