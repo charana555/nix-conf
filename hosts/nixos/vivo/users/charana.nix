@@ -16,7 +16,7 @@ in
   ];
 
   apps.launcher.enable = true;
-  apps.keepassxc.enable = true;
+  apps.bitwarden.enable = true;
   apps.nextcloud.enable = true;
   apps.localsend.enable = true;
   apps.discord.enable = true;
