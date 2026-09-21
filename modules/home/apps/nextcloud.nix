@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }:
@@ -7,10 +8,8 @@
 {
   options.apps.nextcloud.enable = lib.mkEnableOption "Nextcloud Client";
 
+  # Installed only - launch manually; no systemd autostart at login
   config = lib.mkIf config.apps.nextcloud.enable {
-    services.nextcloud-client = {
-      enable = true;
-      startInBackground = true;
-    };
+    home.packages = [ pkgs.nextcloud-client ];
   };
 }
