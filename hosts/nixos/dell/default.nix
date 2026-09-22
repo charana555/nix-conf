@@ -101,6 +101,15 @@ in
   # wifi/bluetooth picking happens in the caelestia bar popouts instead
   hyprland.networkPickers.enable = false;
 
+  # DDC/CI access for caelestia's brightness service on external monitors
+  # (loads i2c-dev; grants /dev/i2c-* to the i2c group and seat users)
+  hardware.i2c.enable = true;
+
+  # caelestia reads battery state through Quickshell's UPower service;
+  # waybar read /sys/class/power_supply directly and never needed this.
+  # Without upowerd the bar shows "no battery detected".
+  services.upower.enable = true;
+
   users = {
     defaultUserShell = pkgs.zsh;
     users.${me.username} = {
@@ -110,6 +119,7 @@ in
         "wheel"
         "networkmanager"
         "docker"
+        "i2c"
       ];
       openssh.authorizedKeys.keys = me.sshPublicKeys;
     };
