@@ -24,6 +24,16 @@ in
   options.apps.caelestia.enable = lib.mkEnableOption "Caelestia desktop shell";
 
   config = lib.mkIf config.apps.caelestia.enable {
+    # Brightness.qml drives external displays via DDC/CI (`ddcutil detect`
+    # maps connectors to i2c buses). Without ddcutil in PATH every monitor
+    # falls back to brightnessctl, which only knows the internal panel -
+    # focused-display brightness then silently changes the laptop screen.
+    # Hosts enabling this module also need, on the NixOS side:
+    #   hardware.i2c.enable + user in the i2c group (DDC brightness)
+    #   services.upower.enable (battery status via Quickshell UPower)
+    # See hosts/nixos/dell/default.nix.
+    home.packages = [ pkgs.ddcutil ];
+
     programs.caelestia = {
       enable = true;
       cli.enable = true;
