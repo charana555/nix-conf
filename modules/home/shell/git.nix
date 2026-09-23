@@ -8,6 +8,7 @@
     ignores = [
       "*~"
       "*.swp"
+      ".omo/"
     ];
 
     iniContent = {
