@@ -9,6 +9,12 @@
         forwardAgent = true;
         addKeysToAgent = "yes";
       };
+      dsd = {
+        hostname = "100.77.128.13";
+        user = "charana.c";
+        identityFile = "~/.ssh/id_ed25519";
+        extraOptions.MACs = "hmac-sha2-512-etm@openssh.com";
+      };
       "github.com" = {
         hostname = "github.com";
         user = "git";
