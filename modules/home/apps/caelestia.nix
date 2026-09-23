@@ -30,7 +30,10 @@
         # session that leaves the GPU/VT wedged, so SDDM's greeter never
         # respawns (dead VT, blinking cursor). uwsm stop exits Hyprland
         # cleanly and the greeter comes back.
-        session.commands.logout = [ "uwsm" "stop" ];
+        session.commands.logout = [
+          "uwsm"
+          "stop"
+        ];
       };
       cli.settings = {
         # stylix owns terminal/GTK/Qt theming; `caelestia scheme set`
