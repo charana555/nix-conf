@@ -382,18 +382,18 @@ in
 
   xdg.mimeApps =
     let
-      value =
-        let
-          zen-browser = config.programs.zen-browser.package;
-        in
-        zen-browser.meta.desktopFileName;
+      # The package does not set meta.desktopFileName, so pin the name of
+      # the desktop file it actually installs.
+      desktopFile = "zen-beta.desktop";
 
       associations = builtins.listToAttrs (
         map
           (name: {
-            inherit name value;
+            inherit name;
+            value = [ desktopFile ];
           })
           [
+            # Web content
             "application/x-extension-shtml"
             "application/x-extension-xhtml"
             "application/x-extension-html"
@@ -409,23 +409,25 @@ in
             "application/json"
             "text/plain"
             "text/html"
+            # Deep links into chat/meeting apps
+            "x-scheme-handler/slack"
+            "x-scheme-handler/discord"
+            "x-scheme-handler/zoommtg"
+            "x-scheme-handler/zoomus"
+            "x-scheme-handler/tg"
+            "x-scheme-handler/whatsapp"
+            "x-scheme-handler/postman"
+            "x-scheme-handler/element"
           ]
       );
     in
     {
+      # xdg.mimeApps is disabled by default in home-manager; without this
+      # the associations below were never written and zen was not the
+      # default browser for http/https (the old raw home.file text block
+      # only covered deep-link schemes).
+      enable = true;
       associations.added = associations;
       defaultApplications = associations;
     };
-
-  home.file.".config/mimeapps.list".text = lib.optionalString pkgs.stdenv.isLinux ''
-    [Default Applications]
-    x-scheme-handler/slack=zen-beta.desktop
-    x-scheme-handler/discord=zen-beta.desktop
-    x-scheme-handler/zoommtg=zen-beta.desktop
-    x-scheme-handler/zoomus=zen-beta.desktop
-    x-scheme-handler/tg=zen-beta.desktop
-    x-scheme-handler/whatsapp=zen-beta.desktop
-    x-scheme-handler/postman=zen-beta.desktop
-    x-scheme-handler/element=zen-beta.desktop
-  '';
 }
