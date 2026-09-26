@@ -27,13 +27,11 @@ in
     programs.caelestia = {
       enable = true;
       cli.enable = true;
-      # macOS-style notification banners (see caelestia/Notification.qml)
-      # and the top-left hot corner, applied over the pinned upstream rev.
-      # Bump note: the substituteInPlace anchors must match
-      # modules/drawers/Interactions.qml at the locked caelestia rev.
+      # Top-left hot corner for the notification sidebar, applied over the
+      # pinned upstream rev. Bump note: the substituteInPlace anchors must
+      # match modules/drawers/Interactions.qml at the locked caelestia rev.
       package = inputs.caelestia.packages.${pkgs.system}.with-cli.overrideAttrs (old: {
         postPatch = (old.postPatch or "") + ''
-          cp ${./caelestia/Notification.qml} modules/notifications/Notification.qml
           substituteInPlace modules/drawers/Interactions.qml \
             --replace-fail "${hotspotOpen}" "${hotspotOpenPatched}" \
             --replace-fail "${hotspotHide}" "${hotspotHidePatched}"
@@ -62,9 +60,6 @@ in
         # reveal the notification sidebar from the top-left hot corner
         # (also keeps stock right-edge hover reveal)
         sidebar.showOnHover = true;
-        # frosted-glass panels behind Hyprland blur (drawers layer);
-        # what makes the banners read as macOS glass
-        appearance.transparency.enabled = true;
       };
       cli.settings = {
         # stylix owns terminal/GTK/Qt theming; `caelestia scheme set`
