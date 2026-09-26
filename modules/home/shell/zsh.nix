@@ -37,12 +37,10 @@ in
     shellAliases = {
       oc = "opencode";
       to = "tmux a -t";
-      to-dsd = "ssh -o MACs=hmac-sha2-512-etm@openssh.com charana.c@100.77.128.13  -i ~/.ssh/id_ed25519";
-      to-cvps = "ssh -i ~/.ssh/id_ed25519 ubuntu@80.225.224.42";
-      to-pvps = "ssh -i ~/.ssh/id_ed25519 ubuntu@140.245.225.52";
-      to-server = "ssh -o MACs=hmac-sha2-512-etm@openssh.com charana.c@100.112.214.101 -i ~/.ssh/id_ed25519";
-      to-lightx = "ssh -i ~/.ssh/id_ed25519_server itachi@pop-os.local";
-      to-oracle = "ssh -i ~/.ssh/ssh-key-2026-02-24.key ubuntu@80.225.224.42";
+      dsd = "ssh dsd";
+      cvps = "ssh -i ~/.ssh/id_ed25519 ubuntu@80.225.224.42";
+      pvps = "ssh -i ~/.ssh/id_ed25519 ubuntu@140.245.225.52";
+      server = "ssh -o MACs=hmac-sha2-512-etm@openssh.com charana.c@100.112.214.101 -i ~/.ssh/id_ed25519";
     };
 
     sessionVariables = {
@@ -105,6 +103,25 @@ in
           else
             tmux new-session -A -s "$session"
           fi
+        }
+
+        todsd() {
+          if [ -z "$1" ]; then
+            echo "Usage: todsd <path> [...]"
+            return 1
+          fi
+          scp -r "$@" dsd:
+        }
+
+        fromdsd() {
+          if [ -z "$1" ]; then
+            echo "Usage: fromdsd <remote-path> [...]"
+            return 1
+          fi
+          local p
+          for p in "$@"; do
+            scp -r "dsd:$p" .
+          done
         }
         export PKG_CONFIG_PATH="${pkgs.openssl.dev}/lib/pkgconfig''${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}"
       '')
