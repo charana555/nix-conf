@@ -118,5 +118,16 @@ in
         };
       };
     };
+
+    # Swappy edits area-picker shots and the screenshot notification's
+    # "open" action. Configless, it saves to the first existing of
+    # ~/Desktop, ~/ - while the CLI's "save" action already writes
+    # ~/Pictures/Screenshots. Point both flows at the same directory.
+    # (The CLI dir itself has no cli.json key; it would move via
+    # CAELESTIA_SCREENSHOTS_DIR.)
+    programs.swappy = {
+      enable = true;
+      settings.Default.save_dir = "${config.home.homeDirectory}/Pictures/Screenshots";
+    };
   };
 }
