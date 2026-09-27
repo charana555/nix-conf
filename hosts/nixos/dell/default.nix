@@ -157,6 +157,11 @@ in
   hm.apps.steam.enable = true;
   hm.apps.skLauncher.enable = true;
   hm.apps.localsend.enable = true;
+  hm.apps.nautilus.enable = true;
+  # Nautilus on a non-GNOME session: gvfs for trash/MTP/network locations,
+  # udisks2 to mount removable media
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
 
   # LocalSend receives on 53317 (blocked by default firewall otherwise)
   networking.firewall.allowedTCPPorts = [ 53317 ];
