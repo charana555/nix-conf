@@ -18,6 +18,7 @@ in
     flake.nixosModules.hyprland
     flake.nixosModules.stylix
     flake.nixosModules.services
+    flake.nixosModules.virtualisation
     flake.inputs.sops-nix.nixosModules.sops
     flake.inputs.disko.nixosModules.disko
     ./disk.nix
@@ -120,6 +121,7 @@ in
         "networkmanager"
         "docker"
         "i2c"
+        "libvirtd"
       ];
       openssh.authorizedKeys.keys = me.sshPublicKeys;
     };
