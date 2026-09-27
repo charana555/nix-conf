@@ -136,6 +136,9 @@ in
         disable_autoreload = true;
         mouse_move_enables_dpms = true;
         key_press_enables_dpms = true;
+        # FreeSync on the dell's Acer external; no-op on outputs without
+        # VRR support (eDP panel, vivo)
+        vrr = 1;
         focus_on_activate = true;
         allow_session_lock_restore = true;
         enable_swallow = true;
