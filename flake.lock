@@ -70,6 +70,22 @@
         "type": "github"
       }
     },
+    "archify": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790163948,
+        "narHash": "sha256-YGaj0MvkmBHgK3WdYFHdNmQeJlS1soRe5uO4vzfHCq8=",
+        "owner": "tt-a1i",
+        "repo": "archify",
+        "rev": "9e35d2b0b39b155553ba9fcfe0b4f2a5198dd993",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tt-a1i",
+        "repo": "archify",
+        "type": "github"
+      }
+    },
     "base16": {
       "inputs": {
         "fromYaml": "fromYaml"
@@ -3597,6 +3613,7 @@
     },
     "root": {
       "inputs": {
+        "archify": "archify",
         "caelestia": "caelestia",
         "disko": "disko",
         "firefox-addons": "firefox-addons",
@@ -3621,6 +3638,7 @@
         "ponytail": "ponytail_2",
         "sops-nix": "sops-nix_2",
         "stylix": "stylix_2",
+        "taste-skill": "taste-skill",
         "treefmt-nix": "treefmt-nix_8",
         "workmux": "workmux",
         "zen-browser": "zen-browser_2"
@@ -3974,6 +3992,22 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "taste-skill": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790413310,
+        "narHash": "sha256-1X7XrXi2mivzmrqa9+zkIHs0uFUoXaqhOXQIHqK8lV0=",
+        "owner": "Leonxlnx",
+        "repo": "taste-skill",
+        "rev": "ce26fc25c0e5e8cab638f883de62d9a86ee5e45b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Leonxlnx",
+        "repo": "taste-skill",
         "type": "github"
       }
     },
