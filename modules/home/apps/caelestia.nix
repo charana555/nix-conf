@@ -59,6 +59,41 @@ in
           audioIncrement = 0.05;
           brightnessIncrement = 0.05;
         };
+        # speaker/volume icon in the bar's status icons (opens the audio
+        # popout with output device picker). Upstream defaults it to false,
+        # and shell.json replaces the whole list instead of merging, so
+        # every entry must be listed. Keep in sync with BarConfig
+        # statusIcons defaults at the locked caelestia rev.
+        bar.statusIcons = [
+          {
+            id = "lockStatus";
+            enabled = true;
+          }
+          {
+            id = "audio";
+            enabled = true;
+          }
+          {
+            id = "microphone";
+            enabled = false;
+          }
+          {
+            id = "kbLayout";
+            enabled = false;
+          }
+          {
+            id = "network";
+            enabled = true;
+          }
+          {
+            id = "bluetooth";
+            enabled = true;
+          }
+          {
+            id = "battery";
+            enabled = true;
+          }
+        ];
         # default logout is a loginctl Terminate alias: a hard SIGTERM of the
         # session that leaves the GPU/VT wedged, so SDDM's greeter never
         # respawns (dead VT, blinking cursor). uwsm stop exits Hyprland
@@ -70,6 +105,8 @@ in
         # reveal the notification sidebar from the top-left hot corner
         # (also keeps stock right-edge hover reveal)
         sidebar.showOnHover = true;
+        # no weather tab in the dashboard
+        dashboard.showWeather = false;
       };
       cli.settings = {
         # stylix owns terminal/GTK/Qt theming; `caelestia scheme set`
