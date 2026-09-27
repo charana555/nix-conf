@@ -164,5 +164,12 @@ in
       "opencode/skills/frontend-design/SKILL.md".source = ../../opencode/skills/frontend-design/SKILL.md;
       "opencode/skills/git-wisdom/SKILL.md".source = ../../opencode/skills/git-wisdom/SKILL.md;
       "opencode/skills/think-deeper/SKILL.md".source = ../../opencode/skills/think-deeper/SKILL.md;
+
+      # Whole-directory skill links: opencode's skill glob follows symlinks,
+      # and archify (CLI + schemas) and shadcn (rules tree) ship full packages.
+      "opencode/skills/archify".source = "${inputs.archify}/archify";
+      "opencode/skills/design-taste-frontend/SKILL.md".source =
+        "${inputs.taste-skill}/skills/taste-skill/SKILL.md";
+      "opencode/skills/shadcn".source = ../../opencode/skills/shadcn;
     };
 }

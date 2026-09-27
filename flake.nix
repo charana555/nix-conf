@@ -69,6 +69,17 @@
     ponytail.url = "github:DietrichGebert/ponytail";
     ponytail.flake = false;
 
+    # opencode skills: diagram generation, frontend design taste
+    archify = {
+      url = "github:tt-a1i/archify";
+      flake = false;
+    };
+
+    taste-skill = {
+      url = "github:Leonxlnx/taste-skill";
+      flake = false;
+    };
+
     # oh-my-openagent (sisyphus agent harness) and vim-enabled opencode
     llm-agents.url = "github:numtide/llm-agents.nix";
     opencode-vim.url = "github:leohenon/opencode-vim/ocv";
