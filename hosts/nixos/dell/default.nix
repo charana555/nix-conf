@@ -160,6 +160,7 @@ in
   hm.apps.skLauncher.enable = true;
   hm.apps.localsend.enable = true;
   hm.apps.nautilus.enable = true;
+  hm.apps.vlc.enable = true;
   # Nautilus on a non-GNOME session: gvfs for trash/MTP/network locations,
   # udisks2 to mount removable media
   services.gvfs.enable = true;
