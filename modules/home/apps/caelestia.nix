@@ -105,6 +105,8 @@ in
         # reveal the notification sidebar from the top-left hot corner
         # (also keeps stock right-edge hover reveal)
         sidebar.showOnHover = true;
+        # no weather tab in the dashboard
+        dashboard.showWeather = false;
       };
       cli.settings = {
         # stylix owns terminal/GTK/Qt theming; `caelestia scheme set`
