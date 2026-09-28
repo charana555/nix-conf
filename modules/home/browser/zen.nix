@@ -380,7 +380,9 @@ in
     };
   };
 
-  xdg.mimeApps =
+  # mimeapps.list is freedesktop/Linux-only; on darwin the default browser
+  # is set via LaunchServices instead.
+  xdg.mimeApps = lib.mkIf pkgs.stdenv.isLinux (
     let
       # The package does not set meta.desktopFileName, so pin the name of
       # the desktop file it actually installs.
@@ -429,5 +431,6 @@ in
       enable = true;
       associations.added = associations;
       defaultApplications = associations;
-    };
+    }
+  );
 }
