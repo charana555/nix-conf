@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
   scheme = "catppuccin-macchiato";
 
@@ -24,7 +24,8 @@ in
     image = ../../../wallpapers/your_name_wall.jpg;
     opacity.terminal = 0.90;
     polarity = "dark";
-    icons = {
+    # papirus-icon-theme has no darwin build in nixpkgs
+    icons = lib.mkIf pkgs.stdenv.isLinux {
       enable = true;
       # stylix has no default icon theme - name + package are required
       dark = "Papirus-Dark";
