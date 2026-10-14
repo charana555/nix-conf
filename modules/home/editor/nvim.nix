@@ -133,8 +133,8 @@ in
     })
   ];
 
-  programs.neovim = {
-    defaultEditor = true;
-    vimAlias = true;
-  };
+  # programs.neovim = {
+  #   defaultEditor = true;
+  #   vimAlias = true;
+  # };
 }
