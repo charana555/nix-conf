@@ -1,10 +1,10 @@
 set positional-arguments
 
-# Deploy - current host (Mac is standalone home-manager, no nix-darwin config yet)
+# Deploy - current host (auto-detects NixOS vs Darwin; Mac is standalone home-manager)
 deploy host="":
     @if [ -z "{{host}}" ]; then \
         if [ "$(uname -s)" = "Darwin" ]; then \
-            nh home switch .#charana.c@darwin; \
+            nh home switch . -c charana.c@darwin; \
         else \
             nh os switch . && { hyprctl reload 2>/dev/null || true; }; \
         fi; \
@@ -13,8 +13,9 @@ deploy host="":
     fi
 
 # Home-manager only (standalone, for non-NixOS machines)
+# -c required: nh cannot express dotted config names (charana.c@...) as .#attrpaths
 home user="itachi@popos":
-    nh home switch .#{{user}}
+    nh home switch . -c {{user}}
 
 # Dry build (eval only, no compilation)
 build host:
