@@ -1,10 +1,10 @@
 set positional-arguments
 
-# Deploy - current host (auto-detects NixOS vs Darwin)
+# Deploy - current host (Mac is standalone home-manager, no nix-darwin config yet)
 deploy host="":
     @if [ -z "{{host}}" ]; then \
         if [ "$(uname -s)" = "Darwin" ]; then \
-            nh darwin switch . -H darwin; \
+            nh home switch .#charana.c@darwin; \
         else \
             nh os switch . && { hyprctl reload 2>/dev/null || true; }; \
         fi; \
