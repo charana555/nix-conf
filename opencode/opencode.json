@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "litellm/glm-latest",
+  "model": "omniroute/my-combo",
   "default_agent": "sisyphus",
   "agent": {
     "sisyphus": {
@@ -22,7 +22,10 @@
         "open-pr"
       ]
     },
-    "explore": { "mode": "subagent", "model": "litellm/open-fast" }
+    "explore": {
+      "mode": "subagent",
+      "model": "litellm/open-fast"
+    }
   },
   "provider": {
     "litellm": {
@@ -36,78 +39,185 @@
       "models": {
         "claude-opus-4-5": {
           "name": "claude-opus-4-5",
-          "limit": { "context": 1000000, "output": 128000 },
-          "modalities": { "input": ["text", "image"], "output": ["text"] }
+          "limit": {
+            "context": 1000000,
+            "output": 128000
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
         },
         "claude-opus-4-6": {
           "name": "claude-opus-4-6",
-          "limit": { "context": 1000000, "output": 128000 },
-          "modalities": { "input": ["text", "image"], "output": ["text"] }
+          "limit": {
+            "context": 1000000,
+            "output": 128000
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
         },
         "claude-sonnet-4-5": {
           "name": "claude-sonnet-4-5",
-          "limit": { "context": 200000, "output": 64000 },
-          "modalities": { "input": ["text", "image"], "output": ["text"] }
+          "limit": {
+            "context": 200000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
         },
         "claude-sonnet-4-6": {
           "name": "claude-sonnet-4-6",
-          "limit": { "context": 200000, "output": 64000 },
-          "modalities": { "input": ["text", "image"], "output": ["text"] }
+          "limit": {
+            "context": 200000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
         },
         "claude-haiku-4-5-20251001": {
           "name": "claude-haiku-4-5-20251001",
-          "limit": { "context": 200000, "output": 64000 },
-          "modalities": { "input": ["text", "image"], "output": ["text"] }
+          "limit": {
+            "context": 200000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
         },
         "gemini-3-flash-preview": {
           "name": "gemini-3-flash-preview",
-          "limit": { "context": 1048576, "output": 65535 },
-          "modalities": { "input": ["text", "image"], "output": ["text"] }
+          "limit": {
+            "context": 1048576,
+            "output": 65535
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
         },
         "gemini-3-pro-preview": {
           "name": "gemini-3-pro-preview",
-          "limit": { "context": 1048576, "output": 65535 },
-          "modalities": { "input": ["text", "image"], "output": ["text"] }
+          "limit": {
+            "context": 1048576,
+            "output": 65535
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
         },
         "gemini-3.1-pro": {
           "name": "gemini-3.1-pro",
-          "limit": { "context": 1048576, "output": 65536 },
-          "modalities": { "input": ["text", "image"], "output": ["text"] }
+          "limit": {
+            "context": 1048576,
+            "output": 65536
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
         },
         "glm-flash-experimental": {
           "name": "glm-flash-experimental",
-          "limit": { "context": 128000, "output": 128000 },
-          "modalities": { "input": ["text", "image"], "output": ["text"] }
+          "limit": {
+            "context": 128000,
+            "output": 128000
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
         },
         "glm-latest": {
           "name": "glm-latest",
-          "limit": { "context": 400000, "output": 400000 },
-          "modalities": { "input": ["text", "image"], "output": ["text"] }
+          "limit": {
+            "context": 400000,
+            "output": 400000
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
         },
         "kimi-latest": {
           "name": "kimi-latest",
-          "limit": { "context": 256000, "output": 32000 },
-          "modalities": { "input": ["text", "image"], "output": ["text"] }
+          "limit": {
+            "context": 256000,
+            "output": 32000
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
         },
         "kimi-k3": {
           "name": "kimi-k3",
-          "limit": { "context": 256000, "output": 32000 },
-          "modalities": { "input": ["text", "image"], "output": ["text"] }
+          "limit": {
+            "context": 256000,
+            "output": 32000
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
         },
         "minimaxai/minimax-m2": {
           "name": "minimaxai/minimax-m2",
-          "limit": { "context": 256000, "output": 256000 },
-          "modalities": { "input": ["text", "image"], "output": ["text"] }
+          "limit": {
+            "context": 256000,
+            "output": 256000
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
         },
         "open-fast": {
           "name": "open-fast",
-          "limit": { "context": 256000, "output": 256000 },
-          "modalities": { "input": ["text", "image"], "output": ["text"] }
+          "limit": {
+            "context": 256000,
+            "output": 256000
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
         },
         "open-large": {
           "name": "open-large",
-          "limit": { "context": 256000, "output": 32000 },
-          "modalities": { "input": ["text", "image"], "output": ["text"] }
+          "limit": {
+            "context": 256000,
+            "output": 32000
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
+        }
+      }
+    },
+    "omniroute": {
+      "name": "OmniRoute",
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "http://localhost:20128/v1",
+        "apiKey": "{env:OMNIROUTE_API_KEY}",
+        "timeout": 600000
+      },
+      "models": {
+        "lightx-ai": {
+          "name": "lightx-ai"
+        },
+        "auto": {
+          "name": "auto"
         }
       }
     }
