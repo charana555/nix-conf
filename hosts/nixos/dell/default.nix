@@ -32,8 +32,9 @@ in
   boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-lts;
 
   # Binary cache for cachyos kernel (extra- appends to cache.nixos.org, doesn't replace it)
-  nix.settings.extra-substituters = [ "https://attic.xuyh0120.win/lantian" ];
-  nix.settings.extra-trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
+  # Disabled: cache compromised - https://github.com/xddxdd/nix-cachyos-kernel/issues/110
+  # nix.settings.extra-substituters = [ "https://attic.xuyh0120.win/lantian" ];
+  # nix.settings.extra-trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
 
   boot.loader = {
     systemd-boot.enable = true;
