@@ -126,8 +126,9 @@ in
   nixpkgs.config.allowUnfree = true;
 
   home.packages = [
-    opencodeVim
-    ohMyOpencode
+    # Temporarily disabled - opencode smoke test failing with exit 137
+    # opencodeVim
+    # ohMyOpencode
   ];
 
   xdg.configFile =
