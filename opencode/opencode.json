@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "omniroute/my-combo",
+  "model": "litellm/glm-latest",
   "default_agent": "sisyphus",
   "agent": {
     "sisyphus": {
