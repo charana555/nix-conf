@@ -12,7 +12,21 @@ let
   opencodeMcp = import ../../opencode/mcp.nix { inherit lib pkgs; };
 
   ohMyOpencode = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.oh-my-opencode;
-  opencodeVim = inputs.opencode-vim.packages.${pkgs.stdenv.hostPlatform.system}.default;
+  opencodeVim =
+    let
+      base = inputs.opencode-vim.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    in
+    # opencode's build script re-signs the compiled binary via `codesign`
+    # from PATH (macOS kills binaries with a stale linker signature,
+    # exit 137). The nix sandbox has no Apple codesign, so provide
+    # sigtool's and point CODESIGN_ALLOCATE at cctools'.
+    if pkgs.stdenv.hostPlatform.isDarwin then
+      base.overrideAttrs (old: {
+        nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.darwin.sigtool ];
+        CODESIGN_ALLOCATE = "${pkgs.darwin.cctools}/bin/codesign_allocate";
+      })
+    else
+      base;
 
   defaultModel = "litellm/glm-latest";
 
@@ -126,9 +140,8 @@ in
   nixpkgs.config.allowUnfree = true;
 
   home.packages = [
-    # Temporarily disabled - opencode smoke test failing with exit 137
-    # opencodeVim
-    # ohMyOpencode
+    opencodeVim
+    ohMyOpencode
   ];
 
   xdg.configFile =
