@@ -3098,11 +3098,11 @@
     },
     "nixpkgs_30": {
       "locked": {
-        "lastModified": 1776683584,
-        "narHash": "sha256-NuTLMrr10Tng72hurYG8jYQ4XKK8wnpJmOGcPiis96g=",
+        "lastModified": 1790510107,
+        "narHash": "sha256-EVMNYv7hYDDD9TGVT/hIyTYgpiXA8y3m5xIEIxuGNU0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "9dd5558b06dbdacbf635a3dd36dce1b1a7ee3a89",
+        "rev": "3181085bfd08663b6b9e60bc7a8395c2aaa741bd",
         "type": "github"
       },
       "original": {
@@ -3477,17 +3477,17 @@
         "nixpkgs": "nixpkgs_30"
       },
       "locked": {
-        "lastModified": 1786516097,
-        "narHash": "sha256-6a/MjEAHmch19SjDscd5grwmp+UFZiOGaFKxQXIIoA4=",
+        "lastModified": 1792844083,
+        "narHash": "sha256-+xsmLhbu9x2YX6RfYkSjo/XivVMUGxRhgKz/KFLzCe0=",
         "owner": "leohenon",
         "repo": "opencode-vim",
-        "rev": "da38c3d5808eb0f1087c6be6e1d4f00132e810b2",
+        "rev": "635ab4d3b2fb63d931a360b95af488fa594341dd",
         "type": "github"
       },
       "original": {
         "owner": "leohenon",
-        "ref": "ocv",
         "repo": "opencode-vim",
+        "rev": "635ab4d3b2fb63d931a360b95af488fa594341dd",
         "type": "github"
       }
     },
