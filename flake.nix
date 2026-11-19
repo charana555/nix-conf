@@ -82,7 +82,8 @@
 
     # oh-my-openagent (sisyphus agent harness) and vim-enabled opencode
     llm-agents.url = "github:numtide/llm-agents.nix";
-    opencode-vim.url = "github:leohenon/opencode-vim/ocv";
+    # v1.19.4-ocv.4.14, pinned by commit so the ref cannot move
+    opencode-vim.url = "github:leohenon/opencode-vim/635ab4d3b2fb63d931a360b95af488fa594341dd";
 
     # Parallel dev: git worktrees + tmux windows
     workmux.url = "github:raine/workmux";

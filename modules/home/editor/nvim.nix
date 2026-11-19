@@ -5,10 +5,130 @@
   ...
 }:
 
+let
+  explorerSource = # lua
+    ''
+      {
+        on_show = function(picker)
+          local show = false
+          local gap = 1
+          local clamp_width = function(value)
+            return math.max(20, math.min(100, value))
+          end
+          local position = picker.resolved_layout.layout.position
+          local rel = picker.layout.root
+          local update = function(win)
+            local border = win:border_size().left + win:border_size().right
+            win.opts.row = vim.api.nvim_win_get_position(rel.win)[1]
+            win.opts.height = 0.8
+            if position == 'left' then
+              win.opts.col = vim.api.nvim_win_get_width(rel.win) + gap
+              win.opts.width = clamp_width(vim.o.columns - border - win.opts.col)
+            end
+            if position == 'right' then
+              win.opts.col = -vim.api.nvim_win_get_width(rel.win) - gap
+              win.opts.width = clamp_width(vim.o.columns - border + win.opts.col)
+            end
+            win:update()
+          end
+          local preview_win = Snacks.win.new {
+            relative = 'editor',
+            external = false,
+            focusable = false,
+            border = 'rounded',
+            backdrop = false,
+            show = show,
+            bo = {
+              filetype = 'snacks_float_preview',
+              buftype = 'nofile',
+              buflisted = false,
+              swapfile = false,
+              undofile = false,
+            },
+            on_win = function(win)
+              update(win)
+              picker:show_preview()
+            end,
+          }
+          rel:on('WinLeave', function()
+            vim.schedule(function()
+              if not picker:is_focused() then
+                picker.preview.win:close()
+              end
+            end)
+          end)
+          rel:on('WinResized', function()
+            update(preview_win)
+          end)
+          picker.preview.win = preview_win
+          picker.main = preview_win.win
+        end,
+        on_close = function(picker)
+          picker.preview.win:close()
+        end,
+        layout = {
+          preset = 'sidebar',
+          layout = {
+            backdrop = false,
+            width = 40,
+            min_width = 40,
+            height = 0,
+            position = 'left',
+            border = 'none',
+            box = 'vertical',
+            { win = 'list', border = 'none' },
+            { win = 'preview', title = '{preview}', height = 0.4, border = 'top' },
+          },
+          preview = false,
+        },
+        actions = {
+          toggle_preview = function(picker)
+            picker.preview.win:toggle()
+          end,
+        },
+      }
+    '';
+in
 {
   home.packages = [
     (inputs.nvix.packages.${pkgs.system}.default.extend {
-      # Fix copilot.lua hash mismatch
+      colorschemes.kanagawa.enable = lib.mkForce false;
+      colorschemes.tokyonight.enable = lib.mkForce false;
+      colorschemes.catppuccin = {
+        enable = lib.mkForce true;
+        settings = {
+          flavour = "macchiato";
+          transparent_background = true;
+          custom_highlights = # lua
+            ''
+              function(colors)
+                return {
+                  NormalFloat = { bg = "none" },
+                  FloatBorder = { bg = "none" },
+                  FloatTitle = { bg = "none" },
+                  SnacksNormal = { bg = "none" },
+                  SnacksNormalNC = { bg = "none" },
+                  SnacksBorder = { bg = "none" },
+                  SnacksTitle = { bg = "none" },
+                }
+              end
+            '';
+          integrations = {
+            cmp = true;
+            gitsigns = true;
+            nvimtree = true;
+            treesitter = true;
+            notify = false;
+            mini = {
+              enabled = true;
+              indentscope_color = "";
+            };
+          };
+        };
+      };
+
+      # nixpkgs pins copilot.lua's moving tag, which upstream re-released and
+      # broke the recorded hash; pin an immutable commit instead.
       plugins.copilot-lua.package = lib.mkForce (
         pkgs.vimUtils.buildVimPlugin {
           pname = "copilot.lua";
@@ -16,11 +136,15 @@
           src = pkgs.fetchFromGitHub {
             owner = "zbirenbaum";
             repo = "copilot.lua";
-            rev = "v2.0.2";
+            rev = "86f52edd2191b5b8aaa1fdc372dc6fcb84423d3b"; # v2.0.2
             hash = "sha256-/cYfC56DjPKEZagNg/3DP/yDs0bgTHFDPYEVd0JvVys=";
           };
         }
       );
+
+      plugins.snacks.settings.picker.sources.explorer = lib.mkForce {
+        __raw = explorerSource;
+      };
     })
   ];
 
