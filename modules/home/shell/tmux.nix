@@ -20,6 +20,7 @@ let
   workmux-sidebar =
     pkgs.writeShellScript "workmux-sidebar" # sh
       ''
+        # toggle workmux sidebar pane
         set +e
         sidebar=$(tmux list-panes -F '#{pane_id} #{pane_current_command}' 2>/dev/null | grep ' workmux$' | awk '{print $1}' | head -1)
         active=$(tmux display -p '#{pane_id}' 2>/dev/null)

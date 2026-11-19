@@ -62,8 +62,7 @@
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
-    nvix.url = "github:niksingh710/nvix";
-    nvix.inputs.nixpkgs.follows = "nixpkgs";
+    nvix.url = "github:semi710/nvix";
 
     # opencode ecosystem
     ponytail.url = "github:DietrichGebert/ponytail";
