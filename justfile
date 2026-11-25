@@ -14,7 +14,7 @@ deploy host="":
 
 # Home-manager only (standalone, for non-NixOS machines)
 # -c required: nh cannot express dotted config names (charana.c@...) as .#attrpaths
-home user="itachi@popos":
+home user="charana.c@work":
     nh home switch . -c {{user}}
 
 # Dry build (eval only, no compilation)

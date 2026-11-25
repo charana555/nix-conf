@@ -24,6 +24,12 @@ let
       base.overrideAttrs (old: {
         nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.darwin.sigtool ];
         CODESIGN_ALLOCATE = "${pkgs.darwin.cctools}/bin/codesign_allocate";
+        # the nix binary wrapper (bin/opencode) also needs re-signing,
+        # otherwise it keeps a stale signature and macOS kills it at
+        # exec with 137 even though the main binary is fine
+        postFixup = (old.postFixup or "") + ''
+          codesign -f -s - $out/bin/opencode
+        '';
       })
     else
       base;

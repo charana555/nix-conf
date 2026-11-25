@@ -23,7 +23,7 @@ in
 
       # HDMI on the dell is wired to the NVIDIA dGPU; hardware cursor planes
       # flicker on the proprietary driver in that multi-GPU setup, so render
-      # the cursor in software (harmless on Intel-only hosts like vivo)
+      # the cursor in software (harmless on Intel-only hosts)
       cursor = {
         no_hardware_cursors = true;
       };
@@ -137,7 +137,7 @@ in
         mouse_move_enables_dpms = true;
         key_press_enables_dpms = true;
         # FreeSync on the dell's Acer external; no-op on outputs without
-        # VRR support (eDP panel, vivo)
+        # VRR support
         vrr = 1;
         focus_on_activate = true;
         allow_session_lock_restore = true;
