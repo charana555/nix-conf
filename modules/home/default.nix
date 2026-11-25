@@ -144,6 +144,8 @@ in
   programs.home-manager.enable = true;
 
   nixpkgs.config.allowUnfree = true;
+  # tmate: no upstream release since 2019-11 (CVE-2018-19387) but still used
+  nixpkgs.config.permittedInsecurePackages = [ "tmate-unstable-2022-08-07" ];
 
   home.packages = [
     opencodeVim
