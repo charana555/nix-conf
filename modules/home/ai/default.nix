@@ -132,38 +132,40 @@ in
     # itself is installed by shell/tmux.nix from the same input rev
     plugins.workmux.enable = true;
 
-    mcp.servers.github = {
-      command = lib.getExe pkgs.github-mcp-server;
-      args = [ "stdio" ];
-      env.GITHUB_PERSONAL_ACCESS_TOKEN = "{env:GITHUB_TOKEN}";
-    };
+    mcp.servers = {
+      github = {
+        command = lib.getExe pkgs.github-mcp-server;
+        args = [ "stdio" ];
+        env.GITHUB_PERSONAL_ACCESS_TOKEN = "{env:GITHUB_TOKEN}";
+      };
 
-    # s-ai's canonical set includes codegraph, which the pinned nixpkgs does
-    # not ship yet. Disable it with a stub command (never spawned) until the
-    # pin catches up; the override self-removes once pkgs gains codegraph.
-    mcp.servers.codegraph =
-      if pkgs ? codegraph then
-        { }
-      else
-        {
-          command = lib.mkForce "true";
-          args = lib.mkForce [ ];
-          enabled = false;
-        };
-
-    # s-ai runs the mcp-nixos binary directly, but pkgs.mcp-nixos does not
-    # evaluate on aarch64-darwin with the current nixpkgs pin (it forces a
-    # luajit-source build whose meta.platforms excludes arm64 darwin), so
-    # keep the nix run form both hosts used before the s-ai move. mkForce
-    # discards s-ai's command definition without evaluating it; drop this
-    # override once the pin can build the binary everywhere.
-    mcp.servers.nixos = {
-      command = lib.mkForce (lib.getExe pkgs.nix);
-      args = lib.mkForce [
-        "run"
-        "github:utensils/mcp-nixos"
-        "--"
-      ];
+      # s-ai runs the mcp-nixos binary directly, but pkgs.mcp-nixos does not
+      # evaluate on aarch64-darwin with the current nixpkgs pin (it forces a
+      # luajit-source build whose meta.platforms excludes arm64 darwin), so
+      # keep the nix run form both hosts used before the s-ai move. mkForce
+      # discards s-ai's command definition without evaluating it; drop this
+      # override once the pin can build the binary everywhere.
+      nixos = {
+        command = lib.mkForce (lib.getExe pkgs.nix);
+        args = lib.mkForce [
+          "run"
+          "github:utensils/mcp-nixos"
+          "--"
+        ];
+      };
+    }
+    # s-ai's canonical set includes codegraph, which older nixpkgs pins do
+    # not ship. s-ai.mcp.servers merges as plain attrs: defining a server
+    # key replaces the canonical entry wholesale, so a `then { }` branch
+    # would delete codegraph instead of letting the canonical definition
+    # through. Stub it out only while the pin lacks codegraph; once pkgs
+    # ships it the canonical server takes over unmodified.
+    // lib.optionalAttrs (!(pkgs ? codegraph)) {
+      codegraph = {
+        command = lib.mkForce "true";
+        args = lib.mkForce [ ];
+        enabled = false;
+      };
     };
   };
 
