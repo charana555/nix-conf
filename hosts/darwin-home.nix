@@ -1,5 +1,6 @@
 {
   flake,
+  inputs,
   config,
   lib,
   pkgs,
@@ -61,6 +62,63 @@ in
     haskell-language-server
     pinentry_mac
   ];
+
+  # Zen on a Kandji-managed machine: patch the bundle ID to
+  # app.zen-browser.zen-oss so the MDM profile (targeting app.zen-browser.zen)
+  # stops matching - same dodge as semi710/ndots jp-mbp. Wrapped mode is
+  # required: policies/extensions ride inside the bundle via wrapFirefox and
+  # survive the bundle ID change; signed mode would keep routing policies
+  # through the app.zen-browser.zen defaults domain, which the patched app no
+  # longer reads.
+  programs.zen-browser = {
+    darwin.packageMode = "wrapped";
+
+    # PlistBuddy patch invalidates the upstream signature; the codesign
+    # appended to the wrapper's buildCommand below restores an ad-hoc one.
+    # The zen-beta symlink exists because wrapFirefox resolves the
+    # executable via the beta binary name.
+    unwrappedPackage =
+      inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.beta-unwrapped.overrideAttrs
+        (old: {
+          postInstall = (old.postInstall or "") + ''
+            /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier app.zen-browser.zen-oss" \
+              "$out/Applications/Zen Browser (Beta).app/Contents/Info.plist"
+            ln -sf zen "$out/Applications/Zen Browser (Beta).app/Contents/MacOS/zen-beta"
+          '';
+        });
+
+    # The HM module skips policies when unwrappedPackage is set, so wrap
+    # ourselves and pass them through the wrapper. wrapFirefox drives the
+    # build via buildCommand (phase hooks never run), so append there:
+    # dereference the symlinks it leaves on Info.plist and the main
+    # executable (codesign refuses symlinks there), drop the upstream
+    # _CodeSignature (symlinks into the read-only store), and re-sign the
+    # bundle ad hoc - launchd refuses to spawn it while the seal is broken.
+    package =
+      (pkgs.wrapFirefox config.programs.zen-browser.unwrappedPackage {
+        inherit (config.programs.zen-browser) extraPrefs extraPrefsFiles nativeMessagingHosts;
+        extraPolicies = config.programs.zen-browser.policies;
+        icon = "zen-browser";
+      }).overrideAttrs
+        (old: {
+          buildCommand = old.buildCommand + ''
+            app="$out/Applications/Zen Browser (Beta).app"
+            rm -rf "$app/Contents/_CodeSignature"
+            chmod -R u+w "$app"
+            for f in "$app/Contents/Info.plist" "$app/Contents/MacOS/zen"; do
+              if [ -L "$f" ]; then
+                cp -L "$f" "$f.real" && rm "$f" && mv "$f.real" "$f"
+              fi
+            done
+            # Sign the wrapper script (codesign treats it as unsigned nested
+            # code otherwise), then the outer seal. No --deep: nested code is
+            # symlinked into the read-only store and keeps its intact upstream
+            # signature; only the outer bundle is rewritten.
+            /usr/bin/codesign --force --sign - "$app/Contents/MacOS/zen-beta"
+            /usr/bin/codesign --force --sign - "$app"
+          '';
+        });
+  };
 
   programs.gpg = {
     enable = true;
