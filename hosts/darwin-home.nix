@@ -43,10 +43,9 @@ in
   };
 
   apps.maccy.enable = true;
-  # Both have aarch64-darwin builds in nixpkgs (discord with Vencord/OpenASAR,
-  # whatsapp-for-mac is the official client) - no brew needed
+  # aarch64-darwin build in nixpkgs (whatsapp-for-mac is the official
+  # client) - no brew needed
   apps.whatsapp.enable = true;
-  apps.discord.enable = true;
 
   # LocalSend has no darwin build in nixpkgs - install via `brew install --cask localsend`
   # ponytail: revisit if nixpkgs gains a darwin package, then use apps.localsend.enable
@@ -57,7 +56,6 @@ in
     docker
     docker-compose
     colima
-    tailscale
     gitleaks
     haskell-language-server
     pinentry_mac
