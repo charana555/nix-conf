@@ -64,9 +64,17 @@
 
     nvix.url = "github:semi710/nvix";
 
-    # opencode ecosystem
-    ponytail.url = "github:DietrichGebert/ponytail";
-    ponytail.flake = false;
+    # AI agents via the s-ai flake: the canonical skills, prompts, MCP
+    # servers and provider renders live there. s-ai closes over its own
+    # agent inputs (opencode, oh-my-openagent, ponytail, workmux skills),
+    # so this flake only pins the extra skill sources below.
+    # Bump with: `nix flake update s-ai`.
+    # git+https (not github:) to dodge unauthenticated GitHub API rate limits
+    s-ai.url = "git+https://github.com/semi710/s-ai";
+    # one workmux rev everywhere: shell/tmux.nix installs the binary, s-ai
+    # symlinks the skills - skew makes `workmux setup` try to overwrite the
+    # read-only store symlinks and fail
+    s-ai.inputs.workmux.follows = "workmux";
 
     # opencode skills: diagram generation, frontend design taste
     archify = {
@@ -78,11 +86,6 @@
       url = "github:Leonxlnx/taste-skill";
       flake = false;
     };
-
-    # oh-my-openagent (sisyphus agent harness) and vim-enabled opencode
-    llm-agents.url = "github:numtide/llm-agents.nix";
-    # v1.19.4-ocv.4.14, pinned by commit so the ref cannot move
-    opencode-vim.url = "github:leohenon/opencode-vim/635ab4d3b2fb63d931a360b95af488fa594341dd";
 
     # Parallel dev: git worktrees + tmux windows
     workmux.url = "github:raine/workmux";
