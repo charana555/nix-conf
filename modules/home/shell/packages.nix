@@ -18,7 +18,7 @@
     gnumake
     unzip
 
-    nodejs_22
+    nodejs_24
     python3
     lua-language-server
 

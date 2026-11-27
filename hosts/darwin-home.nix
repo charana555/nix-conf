@@ -127,21 +127,27 @@ in
   };
 
   # Home-manager exposes GUI apps only via ~/Applications/Home Manager Apps,
-  # a symlink into the read-only /nix/store. LaunchServices and Spotlight
-  # never index that, so no nix-installed app shows in Launchpad or
-  # Spotlight. Copy the apps as real files into ~/Applications/Nix Apps so
-  # macOS can index them. Copies (not links) are required: Spotlight does
-  # not follow links into /nix, and lsregister resolves symlinked bundles
-  # to their store path. A separate folder avoids fighting home-manager's
-  # own management of the "Home Manager Apps" symlink.
+  # a symlink into the read-only /nix/store. Spotlight does not index through
+  # symlinks into /nix, and LaunchServices resolves symlinked bundles to their
+  # store path (which it does not scan), so no nix-installed app shows in
+  # Spotlight search. Copy the apps as real, dereferenced files into a
+  # subfolder of ~/Applications (a standard apps dir LaunchServices scans)
+  # so macOS indexes them. A separate folder avoids fighting home-manager's
+  # own management of the "Home Manager Apps" symlink. The trailing chmod
+  # makes the copies writable so the next activation's rm -rf does not stall
+  # on read-only store modes (Finder would otherwise prompt for auth).
   home.activation.exposeGuiApps = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
     base="$HOME/Applications/Nix Apps"
-    # copies inherit the store's read-only mode, so make them deletable first
     $DRY_RUN_CMD chmod -R u+w "$base" 2>/dev/null || true
     $DRY_RUN_CMD rm -rf "$base"
     $DRY_RUN_CMD mkdir -p "$base"
     for app in "$HOME/.nix-profile/Applications"/*.app; do
+      [ -e "$app" ] || continue
       $DRY_RUN_CMD cp -RH "$app" "$base/" || echo "warning: could not copy $app" >&2
     done
+    $DRY_RUN_CMD chmod -R u+w "$base" 2>/dev/null || true
+    # one-time cleanup: a previous revision copied into a hidden dot-dir
+    # that Spotlight refused to index
+    $DRY_RUN_CMD rm -rf "$HOME/.local/share/nix-apps"
   '';
 }

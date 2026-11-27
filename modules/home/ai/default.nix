@@ -6,6 +6,7 @@
 # repo-local skill sets.
 {
   inputs,
+  config,
   lib,
   pkgs,
   ...
@@ -128,6 +129,13 @@ in
     # lane, which keeps the open-fast model agent.explore ran on before
     agents.opencode.models.explorer = "litellm/open-fast";
 
+    # v2.3.0's picker only shows config-declared providers when the
+    # "new-designs" experiment is off: on, connected() counts solely
+    # integration connections (we have none) and DialogModel falls back to
+    # the free-models-only list, which excludes litellm (cost=[] is not
+    # "free"). Off restores the picker grouped by provider.
+    agents.opencode.extraCliSettings.experimental."new-designs" = false;
+
     # worktree/tmux workflow skills (off by default in s-ai); the binary
     # itself is installed by shell/tmux.nix from the same input rev
     plugins.workmux.enable = true;
@@ -169,6 +177,26 @@ in
     };
   };
 
+  # channel=ocv keys OCV's config root off ~/.config/ocv while everything
+  # above renders into ~/.config/opencode. s-ai bridges the gap with
+  # OPENCODE_CONFIG_DIR, but shells that predate the s-ai switch export
+  # __HM_SESS_VARS_SOURCED without the newer var, and hm-session-vars.sh
+  # early-returns on that marker - so the export never reaches them (nor
+  # the opencode processes they spawn). Point the default root itself at
+  # the rendered config instead of relying on the environment.
+  # Runs ahead of both link-time check nodes: checkLinkTargets fires before
+  # writeBoundary and would otherwise refuse to clobber the directory, and
+  # checkFilesChanged cmp's every target against the new generation.
+  home.activation.ocvConfigRoot = lib.hm.dag.entryBefore [
+    "checkFilesChanged"
+    "checkLinkTargets"
+  ] ''
+    # clear the way for the symlink below: the dir only ever holds
+    # service-ocv.json, which the opencode service regenerates on next
+    # launch (it is not running during activation)
+    $DRY_RUN_CMD rm -rf "$HOME/.config/ocv"
+  '';
+
   # opencode's TUI rewrites cli.json in place (settings dialog), replacing
   # the store symlink with a regular file; force keeps the next deploy from
   # wedging on the backup collision
@@ -181,6 +209,17 @@ in
   programs.opencode.tui = lib.mkForce { };
 
   xdg.configFile = opencodeRegistryFiles // {
+    # OCV's default config root (channel=ocv). A symlink rather than a
+    # re-render, so every opencode process - old TUIs, tmux panes, the
+    # background service - resolves the rendered root with no env var.
+    "ocv".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/opencode";
+
+    # OCV's settings dialog writes through the ~/.config/ocv symlink, so the
+    # store symlink for opencode.json is exposed to the same in-place rewrite
+    # that already forces cli.json above; merged with home-manager's own
+    # definition of the target rather than redeclaring it under home.file
+    "opencode/opencode.json".force = true;
+
     # vendored skills s-ai's plugin model cannot express: archify ships a
     # full package at <input>/archify with no skill-parent directory, and
     # taste-skill's skills/ dir holds 14 skills of which we want one
