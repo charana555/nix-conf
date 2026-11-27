@@ -36,12 +36,32 @@ let
       lib.filter (path: lib.hasPrefix ".opencode/" path) ([ component.path ] ++ (component.files or [ ]))
     );
 
+  # componentFiles =
+  #   component:
+  #   map (path: {
+  #     name = "opencode/${lib.removePrefix ".opencode/" path}";
+  #     value.source = "${openagentsControl}/${path}";
+  #   }) (componentPaths component);
+
   componentFiles =
     component:
-    map (path: {
-      name = "opencode/${lib.removePrefix ".opencode/" path}";
-      value.source = "${openagentsControl}/${path}";
-    }) (componentPaths component);
+    map (
+      path:
+      let
+        rel = lib.removePrefix ".opencode/" path;
+        v2Rel =
+          if lib.hasPrefix "agent/" rel then
+            "agents/${lib.removePrefix "agent/" rel}"
+          else if lib.hasPrefix "command/" rel then
+            "commands/${lib.removePrefix "command/" rel}"
+          else
+            rel;
+      in
+      {
+        name = "opencode/${v2Rel}";
+        value.source = "${openagentsControl}/${path}";
+      }
+    ) (componentPaths component);
 
   collectSpecs =
     seen: pending:
